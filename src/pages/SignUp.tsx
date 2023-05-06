@@ -4,6 +4,7 @@ import { auth } from "../../firebase.config";
 import { db } from "../../firebase.config";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 // import { db } from "../firebase.config.js";
 
@@ -121,7 +122,7 @@ function SignUp() {
               <button type="submit">Sign Up</button>
             </div>
           </form>
-          {/* Google oauth */}
+          <OAuth />
 
           <Link to="/sign-up">Sign In</Link>
         </main>

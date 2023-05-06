@@ -2,6 +2,7 @@ import { auth } from "../../firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -80,7 +81,7 @@ function SignIn() {
               <button type="submit">Sign In</button>
             </div>
           </form>
-          {/* Google oauth */}
+          <OAuth />
 
           <Link to="/sign-up">Sign Up</Link>
         </main>
