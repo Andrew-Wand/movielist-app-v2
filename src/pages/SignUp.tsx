@@ -40,8 +40,6 @@ function SignUp() {
     e.preventDefault();
     if (password === confirmPassword) {
       try {
-        // const auth = getAuth();
-
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           email,
