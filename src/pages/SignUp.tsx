@@ -60,7 +60,7 @@ function SignUp() {
 
         navigate("/");
       } catch (error) {
-        console.log(error);
+        alert("Something went wrong with registration");
       }
     } else {
       alert("passwords must match");

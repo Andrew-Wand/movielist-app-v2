@@ -9,6 +9,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 import MobileNavbar from "./components/MobileNavbar";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<PrivateRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

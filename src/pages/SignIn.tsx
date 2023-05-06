@@ -37,7 +37,7 @@ function SignIn() {
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
+      alert("Bad user credentials");
     }
   };
 
