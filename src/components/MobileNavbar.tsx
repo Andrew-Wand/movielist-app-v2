@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-const Navbar = (): JSX.Element => {
+const MobileNavbar = (): JSX.Element => {
   return (
-    <nav className="m-10 hidden lg:flex justify-between">
+    <nav className="flex justify-between m-10 lg:hidden">
       <div>
         <Link to="/">List</Link>
       </div>
@@ -39,4 +39,4 @@ const Navbar = (): JSX.Element => {
   );
 };
 
-export default Navbar;
+export default MobileNavbar;

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import MovieList from "./pages/MovieList";
 import RatingList from "./pages/RatingList";
@@ -7,13 +7,15 @@ import SignUp from "./pages/SignUp";
 import SpinPage from "./pages/SpinPage";
 import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
-import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import MobileNavbar from "./components/MobileNavbar";
 
 function App() {
   return (
-    <>
-      <Header />
-      <Router>
+    <div>
+      <BrowserRouter>
+        <Navbar />
+        <MobileNavbar />
         <Routes>
           <Route path="/" element={<MovieList />} />
           <Route path="/rating-list" element={<RatingList />} />
@@ -23,8 +25,8 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/profile" element={<SignIn />} />
         </Routes>
-      </Router>
-    </>
+      </BrowserRouter>
+    </div>
   );
 }
 
