@@ -18,7 +18,6 @@ function App() {
         <Navbar />
         <MobileNavbar />
         <Routes>
-          <Route path="/" element={<MovieList />} />
           <Route path="/rating-list" element={<RatingList />} />
           <Route path="/spin" element={<SpinPage />} />
           <Route path="/sign-in" element={<SignIn />} />
@@ -26,6 +25,9 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route path="/" element={<PrivateRoute />}>
+            <Route path="/" element={<MovieList />} />
           </Route>
         </Routes>
       </BrowserRouter>
