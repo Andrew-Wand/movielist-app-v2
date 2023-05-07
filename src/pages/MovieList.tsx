@@ -15,33 +15,34 @@ import Loading from "../components/Loading";
 function MovieList() {
   const [movielist, setmovieList] = useState(null);
   const [loading, setLoading] = useState(true);
+  const fetchMovielist = async () => {
+    try {
+      const movielistRef = collection(db, "movieslist");
+      const q = query(movielistRef);
+
+      const querySnap = await getDocs(q);
+
+      const movielistItems: any[] = [];
+
+      querySnap.docs.map((doc) => {
+        return movielistItems.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setmovieList(movielistItems);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchMovielist = async () => {
-      try {
-        const movielistRef = collection(db, "movieslist");
-        const q = query(movielistRef);
-
-        const querySnap = await getDocs(q);
-
-        let movielistItems = [];
-
-        querySnap.forEach((doc) => {
-          return movielistItems.push({
-            id: doc.id,
-            data: doc.data(),
-          });
-        });
-
-        setmovieList(movielistItems);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchMovielist();
   }, []);
+
+  fetchMovielist();
 
   return (
     <div>
