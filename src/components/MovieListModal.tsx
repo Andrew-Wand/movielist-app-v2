@@ -6,7 +6,7 @@ interface movieInfo {
   movieName: string;
 }
 
-function MovieListModal() {
+function MovieListModal({ fetchMovieList }) {
   const [isChecked, setIsChecked] = useState(false);
 
   const [formData, setFormData] = useState<movieInfo>({
@@ -28,13 +28,16 @@ function MovieListModal() {
   // Handle submit of form
   const addMovie = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsChecked(false);
+
     const formDataCopy = {
       ...formData,
       userRef: auth.currentUser?.uid,
     };
 
     await addDoc(collection(db, "movieslist"), formDataCopy);
-    setIsChecked(false);
+
+    fetchMovieList();
   };
 
   const handleOpen = () => {

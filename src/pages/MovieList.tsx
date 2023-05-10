@@ -51,6 +51,7 @@ function MovieList() {
     fetchMovielist();
   }, [loading]);
 
+  // Delete from movie list
   const deleteFromMovieList = async (movieId) => {
     if (window.confirm("Are you sure you want to delete?")) {
       await deleteDoc(doc(db, "movieslist", movieId));
@@ -65,7 +66,7 @@ function MovieList() {
     <div>
       <h1>MovieList </h1>
       <div>
-        <MovieListModal />
+        <MovieListModal fetchMovieList={fetchMovielist} />
       </div>
 
       {loading ? (
