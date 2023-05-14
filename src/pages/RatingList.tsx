@@ -1,3 +1,17 @@
+import {
+  collection,
+  getDocs,
+  query,
+  limit,
+  setDoc,
+  doc,
+  addDoc,
+  where,
+  deleteDoc,
+} from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db, auth } from "../../firebase.config";
+
 function RatingList() {
   return (
     <div className="overflow-x-auto p-2">

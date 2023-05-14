@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MovieListModal from "../components/MovieListModal";
+import RatingListModal from "../components/RatingListModal";
 import {
   collection,
   getDocs,
@@ -82,6 +83,7 @@ function MovieList() {
               >
                 delete
               </button>
+              <RatingListModal movieRatingId={movieItem.id} />
             </li>
           ))}
         </ul>

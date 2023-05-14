@@ -51,7 +51,7 @@ function MovieListModal({ fetchMovieList }) {
   return (
     <div>
       <label htmlFor="my-modal-4" className="btn" onClick={handleOpen}>
-        open modal
+        Add Movie to List
       </label>
 
       <input
