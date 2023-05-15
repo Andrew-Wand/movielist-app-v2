@@ -83,7 +83,10 @@ function MovieList() {
               >
                 delete
               </button>
-              <RatingListModal movieRatingId={movieItem.id} />
+              <RatingListModal
+                movieRatingId={movieItem.id}
+                fetchMovielist={fetchMovielist}
+              />
             </li>
           ))}
         </ul>

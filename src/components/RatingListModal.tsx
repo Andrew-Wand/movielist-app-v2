@@ -8,11 +8,13 @@ import {
   where,
   getDocs,
   query,
+  deleteDoc,
 } from "firebase/firestore";
 import Loading from "./Loading";
 
 type RateProps = {
   movieRatingId: string;
+  fetchMovielist: (params: any) => any;
 };
 
 interface movieInfo {
@@ -21,7 +23,7 @@ interface movieInfo {
   rating: string;
 }
 
-function RatingListModal({ movieRatingId }: RateProps) {
+function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   const [formData, setFormData] = useState<movieInfo>({
@@ -53,12 +55,14 @@ function RatingListModal({ movieRatingId }: RateProps) {
     };
 
     await addDoc(collection(db, "ratingslist"), formDataCopy);
+    await deleteDoc(doc(db, "movieslist", movieRatingId));
+    fetchMovielist();
     setIsChecked(false);
   };
 
   const handleOpen = () => {
     setIsChecked(true);
-    fetchMovielist();
+    fetchMovieName();
   };
 
   const handleClose = () => {
@@ -66,9 +70,9 @@ function RatingListModal({ movieRatingId }: RateProps) {
   };
 
   // Fetch movie name after clicking rate button
-  const [movielist, setmovieList] = useState(null);
+  const [ratinglist, setratingList] = useState(null);
   const [loading, setLoading] = useState(true);
-  const fetchMovielist = async () => {
+  const fetchMovieName = async () => {
     try {
       const movielistRef = collection(db, "movieslist");
       const q = query(
@@ -96,7 +100,7 @@ function RatingListModal({ movieRatingId }: RateProps) {
         return doc.data.movieName;
       });
 
-      setmovieList(filteredNameList);
+      setratingList(filteredNameList);
       setFormData((prevState) => ({
         ...prevState,
         movieName: string.toString(),
@@ -135,7 +139,7 @@ function RatingListModal({ movieRatingId }: RateProps) {
           <form onSubmit={addRating} className="flex-col">
             <h1>Rate This Movie</h1>
             <label htmlFor="movieName">Movie Name:</label>
-            {movielist?.map((movie) => (
+            {ratinglist?.map((movie) => (
               <input
                 type="text"
                 placeholder="Type here"
