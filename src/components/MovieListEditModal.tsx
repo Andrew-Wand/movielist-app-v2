@@ -1,20 +1,26 @@
 import { useState } from "react";
 import { auth, db } from "../../firebase.config";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, updateDoc, doc } from "firebase/firestore";
 
 interface movieInfo {
   movieName: string;
 }
 
 type movieProps = {
-  fetchMovieList: (params: void) => void;
+  movieItemName: string;
+  fetchMovielist: (params: any) => any;
+  movieRatingId: string;
 };
 
-function MovieListModal({ fetchMovieList }: movieProps) {
+function MovieListEditModal({
+  movieItemName,
+  fetchMovielist,
+  movieRatingId,
+}: movieProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   const [formData, setFormData] = useState<movieInfo>({
-    movieName: "",
+    movieName: movieItemName,
   });
 
   const { movieName } = formData;
@@ -30,7 +36,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
   };
 
   // Handle submit of form
-  const addMovie = async (e: React.FormEvent<HTMLFormElement>) => {
+  const addMovieEdit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsChecked(false);
 
@@ -39,9 +45,11 @@ function MovieListModal({ fetchMovieList }: movieProps) {
       userRef: auth.currentUser?.uid,
     };
 
-    await addDoc(collection(db, "movieslist"), formDataCopy);
+    const movieRef = doc(db, "movieslist", movieRatingId);
 
-    fetchMovieList();
+    await updateDoc(movieRef, formDataCopy);
+
+    fetchMovielist();
   };
 
   const handleOpen = () => {
@@ -55,7 +63,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
   return (
     <div>
       <label htmlFor="my-modal-4" className="btn" onClick={handleOpen}>
-        Add Movie to List
+        Edit
       </label>
 
       <input
@@ -76,7 +84,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
           >
             ✕
           </label>
-          <form onSubmit={addMovie}>
+          <form onSubmit={addMovieEdit}>
             <h1>Add a Movie</h1>
             <input
               type="text"
@@ -98,4 +106,4 @@ function MovieListModal({ fetchMovieList }: movieProps) {
   );
 }
 
-export default MovieListModal;
+export default MovieListEditModal;

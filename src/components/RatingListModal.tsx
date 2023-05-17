@@ -78,7 +78,6 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
       const q = query(
         movielistRef,
         where("userRef", "==", auth.currentUser?.uid)
-        // where(firebase.firestore.FieldPath.documentId(), "==", movieRatingId)
       );
 
       const querySnap = await getDocs(q);
@@ -128,7 +127,7 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
         htmlFor="my-modal-4"
         className="modal modal-middle sm:modal-middle cursor-pointer"
       >
-        <label className="modal-box relative">
+        <label className="modal-box relative overflow-x-hidden">
           <label
             htmlFor="my-modal-4"
             className="btn btn-sm btn-circle absolute right-2 top-2"
@@ -136,52 +135,60 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
           >
             ✕
           </label>
-          <form onSubmit={addRating} className="flex-col">
-            <h1>Rate This Movie</h1>
-            <label htmlFor="movieName">Movie Name:</label>
-            {ratinglist?.map((movie) => (
+          <form onSubmit={addRating} className="">
+            <h1 className="text-center text-3xl underline m-5">
+              Rate This Movie
+            </h1>
+            <div className="text-xl my-5">
+              <label htmlFor="movieName">Movie Name:</label>
+              {ratinglist?.map((movie) => (
+                <input
+                  type="text"
+                  className="p input-ghost outline-none bg-transparent
+               max-w-xs cursor-default ml-5"
+                  value={movie.data.movieName}
+                  id="movieName"
+                  readOnly={true}
+                  // disabled={true}
+                />
+              ))}
+            </div>
+
+            <div className="text-xl">
+              <label htmlFor="date">Date:</label>
               <input
-                type="text"
-                placeholder="Type here"
-                className="input input-ghost
-              w-full max-w-xs"
-                // onChange={handle}
-                value={movie.data.movieName}
-                id="movieName"
-                // disabled={true}
-
-                // {movie.data.movieName}
+                type="date"
+                id="date"
+                value={date}
+                onChange={handleOnChange}
+                className="ml-5"
               />
-            ))}
+            </div>
 
-            <label htmlFor="date">Date:</label>
-            <input
-              type="date"
-              id="date"
-              value={date}
-              onChange={handleOnChange}
-            />
-            <label htmlFor="rating">Rating:</label>
-            <select
-              className="select select-bordered w-full max-w-xs"
-              value={rating}
-              id="rating"
-              onChange={handleOnChange}
-            >
-              <option disabled selected>
-                Select Rating
-              </option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
+            <div className="text-xl w-6/12 mt-5">
+              <label htmlFor="rating">Rating:</label>
+              <select
+                className="select select-bordered w-full max-w-xs"
+                value={rating}
+                id="rating"
+                onChange={handleOnChange}
+              >
+                <option disabled selected>
+                  Select Rating
+                </option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+
             <div className="modal-action">
               <button type="submit" className="btn">
                 Add
