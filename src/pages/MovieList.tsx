@@ -9,6 +9,9 @@ import {
   doc,
   where,
   deleteDoc,
+  limit,
+  startAfter,
+  orderBy,
 } from "firebase/firestore";
 import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";
@@ -21,12 +24,14 @@ function MovieList() {
   const fetchMovielist = async () => {
     try {
       const movielistRef = collection(db, "movieslist");
-      const q = query(
+      const first = query(
         movielistRef,
-        where("userRef", "==", auth.currentUser?.uid)
+        where("userRef", "==", auth.currentUser?.uid),
+        orderBy("movieName"),
+        limit(8)
       );
 
-      const querySnap = await getDocs(q);
+      const querySnap = await getDocs(first);
 
       const movielistItems: any[] = [];
 
@@ -38,6 +43,43 @@ function MovieList() {
       });
 
       setmovieList(movielistItems);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchNextMovies = async () => {
+    try {
+      const movielistRef = collection(db, "movieslist");
+      const first = query(
+        movielistRef,
+        where("userRef", "==", auth.currentUser?.uid),
+        limit(8)
+      );
+
+      const querySnap = await getDocs(first);
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+
+      const next = query(
+        movielistRef,
+        where("userRef", "==", auth.currentUser?.uid),
+        startAfter(lastVisible),
+        limit(8)
+      );
+
+      const nextSnap = await getDocs(next);
+
+      const nextListItems: any[] = [];
+
+      nextSnap.docs.map((doc) => {
+        return nextListItems.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setmovieList(nextListItems);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -71,23 +113,23 @@ function MovieList() {
         <Loading />
       ) : movielist && movielist.length > 0 ? (
         <div className="overflow-x-auto p-2">
-          <table className="table table-zebra table-compact w-full">
+          <table className="table table-zebra w-full">
             <caption className="text-4xl p-5 bg-[#182635]">Movie List</caption>
             {/* head */}
             <thead>
-              <tr>
-                <th></th>
+              {/* <tr>
                 <th className="text-lg">Title</th>
                 <th></th>
                 <th></th>
                 <th></th>
-              </tr>
+              </tr> */}
             </thead>
             <tbody>
-              {movielist.map((movieItem: any) => (
+              {movielist?.map((movieItem: any) => (
                 <tr>
-                  <th></th>
-                  <td className="text-lg">{movieItem.data.movieName}</td>
+                  <td className="text-md max-w-[210px] ">
+                    <p className="truncate">{movieItem.data.movieName}</p>
+                  </td>
                   <td>
                     <RatingListModal
                       movieRatingId={movieItem.id}
@@ -103,7 +145,7 @@ function MovieList() {
                   </td>
                   <td>
                     <button
-                      className="btn"
+                      className=""
                       onClick={() => deleteFromMovieList(movieItem.id)}
                     >
                       delete
@@ -113,6 +155,9 @@ function MovieList() {
               ))}
             </tbody>
           </table>
+          <div>
+            <button onClick={fetchNextMovies}>Next</button>
+          </div>
         </div>
       ) : (
         <div>Nothing here</div>

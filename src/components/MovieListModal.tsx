@@ -42,6 +42,9 @@ function MovieListModal({ fetchMovieList }: movieProps) {
     await addDoc(collection(db, "movieslist"), formDataCopy);
 
     fetchMovieList();
+    setFormData({
+      movieName: "",
+    });
   };
 
   const handleOpen = () => {

@@ -113,7 +113,7 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
 
   return (
     <div>
-      <label htmlFor="my-modal-4" className="btn" onClick={handleOpen}>
+      <label htmlFor="my-modal-4" className="" onClick={handleOpen}>
         Rate
       </label>
 
