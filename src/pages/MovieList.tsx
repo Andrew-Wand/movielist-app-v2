@@ -207,6 +207,7 @@ function MovieList() {
                       </td>
                     </tr>
                   ))}
+              {!state.list.length ? "No results" : ""}
             </tbody>
           </table>
           <div>
