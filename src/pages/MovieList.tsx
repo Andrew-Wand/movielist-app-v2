@@ -150,34 +150,63 @@ function MovieList() {
               </tr> */}
             </thead>
             <tbody>
-              {state.list?.map((movieItem: any) => (
-                <tr>
-                  <td className="text-md max-w-[210px] ">
-                    <p className="truncate">{movieItem.data.movieName}</p>
-                  </td>
-                  <td>
-                    <RatingListModal
-                      movieRatingId={movieItem.id}
-                      fetchMovielist={fetchMovielist}
-                    />
-                  </td>
-                  <td>
-                    <MovieListEditModal
-                      movieItemName={movieItem.data.movieName}
-                      fetchMovielist={fetchMovielist}
-                      movieRatingId={movieItem.id}
-                    />
-                  </td>
-                  <td>
-                    <button
-                      className=""
-                      onClick={() => deleteFromMovieList(movieItem.id)}
-                    >
-                      delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {state.search === ""
+                ? movielist?.map((movieItem: any) => (
+                    <tr>
+                      <td className="text-md max-w-[210px] ">
+                        <p className="truncate">{movieItem.data.movieName}</p>
+                      </td>
+                      <td>
+                        <RatingListModal
+                          movieRatingId={movieItem.id}
+                          fetchMovielist={fetchMovielist}
+                        />
+                      </td>
+                      <td>
+                        <MovieListEditModal
+                          movieItemName={movieItem.data.movieName}
+                          fetchMovielist={fetchMovielist}
+                          movieRatingId={movieItem.id}
+                        />
+                      </td>
+                      <td>
+                        <button
+                          className=""
+                          onClick={() => deleteFromMovieList(movieItem.id)}
+                        >
+                          delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                : state.list?.map((movieItem) => (
+                    <tr>
+                      <td className="text-md max-w-[210px] ">
+                        <p className="truncate">{movieItem.data.movieName}</p>
+                      </td>
+                      <td>
+                        <RatingListModal
+                          movieRatingId={movieItem.id}
+                          fetchMovielist={fetchMovielist}
+                        />
+                      </td>
+                      <td>
+                        <MovieListEditModal
+                          movieItemName={movieItem.data.movieName}
+                          fetchMovielist={fetchMovielist}
+                          movieRatingId={movieItem.id}
+                        />
+                      </td>
+                      <td>
+                        <button
+                          className=""
+                          onClick={() => deleteFromMovieList(movieItem.id)}
+                        >
+                          delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
             </tbody>
           </table>
           <div>
