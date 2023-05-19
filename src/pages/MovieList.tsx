@@ -103,8 +103,33 @@ function MovieList() {
     }
   };
 
+  const [state, setState] = useState({
+    search: "",
+    list: [],
+  });
+
+  const handleChange = async (e) => {
+    const results = movielist.filter((movie) => {
+      if (e.currentTarget.value === "") {
+        return movielist;
+      }
+      return movie.data.movieName
+        .toLowerCase()
+        .includes(e.currentTarget.value.toLowerCase());
+    });
+    setState({
+      search: e.currentTarget.value,
+      list: results,
+    });
+  };
+
   return (
     <div>
+      <div>
+        <form>
+          <input type="search" value={state.search} onChange={handleChange} />
+        </form>
+      </div>
       <div>
         <MovieListModal fetchMovieList={fetchMovielist} />
       </div>
@@ -125,7 +150,7 @@ function MovieList() {
               </tr> */}
             </thead>
             <tbody>
-              {movielist?.map((movieItem: any) => (
+              {state.list?.map((movieItem: any) => (
                 <tr>
                   <td className="text-md max-w-[210px] ">
                     <p className="truncate">{movieItem.data.movieName}</p>

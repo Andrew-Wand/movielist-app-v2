@@ -8,7 +8,7 @@ interface movieInfo {
 
 type movieProps = {
   movieItemName: string;
-  fetchMovielist: (params: any) => any;
+  fetchMovielist: () => void;
   movieRatingId: string;
 };
 
