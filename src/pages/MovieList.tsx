@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MovieListModal from "../components/MovieListModal";
 import MovieListEditModal from "../components/MovieListEditModal";
+import MovieListSort from "../components/MovieListSort";
 import RatingListModal from "../components/RatingListModal";
 import {
   collection,
@@ -184,6 +185,14 @@ function MovieList() {
         <MovieListModal fetchMovieList={fetchMovielist} />
       </div>
 
+      <div>
+        <MovieListSort
+          movielist={movielist}
+          setmovieList={setmovieList}
+          setLoading={setLoading}
+        />
+      </div>
+
       {loading ? (
         <Loading />
       ) : movielist && movielist.length > 0 ? (
@@ -261,16 +270,31 @@ function MovieList() {
           </table>
           {!state.list.length ? "No results" : ""}
           <div>
-            <button
-              onClick={() =>
-                fetchNextMovies({ item: movielist[movielist.length - 1] })
-              }
-            >
-              Next
-            </button>
+            {movielist?.length < 8 ? (
+              <button
+                // onClick={() =>
+                //   fetchNextMovies({ item: movielist[movielist.length - 1] })
+                // }
+                disabled
+                className="text-black"
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                onClick={() =>
+                  fetchNextMovies({ item: movielist[movielist.length - 1] })
+                }
+              >
+                Next
+              </button>
+            )}
           </div>
           <div>
-            <button onClick={() => fetchLastMovies({ item: movielist[0] })}>
+            <button
+              onClick={() => fetchLastMovies({ item: movielist[0] })}
+              className={movielist?.legnth <= 8 ? "hidden" : "block"}
+            >
               Back
             </button>
           </div>
