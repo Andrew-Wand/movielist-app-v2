@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { auth, db } from "../../firebase.config";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 interface movieInfo {
   movieName: string;
@@ -37,6 +37,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
     const formDataCopy = {
       ...formData,
       userRef: auth.currentUser?.uid,
+      createdAt: serverTimestamp(),
     };
 
     await addDoc(collection(db, "movieslist"), formDataCopy);

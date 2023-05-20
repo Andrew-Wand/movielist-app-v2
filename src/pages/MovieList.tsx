@@ -12,6 +12,8 @@ import {
   limit,
   startAfter,
   orderBy,
+  endBefore,
+  limitToLast,
 } from "firebase/firestore";
 import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";
@@ -19,6 +21,7 @@ import Loading from "../components/Loading";
 function MovieList() {
   const [movielist, setmovieList] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState<number>(1);
 
   // Fetch movies from firebase
   const fetchMovielist = async () => {
@@ -27,7 +30,7 @@ function MovieList() {
       const first = query(
         movielistRef,
         where("userRef", "==", auth.currentUser?.uid),
-        orderBy("movieName"),
+        orderBy("createdAt", "desc"),
         limit(8)
       );
 
@@ -49,22 +52,24 @@ function MovieList() {
     }
   };
 
-  const fetchNextMovies = async () => {
+  // Next button - fetch next movies
+  const fetchNextMovies = async ({ item }) => {
     try {
       const movielistRef = collection(db, "movieslist");
-      const first = query(
-        movielistRef,
-        where("userRef", "==", auth.currentUser?.uid),
-        limit(8)
-      );
+      // const first = query(
+      //   movielistRef,
+      //   where("userRef", "==", auth.currentUser?.uid),
+      //   limit(8)
+      // );
 
-      const querySnap = await getDocs(first);
-      const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+      // const querySnap = await getDocs(first);
+      // const lastVisible = querySnap.docs[querySnap.docs.length - 1];
 
       const next = query(
         movielistRef,
         where("userRef", "==", auth.currentUser?.uid),
-        startAfter(lastVisible),
+        orderBy("createdAt", "desc"),
+        startAfter(item.data.createdAt),
         limit(8)
       );
 
@@ -79,7 +84,50 @@ function MovieList() {
         });
       });
 
+      // console.log(nextListItems);
+
       setmovieList(nextListItems);
+      setPage(page + 1);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Back button
+  const fetchLastMovies = async ({ item }) => {
+    try {
+      const movielistRef = collection(db, "movieslist");
+      // const first = query(
+      //   movielistRef,
+      //   where("userRef", "==", auth.currentUser?.uid),
+      //   limit(8)
+      // );
+
+      // const querySnap = await getDocs(first);
+      // const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+
+      const previous = query(
+        movielistRef,
+        where("userRef", "==", auth.currentUser?.uid),
+        orderBy("createdAt", "desc"),
+        endBefore(item.data.createdAt),
+        limitToLast(8)
+      );
+
+      const previousSnap = await getDocs(previous);
+
+      const lastListItems: any[] = [];
+
+      previousSnap.docs.map((doc) => {
+        return lastListItems.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setmovieList(lastListItems);
+      setPage(page - 1);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -103,9 +151,11 @@ function MovieList() {
     }
   };
 
+  // Searching component
+
   const [state, setState] = useState({
     search: "",
-    list: [],
+    list: [null],
   });
 
   const handleChange = async (e) => {
@@ -207,11 +257,22 @@ function MovieList() {
                       </td>
                     </tr>
                   ))}
-              {!state.list.length ? "No results" : ""}
             </tbody>
           </table>
+          {!state.list.length ? "No results" : ""}
           <div>
-            <button onClick={fetchNextMovies}>Next</button>
+            <button
+              onClick={() =>
+                fetchNextMovies({ item: movielist[movielist.length - 1] })
+              }
+            >
+              Next
+            </button>
+          </div>
+          <div>
+            <button onClick={() => fetchLastMovies({ item: movielist[0] })}>
+              Back
+            </button>
           </div>
         </div>
       ) : (
