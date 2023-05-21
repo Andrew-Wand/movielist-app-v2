@@ -9,6 +9,7 @@ import {
   getDocs,
   query,
   deleteDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import Loading from "./Loading";
 
@@ -50,8 +51,8 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
 
     const formDataCopy = {
       ...formData,
-      // movieName: getMovieName(),
       userRef: auth.currentUser?.uid,
+      createdAt: serverTimestamp(),
     };
 
     await addDoc(collection(db, "ratingslist"), formDataCopy);

@@ -13,12 +13,12 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../../firebase.config";
 
-function MovieListSort({ movielist, setmovieList, setLoading }) {
+function RatingListSort({ setRatingList, setLoading }) {
   const handleNameAscend = async () => {
     try {
-      const movielistRef = collection(db, "movieslist");
+      const ratinglistRef = collection(db, "ratingslist");
       const first = query(
-        movielistRef,
+        ratinglistRef,
         where("userRef", "==", auth.currentUser?.uid),
         orderBy("movieName"),
         limit(8)
@@ -35,7 +35,7 @@ function MovieListSort({ movielist, setmovieList, setLoading }) {
         });
       });
 
-      setmovieList(movielistItems);
+      setRatingList(movielistItems);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -43,9 +43,9 @@ function MovieListSort({ movielist, setmovieList, setLoading }) {
   };
   const handleNameDescend = async () => {
     try {
-      const movielistRef = collection(db, "movieslist");
+      const ratinglistRef = collection(db, "ratingslist");
       const first = query(
-        movielistRef,
+        ratinglistRef,
         where("userRef", "==", auth.currentUser?.uid),
         orderBy("movieName", "desc"),
         limit(8)
@@ -62,7 +62,7 @@ function MovieListSort({ movielist, setmovieList, setLoading }) {
         });
       });
 
-      setmovieList(movielistItems);
+      setRatingList(movielistItems);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -70,11 +70,11 @@ function MovieListSort({ movielist, setmovieList, setLoading }) {
   };
   const handleDateAscend = async () => {
     try {
-      const movielistRef = collection(db, "movieslist");
+      const movielistRef = collection(db, "ratingslist");
       const first = query(
         movielistRef,
         where("userRef", "==", auth.currentUser?.uid),
-        orderBy("createdAt"),
+        orderBy("date"),
         limit(8)
       );
 
@@ -89,7 +89,7 @@ function MovieListSort({ movielist, setmovieList, setLoading }) {
         });
       });
 
-      setmovieList(movielistItems);
+      setRatingList(movielistItems);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -97,11 +97,11 @@ function MovieListSort({ movielist, setmovieList, setLoading }) {
   };
   const handleDateDescend = async () => {
     try {
-      const movielistRef = collection(db, "movieslist");
+      const ratinglistRef = collection(db, "ratingslist");
       const first = query(
-        movielistRef,
+        ratinglistRef,
         where("userRef", "==", auth.currentUser?.uid),
-        orderBy("createdAt", "desc"),
+        orderBy("date", "desc"),
         limit(8)
       );
 
@@ -116,7 +116,61 @@ function MovieListSort({ movielist, setmovieList, setLoading }) {
         });
       });
 
-      setmovieList(movielistItems);
+      setRatingList(movielistItems);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleRatingAscend = async () => {
+    try {
+      const ratinglistRef = collection(db, "ratingslist");
+      const first = query(
+        ratinglistRef,
+        where("userRef", "==", auth.currentUser?.uid),
+        orderBy("rating"),
+        limit(8)
+      );
+
+      const querySnap = await getDocs(first);
+
+      const movielistItems: any[] = [];
+
+      querySnap.docs.map((doc) => {
+        return movielistItems.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setRatingList(movielistItems);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleRatingDescend = async () => {
+    try {
+      const movielistRef = collection(db, "ratingslist");
+      const first = query(
+        movielistRef,
+        where("userRef", "==", auth.currentUser?.uid),
+        orderBy("rating", "desc"),
+        limit(8)
+      );
+
+      const querySnap = await getDocs(first);
+
+      const movielistItems: any[] = [];
+
+      querySnap.docs.map((doc) => {
+        return movielistItems.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setRatingList(movielistItems);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -138,9 +192,15 @@ function MovieListSort({ movielist, setmovieList, setLoading }) {
         <option value="" onClick={handleNameDescend}>
           Name (descending)
         </option>
+        <option value="" onClick={handleRatingAscend}>
+          Rating (ascending)
+        </option>
+        <option value="" onClick={handleRatingDescend}>
+          Rating (descending)
+        </option>
       </select>
     </div>
   );
 }
 
-export default MovieListSort;
+export default RatingListSort;
