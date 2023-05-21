@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";
 import RatingListSort from "../components/RatingListSort";
+import RatingListEditModal from "../components/RatingListEditModal";
 
 function RatingList() {
   const [ratinglist, setRatingList] = useState(null);
@@ -71,6 +72,19 @@ function RatingList() {
     });
   };
 
+  // Delete from movie list
+  const deleteFromRatingList = async (movieId: string) => {
+    if (window.confirm("Are you sure you want to delete?")) {
+      await deleteDoc(doc(db, "ratingslist", movieId));
+
+      const updatedRatingList = ratinglist.filter(
+        (item: any) => item.id !== movieId
+      );
+      setRatingList(updatedRatingList);
+      console.log("Success delete!");
+    }
+  };
+
   return (
     <div>
       <div>
@@ -104,14 +118,40 @@ function RatingList() {
                       <td>{item.data.movieName}</td>
                       <td>{item.data.date}</td>
                       <td>{item.data.rating}</td>
+                      <td>
+                        <RatingListEditModal
+                          movieItemName={item.data.movieName}
+                          movieItemDate={item.data.date}
+                          movieItemRating={item.data.rating}
+                          fetchRatingList={fetchRatingList}
+                          movieRatingId={item.id}
+                        />
+                      </td>
+                      <td>
+                        <button
+                          className=""
+                          onClick={() => deleteFromRatingList(item.id)}
+                        >
+                          delete
+                        </button>
+                      </td>
                     </tr>
                   ))
-                : state.list?.map((movieItem) => (
+                : state.list?.map((item) => (
                     <tr>
                       <th></th>
-                      <td>{movieItem.data.movieName}</td>
-                      <td>{movieItem.data.date}</td>
-                      <td>{movieItem.data.rating}</td>
+                      <td>{item.data.movieName}</td>
+                      <td>{item.data.date}</td>
+                      <td>{item.data.rating}</td>
+                      <td>
+                        <RatingListEditModal
+                          movieItemName={item.data.movieName}
+                          movieItemDate={item.data.date}
+                          movieItemRating={item.data.rating}
+                          fetchRatingList={fetchRatingList}
+                          movieRatingId={item.id}
+                        />
+                      </td>
                     </tr>
                   ))}
             </tbody>
