@@ -2,18 +2,33 @@ import { useNavigate, Link } from "react-router-dom";
 import { auth, db } from "../../firebase.config";
 import { updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  collection,
+  getDocs,
+  query,
+  where,
+  deleteDoc,
+  limit,
+  startAfter,
+  orderBy,
+  endBefore,
+  limitToLast,
+} from "firebase/firestore";
+import ProfileStats from "../components/ProfileStats";
 
 function Profile() {
   const [user, setUser] = useState(null);
   const [changeDetails, setChangeDetails] = useState(false);
+  const [movielist, setmovieList] = useState<any | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const [formData, setFormData] = useState({
     name: auth.currentUser.displayName,
-    email: auth.currentUser.email,
   });
 
-  const { name, email } = formData;
+  const { name } = formData;
 
   const navigate = useNavigate();
 
@@ -46,6 +61,33 @@ function Profile() {
       ...prevState,
       [id]: value,
     }));
+  };
+
+  // Stats for movie list
+  const fetchMovielist = async () => {
+    try {
+      const movielistRef = collection(db, "movieslist");
+      const first = query(
+        movielistRef,
+        where("userRef", "==", auth.currentUser?.uid)
+      );
+
+      const querySnap = await getDocs(first);
+
+      const movielistItems: any[] = [];
+
+      querySnap.docs.map((doc) => {
+        return movielistItems.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setmovieList(movielistItems);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -81,6 +123,13 @@ function Profile() {
               onChange={onChange}
             />
           </form>
+        </div>
+        <div>
+          <ProfileStats
+            fetchMovielist={fetchMovielist}
+            loading={loading}
+            movielist={movielist}
+          />
         </div>
       </main>
     </div>
