@@ -13,7 +13,13 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../../firebase.config";
 
-function MovieListSort({ movielist, setmovieList, setLoading }) {
+function MovieListSort({
+  movielist,
+  setmovieList,
+  setLoading,
+  sort,
+  onFilterChange,
+}) {
   const handleNameAscend = async () => {
     try {
       const movielistRef = collection(db, "movieslist");
@@ -125,8 +131,8 @@ function MovieListSort({ movielist, setmovieList, setLoading }) {
 
   return (
     <div>
-      <select name="" id="">
-        <option value="" onClick={handleDateDescend}>
+      <select name="" id="" onChange={onFilterChange}>
+        {/* <option value=""  onClick={handleDateDescend}>
           Date (descending)
         </option>
         <option value="" onClick={handleDateAscend}>
@@ -137,7 +143,11 @@ function MovieListSort({ movielist, setmovieList, setLoading }) {
         </option>
         <option value="" onClick={handleNameDescend}>
           Name (descending)
-        </option>
+        </option> */}
+        <option selected={sort == "NEW" ? true : false}>NEW</option>
+        <option selected={sort == "OLD" ? true : false}>OLD</option>
+        <option selected={sort == "NAME ASC" ? true : false}>NAME ASC</option>
+        <option selected={sort == "NAME DESC" ? true : false}>NAME DESC</option>
       </select>
     </div>
   );
