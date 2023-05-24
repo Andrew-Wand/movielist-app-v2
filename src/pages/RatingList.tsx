@@ -152,6 +152,14 @@ function RatingList() {
                           movieRatingId={item.id}
                         />
                       </td>
+                      <td>
+                        <button
+                          className=""
+                          onClick={() => deleteFromRatingList(item.id)}
+                        >
+                          delete
+                        </button>
+                      </td>
                     </tr>
                   ))}
             </tbody>
