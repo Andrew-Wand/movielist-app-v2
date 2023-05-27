@@ -13,7 +13,12 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../../firebase.config";
 
-function RatingListSort({ setRatingList, setLoading }) {
+function RatingListSort({
+  setRatingList,
+  setLoading,
+  rateSort,
+  onFilterChange,
+}) {
   const handleNameAscend = async () => {
     try {
       const ratinglistRef = collection(db, "ratingslist");
@@ -179,8 +184,8 @@ function RatingListSort({ setRatingList, setLoading }) {
 
   return (
     <div>
-      <select name="" id="">
-        <option value="" onClick={handleDateDescend}>
+      <select name="" id="" onChange={onFilterChange}>
+        {/* <option value="" onClick={handleDateDescend}>
           Date (descending)
         </option>
         <option value="" onClick={handleDateAscend}>
@@ -197,6 +202,27 @@ function RatingListSort({ setRatingList, setLoading }) {
         </option>
         <option value="" onClick={handleRatingDescend}>
           Rating (descending)
+        </option> */}
+
+        <option selected={rateSort == "NEW" ? true : false}>NEW</option>
+        <option selected={rateSort == "OLD" ? true : false}>OLD</option>
+        <option selected={rateSort == "NAME ASC" ? true : false}>
+          NAME ASC
+        </option>
+        <option selected={rateSort == "NAME DESC" ? true : false}>
+          NAME DESC
+        </option>
+        <option selected={rateSort == "RATING ASC" ? true : false}>
+          RATING ASC
+        </option>
+        <option selected={rateSort == "RATING DESC" ? true : false}>
+          RATING DESC
+        </option>
+        <option selected={rateSort == "FINISHED ASC" ? true : false}>
+          FINISHED ASC
+        </option>
+        <option selected={rateSort == "FINISHED DESC" ? true : false}>
+          FINISHED DESC
         </option>
       </select>
     </div>

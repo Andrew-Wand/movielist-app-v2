@@ -8,25 +8,93 @@ import {
   addDoc,
   where,
   deleteDoc,
+  orderBy,
+  startAfter,
+  endBefore,
+  limitToLast,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";
 import RatingListSort from "../components/RatingListSort";
 import RatingListEditModal from "../components/RatingListEditModal";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 function RatingList() {
   const [ratinglist, setRatingList] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState<number>(1);
+  const [rateSort, setRateSort] = useLocalStorage("rateSort", []);
+
+  const pageSize = 8;
 
   // Fetch movies from firebase
   const fetchRatingList = async () => {
     try {
       const ratinglistRef = collection(db, "ratingslist");
-      const q = query(
-        ratinglistRef,
-        where("userRef", "==", auth.currentUser?.uid)
-      );
+      const q =
+        rateSort === "NEW"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("createdAt", "desc"),
+              limit(pageSize)
+            )
+          : rateSort === "OLD"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("createdAt"),
+              limit(pageSize)
+            )
+          : rateSort === "NAME ASC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("movieName"),
+              limit(pageSize)
+            )
+          : rateSort === "NAME DESC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("movieName", "desc"),
+              limit(pageSize)
+            )
+          : rateSort === "RATING DESC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("rating", "desc"),
+              limit(pageSize)
+            )
+          : rateSort === "RATING ASC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("rating"),
+              limit(pageSize)
+            )
+          : rateSort === "FINISHED ASC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("date"),
+              limit(pageSize)
+            )
+          : rateSort === "FINISHED DESC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("date", "desc"),
+              limit(pageSize)
+            )
+          : query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("createdAt", "desc"),
+              limit(pageSize)
+            );
 
       const querySnap = await getDocs(q);
 
@@ -48,7 +116,7 @@ function RatingList() {
 
   useEffect(() => {
     fetchRatingList();
-  }, [loading]);
+  }, [rateSort]);
 
   // Searching component
 
@@ -84,6 +152,204 @@ function RatingList() {
       console.log("Success delete!");
     }
   };
+  //Filter
+  const onFilterChange = (e: React.FormEvent<HTMLSelectElement>) => {
+    setRateSort(e.currentTarget.value);
+  };
+
+  // Next button - fetch next movies
+  const fetchNextMovies = async ({ item }) => {
+    try {
+      const ratinglistRef = collection(db, "ratingslist");
+
+      const next =
+        rateSort === "NEW"
+          ? query(
+              ratinglistRef,
+              orderBy("createdAt", "desc"),
+              where("userRef", "==", auth.currentUser?.uid),
+              startAfter(item.data.createdAt),
+              limit(pageSize)
+            )
+          : rateSort === "OLD"
+          ? query(
+              ratinglistRef,
+              orderBy("createdAt"),
+              where("userRef", "==", auth.currentUser?.uid),
+              startAfter(item.data.createdAt),
+              limit(pageSize)
+            )
+          : rateSort === "NAME ASC"
+          ? query(
+              ratinglistRef,
+              orderBy("movieName"),
+              where("userRef", "==", auth.currentUser?.uid),
+              startAfter(item.data.movieName),
+              limit(pageSize)
+            )
+          : rateSort === "NAME DESC"
+          ? query(
+              ratinglistRef,
+              orderBy("movieName", "desc"),
+              where("userRef", "==", auth.currentUser?.uid),
+              startAfter(item.data.movieName),
+              limit(pageSize)
+            )
+          : rateSort === "RATING DESC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("rating", "desc"),
+              startAfter(item.data.rating),
+              limit(pageSize)
+            )
+          : rateSort === "RATING ASC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("rating"),
+              startAfter(item.data.rating),
+              limit(pageSize)
+            )
+          : rateSort === "FINISHED ASC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("date"),
+              startAfter(item.data.date),
+              limit(pageSize)
+            )
+          : rateSort === "FINISHED DESC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("date", "desc"),
+              startAfter(item.data.date),
+              limit(pageSize)
+            )
+          : query(
+              ratinglistRef,
+              orderBy("createdAt", "desc"),
+              where("userRef", "==", auth.currentUser?.uid),
+              startAfter(item.data.createdAt),
+              limit(pageSize)
+            );
+
+      const nextSnap = await getDocs(next);
+
+      const nextListItems: any[] = [];
+
+      nextSnap.docs.map((doc) => {
+        return nextListItems.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setRatingList(nextListItems);
+      setPage(page + 1);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Back button
+  const fetchLastMovies = async ({ item }) => {
+    try {
+      const ratinglistRef = collection(db, "ratingslist");
+
+      const previous =
+        rateSort === "NEW"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("createdAt", "desc"),
+              endBefore(item.data.createdAt),
+              limitToLast(pageSize)
+            )
+          : rateSort === "OLD"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("createdAt"),
+              endBefore(item.data.createdAt),
+              limitToLast(pageSize)
+            )
+          : rateSort === "NAME ASC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("movieName"),
+              endBefore(item.data.movieName),
+              limitToLast(pageSize)
+            )
+          : rateSort === "NAME DESC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("movieName", "desc"),
+              endBefore(item.data.movieName),
+              limitToLast(pageSize)
+            )
+          : rateSort === "RATING DESC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("rating", "desc"),
+              endBefore(item.data.rating),
+              limitToLast(pageSize)
+            )
+          : rateSort === "RATING ASC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("rating"),
+              endBefore(item.data.rating),
+              limitToLast(pageSize)
+            )
+          : rateSort === "FINISHED ASC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("date"),
+              endBefore(item.data.date),
+              limitToLast(pageSize)
+            )
+          : rateSort === "FINISHED DESC"
+          ? query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("date", "desc"),
+              endBefore(item.data.date),
+              limitToLast(pageSize)
+            )
+          : query(
+              ratinglistRef,
+              where("userRef", "==", auth.currentUser?.uid),
+              orderBy("createdAt", "desc"),
+              endBefore(item.data.createdAt),
+              limitToLast(pageSize)
+            );
+
+      const previousSnap = await getDocs(previous);
+
+      const lastListItems: any[] = [];
+
+      previousSnap.docs.map((doc) => {
+        return lastListItems.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setRatingList(lastListItems);
+      setPage(page - 1);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -93,7 +359,12 @@ function RatingList() {
         </form>
       </div>
       <div>
-        <RatingListSort setRatingList={setRatingList} setLoading={setLoading} />
+        <RatingListSort
+          setRatingList={setRatingList}
+          setLoading={setLoading}
+          rateSort={rateSort}
+          onFilterChange={onFilterChange}
+        />
       </div>
       {loading ? (
         <Loading />
@@ -105,8 +376,10 @@ function RatingList() {
               <tr>
                 <th></th>
                 <th>Title</th>
-                <th>Date</th>
+                <th>Finished</th>
                 <th>Rating</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
 
@@ -165,6 +438,39 @@ function RatingList() {
             </tbody>
           </table>
           {!state.list.length ? "No results" : ""}
+          <div>
+            {ratinglist?.length < 8 ? (
+              <button
+                // onClick={() =>
+                //   fetchNextMovies({ item: movielist[movielist.length - 1] })
+                // }
+                disabled
+                className="text-black"
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                onClick={() =>
+                  fetchNextMovies({ item: ratinglist[ratinglist.length - 1] })
+                }
+              >
+                Next
+              </button>
+            )}
+          </div>
+          <div>
+            {page === 1 ? (
+              ""
+            ) : (
+              <button
+                onClick={() => fetchLastMovies({ item: ratinglist[0] })}
+                // className={ratinglist?.length <= 8 ? "hidden" : "block"}
+              >
+                Back
+              </button>
+            )}
+          </div>
         </div>
       ) : (
         <div>Nothing here</div>

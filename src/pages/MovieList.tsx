@@ -26,6 +26,8 @@ function MovieList() {
   const [page, setPage] = useState<number>(1);
   const [sort, setSort] = useLocalStorage("sort", []);
 
+  const pageSize = 8;
+
   // Fetch movies from firebase
   const fetchMovielist = async () => {
     try {
@@ -36,34 +38,34 @@ function MovieList() {
               movielistRef,
               where("userRef", "==", auth.currentUser?.uid),
               orderBy("createdAt", "desc"),
-              limit(8)
+              limit(pageSize)
             )
           : sort === "OLD"
           ? query(
               movielistRef,
               where("userRef", "==", auth.currentUser?.uid),
               orderBy("createdAt"),
-              limit(8)
+              limit(pageSize)
             )
           : sort === "NAME ASC"
           ? query(
               movielistRef,
               where("userRef", "==", auth.currentUser?.uid),
               orderBy("movieName"),
-              limit(8)
+              limit(pageSize)
             )
           : sort === "NAME DESC"
           ? query(
               movielistRef,
               where("userRef", "==", auth.currentUser?.uid),
               orderBy("movieName", "desc"),
-              limit(8)
+              limit(pageSize)
             )
           : query(
               movielistRef,
               where("userRef", "==", auth.currentUser?.uid),
               orderBy("createdAt", "desc"),
-              limit(8)
+              limit(pageSize)
             );
 
       // query(
@@ -100,15 +102,8 @@ function MovieList() {
   const fetchNextMovies = async ({ item }) => {
     try {
       const movielistRef = collection(db, "movieslist");
-      // const first = query(
-      //   movielistRef,
-      //   where("userRef", "==", auth.currentUser?.uid),
-      //   limit(8)
-      // );
-
-      // const querySnap = await getDocs(first);
-      // const lastVisible = querySnap.docs[querySnap.docs.length - 1];
-
+      const derp = page * 8;
+      console.log(movielist[0]);
       const next =
         sort === "NEW"
           ? query(
@@ -116,7 +111,7 @@ function MovieList() {
               orderBy("createdAt", "desc"),
               where("userRef", "==", auth.currentUser?.uid),
               startAfter(item.data.createdAt),
-              limit(8)
+              limit(pageSize)
             )
           : sort === "OLD"
           ? query(
@@ -124,7 +119,7 @@ function MovieList() {
               orderBy("createdAt"),
               where("userRef", "==", auth.currentUser?.uid),
               startAfter(item.data.createdAt),
-              limit(8)
+              limit(pageSize)
             )
           : sort === "NAME ASC"
           ? query(
@@ -132,7 +127,7 @@ function MovieList() {
               orderBy("movieName"),
               where("userRef", "==", auth.currentUser?.uid),
               startAfter(item.data.movieName),
-              limit(8)
+              limit(pageSize)
             )
           : sort === "NAME DESC"
           ? query(
@@ -140,23 +135,15 @@ function MovieList() {
               orderBy("movieName", "desc"),
               where("userRef", "==", auth.currentUser?.uid),
               startAfter(item.data.movieName),
-              limit(8)
+              limit(pageSize)
             )
           : query(
               movielistRef,
               orderBy("createdAt", "desc"),
               where("userRef", "==", auth.currentUser?.uid),
               startAfter(item.data.createdAt),
-              limit(8)
+              limit(pageSize)
             );
-
-      // query(
-      //   movielistRef,
-      //   where("userRef", "==", auth.currentUser?.uid),
-      //   orderBy("createdAt", "desc"),
-      //   startAfter(item.data.createdAt),
-      //   limit(8)
-      // );
 
       const nextSnap = await getDocs(next);
 
@@ -168,8 +155,6 @@ function MovieList() {
           data: doc.data(),
         });
       });
-
-      // console.log(nextListItems);
 
       setmovieList(nextListItems);
       setPage(page + 1);
@@ -183,14 +168,6 @@ function MovieList() {
   const fetchLastMovies = async ({ item }) => {
     try {
       const movielistRef = collection(db, "movieslist");
-      // const first = query(
-      //   movielistRef,
-      //   where("userRef", "==", auth.currentUser?.uid),
-      //   limit(8)
-      // );
-
-      // const querySnap = await getDocs(first);
-      // const lastVisible = querySnap.docs[querySnap.docs.length - 1];
 
       const previous =
         sort === "NEW"
@@ -199,7 +176,8 @@ function MovieList() {
               where("userRef", "==", auth.currentUser?.uid),
               orderBy("createdAt", "desc"),
               endBefore(item.data.createdAt),
-              limit(8)
+              limitToLast(pageSize)
+              // limit(8)
             )
           : sort === "OLD"
           ? query(
@@ -207,7 +185,8 @@ function MovieList() {
               where("userRef", "==", auth.currentUser?.uid),
               orderBy("createdAt"),
               endBefore(item.data.createdAt),
-              limit(8)
+              limitToLast(pageSize)
+              // limit(8)
             )
           : sort === "NAME ASC"
           ? query(
@@ -215,7 +194,8 @@ function MovieList() {
               where("userRef", "==", auth.currentUser?.uid),
               orderBy("movieName"),
               endBefore(item.data.movieName),
-              limit(8)
+              limitToLast(pageSize)
+              // limit(8)
             )
           : sort === "NAME DESC"
           ? query(
@@ -223,23 +203,17 @@ function MovieList() {
               where("userRef", "==", auth.currentUser?.uid),
               orderBy("movieName", "desc"),
               endBefore(item.data.movieName),
-              limit(8)
+              limitToLast(pageSize)
+              // limit(8)
             )
           : query(
               movielistRef,
               where("userRef", "==", auth.currentUser?.uid),
               orderBy("createdAt", "desc"),
               endBefore(item.data.createdAt),
-              limit(8)
+              limitToLast(pageSize)
+              // limit(8)
             );
-
-      // query(
-      //   movielistRef,
-      //   where("userRef", "==", auth.currentUser?.uid),
-      //   orderBy("createdAt", "desc"),
-      //   endBefore(item.data.createdAt),
-      //   limitToLast(8)
-      // );
 
       const previousSnap = await getDocs(previous);
 
@@ -254,6 +228,7 @@ function MovieList() {
 
       setmovieList(lastListItems);
       setPage(page - 1);
+
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -262,6 +237,7 @@ function MovieList() {
 
   useEffect(() => {
     fetchMovielist();
+    // console.log(movielist[page * 8]);
   }, [sort]);
 
   // Delete from movie list
@@ -418,12 +394,13 @@ function MovieList() {
             )}
           </div>
           <div>
-            <button
-              onClick={() => fetchLastMovies({ item: movielist[0] })}
-              className={movielist?.legnth <= 8 ? "hidden" : "block"}
-            >
-              Back
-            </button>
+            {page === 1 ? (
+              ""
+            ) : (
+              <button onClick={() => fetchLastMovies({ item: movielist[0] })}>
+                Back
+              </button>
+            )}
           </div>
         </div>
       ) : (
