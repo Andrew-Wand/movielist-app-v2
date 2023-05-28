@@ -19,6 +19,8 @@ import Loading from "../components/Loading";
 import RatingListSort from "../components/RatingListSort";
 import RatingListEditModal from "../components/RatingListEditModal";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { BiSearch } from "react-icons/bi";
+import { BsTrashFill } from "react-icons/bs";
 
 function RatingList() {
   const [ratinglist, setRatingList] = useState(null);
@@ -352,25 +354,43 @@ function RatingList() {
   };
 
   return (
-    <div>
-      <div>
+    <main>
+      {/* <div>
         <form>
           <input type="search" value={state.search} onChange={handleChange} />
         </form>
+      </div> */}
+
+      <div className="absolute left-5 top-[7.4rem]">
+        <BiSearch />
       </div>
-      <div>
-        <RatingListSort
-          setRatingList={setRatingList}
-          setLoading={setLoading}
-          rateSort={rateSort}
-          onFilterChange={onFilterChange}
-        />
+      <div className="flex justify-between">
+        <div>
+          <form>
+            <input
+              type="search"
+              value={state.search}
+              onChange={handleChange}
+              className="input input-bordered input-sm w-10/12 max-w-xs pl-7 ml-3"
+              // placeholder="Search here..."
+            />
+          </form>
+        </div>
+
+        <div>
+          <RatingListSort
+            setRatingList={setRatingList}
+            setLoading={setLoading}
+            rateSort={rateSort}
+            onFilterChange={onFilterChange}
+          />
+        </div>
       </div>
       {loading ? (
         <Loading />
       ) : ratinglist && ratinglist?.length > 0 ? (
         <div className="overflow-x-auto p-2">
-          <table className="table table-zebra table-compact w-full">
+          <table className="table table-zebra table-compact w-full font-['Staatliches'] mt-3">
             {/* head */}
             <thead>
               <tr>
@@ -388,7 +408,7 @@ function RatingList() {
                 ? ratinglist?.map((item) => (
                     <tr>
                       <th></th>
-                      <td>{item.data.movieName}</td>
+                      <td className="truncate">{item.data.movieName}</td>
                       <td>{item.data.date}</td>
                       <td>{item.data.rating}</td>
                       <td>
@@ -475,7 +495,7 @@ function RatingList() {
       ) : (
         <div>Nothing here</div>
       )}
-    </div>
+    </main>
   );
 }
 

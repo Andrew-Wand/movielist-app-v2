@@ -289,7 +289,7 @@ function MovieList() {
               type="search"
               value={state.search}
               onChange={handleChange}
-              className="input input-bordered input-sm w-12/12 max-w-xs pl-7 ml-3"
+              className="input input-bordered input-sm w-10/12 max-w-xs pl-7 ml-3"
               // placeholder="Search here..."
             />
           </form>

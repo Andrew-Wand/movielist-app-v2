@@ -184,7 +184,13 @@ function RatingListSort({
 
   return (
     <div>
-      <select name="" id="" onChange={onFilterChange}>
+      <select
+        name=""
+        id=""
+        onChange={onFilterChange}
+        className="select select-bordered select-sm mr-3"
+        data-theme="halloween"
+      >
         {/* <option value="" onClick={handleDateDescend}>
           Date (descending)
         </option>
