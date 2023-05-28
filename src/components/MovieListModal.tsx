@@ -85,7 +85,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
             ✕
           </label>
           <form onSubmit={addMovie}>
-            <h1>Add a Movie</h1>
+            <h1 className="text-3xl ml-2 mb-5">Add a Movie</h1>
             <input
               type="text"
               placeholder="Type here"
@@ -95,7 +95,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
               id="movieName"
             />
             <div className="modal-action">
-              <button type="submit" className="btn">
+              <button type="submit" className="btn text-lg">
                 Add
               </button>
             </div>

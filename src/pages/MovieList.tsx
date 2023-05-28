@@ -313,10 +313,10 @@ function MovieList() {
           <table className="table table-zebra w-full font-['Staatliches']">
             <caption className="text-5xl p-5 bg-[#182635] drop-shadow-xl rounded-lg">
               Movie List
-              <div className="absolute right-5 top-4">
-                <MovieListModal fetchMovieList={fetchMovielist} />
-              </div>
             </caption>
+            <div className="absolute right-5 top-5">
+              <MovieListModal fetchMovieList={fetchMovielist} />
+            </div>
 
             {/* head */}
             <thead>

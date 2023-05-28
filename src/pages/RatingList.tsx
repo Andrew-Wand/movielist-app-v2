@@ -389,15 +389,15 @@ function RatingList() {
       {loading ? (
         <Loading />
       ) : ratinglist && ratinglist?.length > 0 ? (
-        <div className="overflow-x-auto p-2">
-          <table className="table table-zebra table-compact w-full font-['Staatliches'] mt-3">
+        <div className="overflow-x-auto p-2 ">
+          <table className="table table-zebra table-compact w-full font-['Staatliches'] mt-3 drop-shadow-xl ">
             {/* head */}
-            <thead>
+            <thead className="shadow-lg" data-theme="aqua">
               <tr>
                 <th></th>
-                <th>Title</th>
-                <th>Finished</th>
-                <th>Rating</th>
+                <th className="text-xl underline text-black">Title</th>
+                <th className="text-lg underline text-black">Finished</th>
+                <th className="text-lg underline text-black">Rating</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -408,9 +408,11 @@ function RatingList() {
                 ? ratinglist?.map((item) => (
                     <tr>
                       <th></th>
-                      <td className="truncate">{item.data.movieName}</td>
+                      <td className="truncate text-lg">
+                        {item.data.movieName}
+                      </td>
                       <td>{item.data.date}</td>
-                      <td>{item.data.rating}</td>
+                      <td>{item.data.rating} / 10</td>
                       <td>
                         <RatingListEditModal
                           movieItemName={item.data.movieName}
@@ -422,10 +424,10 @@ function RatingList() {
                       </td>
                       <td>
                         <button
-                          className=""
+                          className="text-lg mt-2"
                           onClick={() => deleteFromRatingList(item.id)}
                         >
-                          delete
+                          <BsTrashFill />
                         </button>
                       </td>
                     </tr>
@@ -433,9 +435,11 @@ function RatingList() {
                 : state.list?.map((item) => (
                     <tr>
                       <th></th>
-                      <td>{item.data.movieName}</td>
+                      <td className="truncate text-lg">
+                        {item.data.movieName}
+                      </td>
                       <td>{item.data.date}</td>
-                      <td>{item.data.rating}</td>
+                      <td>{item.data.rating} / 10</td>
                       <td>
                         <RatingListEditModal
                           movieItemName={item.data.movieName}
@@ -447,10 +451,10 @@ function RatingList() {
                       </td>
                       <td>
                         <button
-                          className=""
+                          className="text-lg mt-2"
                           onClick={() => deleteFromRatingList(item.id)}
                         >
-                          delete
+                          <BsTrashFill />
                         </button>
                       </td>
                     </tr>
@@ -458,22 +462,15 @@ function RatingList() {
             </tbody>
           </table>
           {!state.list.length ? "No results" : ""}
-          <div>
+          <div className=" justify-end flex mt-3">
             {ratinglist?.length < 8 ? (
-              <button
-                // onClick={() =>
-                //   fetchNextMovies({ item: movielist[movielist.length - 1] })
-                // }
-                disabled
-                className="text-black"
-              >
-                Next
-              </button>
+              ""
             ) : (
               <button
                 onClick={() =>
                   fetchNextMovies({ item: ratinglist[ratinglist.length - 1] })
                 }
+                className="btn"
               >
                 Next
               </button>

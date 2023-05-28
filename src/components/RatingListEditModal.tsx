@@ -82,8 +82,8 @@ function RatingListEditModal({
   };
   return (
     <div>
-      <label htmlFor="my-modal-4" className="" onClick={handleOpen}>
-        Edit
+      <label htmlFor="my-modal-4" className="text-xl" onClick={handleOpen}>
+        <BiEdit />
       </label>
 
       <input

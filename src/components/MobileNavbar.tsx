@@ -24,8 +24,8 @@ const MobileNavbar = (): JSX.Element => {
   };
 
   return (
-    <nav className="lg:hidden font-['Staatliches'] list-none">
-      <div className="btm-nav">
+    <nav className="lg:hidden font-['Staatliches'] list-none" data-theme="aqua">
+      <div className="btm-nav ">
         {navList.map((list) => (
           <Link
             to={list.toLink}

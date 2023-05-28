@@ -27,7 +27,7 @@ function Header() {
   return (
     <header>
       <div className="text-6xl font-['Dancing_Script'] text-center m-5 flex justify-between border-b-2 border-gray-500">
-        <h1>Movie Night</h1>
+        <h1 className="text-blue-500">Movie Night</h1>
         <div
           className="dropdown dropdown-end font-['sans-serif']"
           onClick={openMenu}
