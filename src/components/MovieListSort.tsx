@@ -131,7 +131,13 @@ function MovieListSort({
 
   return (
     <div>
-      <select name="" id="" onChange={onFilterChange}>
+      <select
+        name=""
+        id=""
+        onChange={onFilterChange}
+        className="select select-bordered select-sm mr-3"
+        data-theme="halloween"
+      >
         {/* <option value=""  onClick={handleDateDescend}>
           Date (descending)
         </option>
@@ -144,8 +150,8 @@ function MovieListSort({
         <option value="" onClick={handleNameDescend}>
           Name (descending)
         </option> */}
-        <option selected={sort == "NEW" ? true : false}>NEW</option>
-        <option selected={sort == "OLD" ? true : false}>OLD</option>
+        <option selected={sort == "NEWEST" ? true : false}>NEWEST</option>
+        <option selected={sort == "OLDEST" ? true : false}>OLDEST</option>
         <option selected={sort == "NAME ASC" ? true : false}>NAME ASC</option>
         <option selected={sort == "NAME DESC" ? true : false}>NAME DESC</option>
       </select>

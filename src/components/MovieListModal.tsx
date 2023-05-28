@@ -58,8 +58,12 @@ function MovieListModal({ fetchMovieList }: movieProps) {
 
   return (
     <div>
-      <label htmlFor="my-modal-4" className="btn" onClick={handleOpen}>
-        Add Movie to List
+      <label
+        htmlFor="my-modal-4"
+        className="btn text-4xl rounded-full"
+        onClick={handleOpen}
+      >
+        +
       </label>
 
       <input

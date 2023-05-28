@@ -19,6 +19,7 @@ import {
 import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { BiSearch } from "react-icons/bi";
 
 function MovieList() {
   const [movielist, setmovieList] = useState<any | null>(null);
@@ -33,14 +34,14 @@ function MovieList() {
     try {
       const movielistRef = collection(db, "movieslist");
       const q =
-        sort === "NEW"
+        sort === "NEWEST"
           ? query(
               movielistRef,
               where("userRef", "==", auth.currentUser?.uid),
               orderBy("createdAt", "desc"),
               limit(pageSize)
             )
-          : sort === "OLD"
+          : sort === "OLDEST"
           ? query(
               movielistRef,
               where("userRef", "==", auth.currentUser?.uid),
@@ -105,7 +106,7 @@ function MovieList() {
       const derp = page * 8;
       console.log(movielist[0]);
       const next =
-        sort === "NEW"
+        sort === "NEWEST"
           ? query(
               movielistRef,
               orderBy("createdAt", "desc"),
@@ -113,7 +114,7 @@ function MovieList() {
               startAfter(item.data.createdAt),
               limit(pageSize)
             )
-          : sort === "OLD"
+          : sort === "OLDEST"
           ? query(
               movielistRef,
               orderBy("createdAt"),
@@ -170,7 +171,7 @@ function MovieList() {
       const movielistRef = collection(db, "movieslist");
 
       const previous =
-        sort === "NEW"
+        sort === "NEWEST"
           ? query(
               movielistRef,
               where("userRef", "==", auth.currentUser?.uid),
@@ -179,7 +180,7 @@ function MovieList() {
               limitToLast(pageSize)
               // limit(8)
             )
-          : sort === "OLD"
+          : sort === "OLDEST"
           ? query(
               movielistRef,
               where("userRef", "==", auth.currentUser?.uid),
@@ -276,32 +277,46 @@ function MovieList() {
   };
 
   return (
-    <div>
-      <div>
-        <form>
-          <input type="search" value={state.search} onChange={handleChange} />
-        </form>
+    <main>
+      <div className="absolute left-5 top-[7.4rem]">
+        <BiSearch />
       </div>
-      <div>
-        <MovieListModal fetchMovieList={fetchMovielist} />
-      </div>
+      <div className="flex justify-between">
+        <div>
+          <form>
+            <input
+              type="search"
+              value={state.search}
+              onChange={handleChange}
+              className="input input-bordered input-sm w-12/12 max-w-xs pl-7 ml-3"
+              // placeholder="Search here..."
+            />
+          </form>
+        </div>
 
-      <div>
-        <MovieListSort
-          movielist={movielist}
-          setmovieList={setmovieList}
-          setLoading={setLoading}
-          sort={sort}
-          onFilterChange={onFilterChange}
-        />
+        <div>
+          <MovieListSort
+            movielist={movielist}
+            setmovieList={setmovieList}
+            setLoading={setLoading}
+            sort={sort}
+            onFilterChange={onFilterChange}
+          />
+        </div>
       </div>
 
       {loading ? (
         <Loading />
       ) : movielist && movielist.length > 0 ? (
         <div className="overflow-x-auto p-2">
-          <table className="table table-zebra w-full">
-            <caption className="text-4xl p-5 bg-[#182635]">Movie List</caption>
+          <table className="table table-zebra w-full font-['Staatliches']">
+            <caption className="text-5xl p-5 bg-[#182635]">
+              Movie List
+              <div className="absolute right-5 top-4">
+                <MovieListModal fetchMovieList={fetchMovielist} />
+              </div>
+            </caption>
+
             {/* head */}
             <thead>
               {/* <tr>
@@ -315,7 +330,7 @@ function MovieList() {
               {state.search === ""
                 ? movielist?.map((movieItem: any) => (
                     <tr>
-                      <td className="text-md max-w-[210px] ">
+                      <td className="text-lg max-w-[210px] ">
                         <p className="truncate">{movieItem.data.movieName}</p>
                       </td>
                       <td>
@@ -406,7 +421,7 @@ function MovieList() {
       ) : (
         <div>Nothing here</div>
       )}
-    </div>
+    </main>
   );
 }
 

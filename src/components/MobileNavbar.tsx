@@ -37,18 +37,18 @@ const MobileNavbar = (): JSX.Element => {
           >
             {list.id === 1 ? (
               <svg
-                width="28px"
-                height="28px"
+                width="32px"
+                height="32px"
+                stroke-width="1.9"
                 viewBox="0 0 24 24"
-                stroke-width="1.6"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 color="#fff"
               >
                 <path
-                  d="M10 16h4M2 8l9.732-4.866a.6.6 0 01.536 0L22 8M20 11v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8"
+                  d="M8 6h12M4 6.01l.01-.011M4 12.01l.01-.011M4 18.01l.01-.011M8 12h12M8 18h12"
                   stroke="#fff"
-                  stroke-width="1.6"
+                  stroke-width="1.9"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 ></path>

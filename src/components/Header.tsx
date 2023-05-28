@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { auth } from "../../firebase.config";
+import { BsPersonCircle } from "react-icons/bs";
 function Header() {
   const [open, setOpen] = useState(true);
   const [displayMenuStyle, setdisplayMenuStyle] = useState("");
@@ -31,14 +32,17 @@ function Header() {
           className="dropdown dropdown-end font-['sans-serif']"
           onClick={openMenu}
         >
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-12 rounded-full">
-              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-            </div>
+          <label
+            tabIndex={0}
+            className="btn btn-ghost btn-circle avatar text-4xl mt-3"
+          >
+            {/* <div className="w-12 rounded-full"> */}
+            <BsPersonCircle />
+            {/* </div> */}
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-300 rounded-box w-52"
             style={{ display: displayMenuStyle }}
           >
             {auth.currentUser ? (
