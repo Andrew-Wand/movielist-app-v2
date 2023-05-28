@@ -1,67 +1,91 @@
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../firebase.config";
+
 import { useState } from "react";
 
 const MobileNavbar = (): JSX.Element => {
-  const [open, setOpen] = useState(true);
-  const [displayMenuStyle, setdisplayMenuStyle] = useState("");
+  const navList = [
+    { id: 1, title: "List", toLink: "/" },
+    { id: 2, title: "Ratings", toLink: "/rating-list" },
+    { id: 3, title: "Spin", toLink: "/spin" },
+  ];
 
-  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState(1);
 
-  const openMenu = () => {
-    setOpen(!open);
-    if (open) {
-      setdisplayMenuStyle("");
-    } else {
-      setdisplayMenuStyle("none");
+  const handleClick = (row) => {
+    if (row.id === 1) {
+      setActiveTab(row.id);
     }
-    return open;
-  };
-
-  const onLogout = () => {
-    if (auth.currentUser) {
-      auth.signOut();
-      navigate("/sign-in");
+    if (row.id === 2) {
+      setActiveTab(row.id);
+    }
+    if (row.id === 3) {
+      setActiveTab(row.id);
     }
   };
 
   return (
-    <nav className="flex justify-between m-10 lg:hidden">
-      <div>
-        <Link to="/">List</Link>
-      </div>
-      <div>
-        <Link to="/rating-list">Ratings</Link>
-      </div>
-      <div>
-        <Link to="/spin">Spin</Link>
-      </div>
-
-      {/* When user is signed in */}
-      <div className="dropdown dropdown-end" onClick={openMenu}>
-        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-          <div className="w-10 rounded-full">
-            <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-          </div>
-        </label>
-        <ul
-          tabIndex={0}
-          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          style={{ display: displayMenuStyle }}
-        >
-          {auth.currentUser ? (
-            <li>
-              <Link to="/profile" className="justify-between">
-                Profile
-              </Link>
-              <a onClick={onLogout}>Logout</a>
-            </li>
-          ) : (
-            <li>
-              <Link to="/sign-in">Sign In</Link>
-            </li>
-          )}
-        </ul>
+    <nav className="lg:hidden font-['Staatliches'] list-none">
+      <div className="btm-nav">
+        {navList.map((list) => (
+          <Link
+            to={list.toLink}
+            key={list.id}
+            className={
+              list.id === activeTab ? "active btm-nav-label" : "btm-nav-label"
+            }
+            onClick={() => handleClick(list)}
+          >
+            {list.id === 1 ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
+              </svg>
+            ) : list.id === 2 ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            ) : list.id === 3 ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            ) : (
+              ""
+            )}
+            <span>{list.title}</span>
+          </Link>
+        ))}
       </div>
     </nav>
   );

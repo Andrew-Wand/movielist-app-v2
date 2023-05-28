@@ -10,15 +10,19 @@ import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 import MobileNavbar from "./components/MobileNavbar";
 import PrivateRoute from "./components/PrivateRoute";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+        <Header />
         <Navbar />
-        <MobileNavbar />
+
         <Routes>
-          <Route path="/rating-list" element={<RatingList />} />
+          <Route path="/rating-list" element={<PrivateRoute />}>
+            <Route path="/rating-list" element={<RatingList />} />
+          </Route>
           <Route path="/spin" element={<SpinPage />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
@@ -30,6 +34,7 @@ function App() {
             <Route path="/" element={<MovieList />} />
           </Route>
         </Routes>
+        <MobileNavbar />
       </BrowserRouter>
     </div>
   );
