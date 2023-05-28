@@ -20,6 +20,7 @@ import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { BiSearch } from "react-icons/bi";
+import { BsTrashFill } from "react-icons/bs";
 
 function MovieList() {
   const [movielist, setmovieList] = useState<any | null>(null);
@@ -308,9 +309,9 @@ function MovieList() {
       {loading ? (
         <Loading />
       ) : movielist && movielist.length > 0 ? (
-        <div className="overflow-x-auto p-2">
+        <div className="overflow-x-auto p-2 mt-3 drop-shadow-xl">
           <table className="table table-zebra w-full font-['Staatliches']">
-            <caption className="text-5xl p-5 bg-[#182635]">
+            <caption className="text-5xl p-5 bg-[#182635] drop-shadow-xl rounded-lg">
               Movie List
               <div className="absolute right-5 top-4">
                 <MovieListModal fetchMovieList={fetchMovielist} />
@@ -330,7 +331,7 @@ function MovieList() {
               {state.search === ""
                 ? movielist?.map((movieItem: any) => (
                     <tr>
-                      <td className="text-lg max-w-[210px] ">
+                      <td className="text-xl max-w-[210px] ">
                         <p className="truncate">{movieItem.data.movieName}</p>
                       </td>
                       <td>
@@ -348,17 +349,17 @@ function MovieList() {
                       </td>
                       <td>
                         <button
-                          className=""
+                          className="text-xl mt-2"
                           onClick={() => deleteFromMovieList(movieItem.id)}
                         >
-                          delete
+                          <BsTrashFill />
                         </button>
                       </td>
                     </tr>
                   ))
                 : state.list?.map((movieItem) => (
                     <tr>
-                      <td className="text-md max-w-[210px] ">
+                      <td className="text-xl max-w-[210px] ">
                         <p className="truncate">{movieItem.data.movieName}</p>
                       </td>
                       <td>
@@ -376,10 +377,10 @@ function MovieList() {
                       </td>
                       <td>
                         <button
-                          className=""
+                          className="text-xl mt-2"
                           onClick={() => deleteFromMovieList(movieItem.id)}
                         >
-                          delete
+                          <BsTrashFill />
                         </button>
                       </td>
                     </tr>
@@ -389,15 +390,7 @@ function MovieList() {
           {!state.list.length ? "No results" : ""}
           <div>
             {movielist?.length < 8 ? (
-              <button
-                // onClick={() =>
-                //   fetchNextMovies({ item: movielist[movielist.length - 1] })
-                // }
-                disabled
-                className="text-black"
-              >
-                Next
-              </button>
+              ""
             ) : (
               <button
                 onClick={() =>

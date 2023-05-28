@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { auth, db } from "../../firebase.config";
 import { addDoc, collection, updateDoc, doc } from "firebase/firestore";
+import { BiEdit } from "react-icons/bi";
 
 interface movieInfo {
   movieName: string;
@@ -62,8 +63,8 @@ function MovieListEditModal({
 
   return (
     <div>
-      <label htmlFor="my-modal-4" className="" onClick={handleOpen}>
-        Edit
+      <label htmlFor="my-modal-4" className="text-2xl" onClick={handleOpen}>
+        <BiEdit />
       </label>
 
       <input

@@ -13,6 +13,8 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
+import { BiEdit } from "react-icons/bi";
+
 type RateProps = {
   movieRatingId: string;
   fetchRatingList: () => void;
