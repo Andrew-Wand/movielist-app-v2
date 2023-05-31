@@ -35,7 +35,7 @@ function MovieList() {
   const [sort, setSort] = useLocalStorage("sort", []);
   const [searchMovies, setSearchMovies] = useState<movie[]>([]);
 
-  const pageSize = 8;
+  const pageSize = 6;
 
   // Fetch movies from firebase
   const fetchMovielist = async () => {
@@ -129,8 +129,7 @@ function MovieList() {
   const fetchNextMovies = async ({ item }) => {
     try {
       const movielistRef = collection(db, "movieslist");
-      const derp = page * 8;
-      console.log(movielist[0]);
+
       const next =
         sort === "NEWEST"
           ? query(
@@ -335,8 +334,14 @@ function MovieList() {
         <Loading />
       ) : movielist && movielist.length > 0 ? (
         <div className="overflow-x-auto p-2 mt-3 drop-shadow-xl">
-          <table className="table table-zebra w-full font-['Staatliches']">
-            <caption className="text-5xl p-5 bg-[#182635] drop-shadow-xl rounded-lg">
+          <table
+            className="table table-zebra w-full font-['Staatliches'] rounded-b-lg"
+            data-theme="aqua"
+          >
+            <caption
+              className="text-5xl p-5 drop-shadow-xl rounded-t-lg border-b-2"
+              data-theme="aqua"
+            >
               Movie List
             </caption>
             <div className="absolute right-5 top-5">
@@ -413,25 +418,31 @@ function MovieList() {
             </tbody>
           </table>
           {!state.list.length ? "No results" : ""}
-          <div>
-            {movielist?.length < 8 ? (
+          <div className="justify-between flex mt-3">
+            <div>
+              {page === 1 ? (
+                ""
+              ) : (
+                <button
+                  onClick={() => fetchLastMovies({ item: movielist[0] })}
+                  className="btn"
+                  data-theme="aqua"
+                >
+                  Back
+                </button>
+              )}
+            </div>
+            {movielist?.length < 6 ? (
               ""
             ) : (
               <button
                 onClick={() =>
                   fetchNextMovies({ item: movielist[movielist.length - 1] })
                 }
+                className="btn"
+                data-theme="aqua"
               >
                 Next
-              </button>
-            )}
-          </div>
-          <div>
-            {page === 1 ? (
-              ""
-            ) : (
-              <button onClick={() => fetchLastMovies({ item: movielist[0] })}>
-                Back
               </button>
             )}
           </div>

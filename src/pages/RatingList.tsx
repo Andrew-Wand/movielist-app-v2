@@ -420,7 +420,13 @@ function RatingList() {
         <Loading />
       ) : ratinglist && ratinglist?.length > 0 ? (
         <div className="overflow-x-auto p-2 ">
-          <table className="table table-zebra table-compact w-full font-['Staatliches'] mt-3 drop-shadow-xl ">
+          <table
+            className="table table-zebra table-compact w-full font-['Staatliches'] mt-3 drop-shadow-xl text-gray-300 rounded-b-lg"
+            data-theme="aqua"
+          >
+            <caption className="text-5xl p-5 bg-[#2e5394] border-b-2 rounded-tl-lg rounded-tr-lg drop-shadow-xl">
+              Rating List
+            </caption>
             {/* head */}
             <thead className="shadow-lg" data-theme="aqua">
               <tr>
@@ -492,7 +498,20 @@ function RatingList() {
             </tbody>
           </table>
           {!state.list.length ? "No results" : ""}
-          <div className=" justify-end flex mt-3">
+          <div className=" justify-between flex mt-3">
+            <div>
+              {page === 1 ? (
+                ""
+              ) : (
+                <button
+                  onClick={() => fetchLastMovies({ item: ratinglist[0] })}
+                  className="btn"
+                  data-theme="aqua"
+                >
+                  Back
+                </button>
+              )}
+            </div>
             {ratinglist?.length < 8 ? (
               ""
             ) : (
@@ -501,20 +520,9 @@ function RatingList() {
                   fetchNextMovies({ item: ratinglist[ratinglist.length - 1] })
                 }
                 className="btn"
+                data-theme="aqua"
               >
                 Next
-              </button>
-            )}
-          </div>
-          <div>
-            {page === 1 ? (
-              ""
-            ) : (
-              <button
-                onClick={() => fetchLastMovies({ item: ratinglist[0] })}
-                // className={ratinglist?.length <= 8 ? "hidden" : "block"}
-              >
-                Back
               </button>
             )}
           </div>

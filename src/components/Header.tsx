@@ -26,15 +26,15 @@ function Header() {
   };
   return (
     <header>
-      <div className="text-6xl font-['Dancing_Script'] text-center m-5 flex justify-between border-b-2 border-gray-500">
-        <h1 className="text-blue-500">Movie Night</h1>
+      <div className="text-6xl font-['Dancing_Script'] text-center m-5 flex justify-between border-b-2 border-gray-500 lg:justify-center lg:text-8xl lg:border-none lg:underline">
+        <h1 className="text-blue-500 lg:text-center">Movie Night</h1>
         <div
-          className="dropdown dropdown-end font-['sans-serif']"
+          className="dropdown dropdown-end font-['sans-serif'] lg:absolute lg:right-[20%]"
           onClick={openMenu}
         >
           <label
             tabIndex={0}
-            className="btn btn-ghost btn-circle avatar text-4xl mt-3"
+            className="btn btn-ghost btn-circle avatar text-4xl mt-3 lg:text-5xl lg:ml-36 lg:mt-10"
           >
             {/* <div className="w-12 rounded-full"> */}
             <BsPersonCircle />

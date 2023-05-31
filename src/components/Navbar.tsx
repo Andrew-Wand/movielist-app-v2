@@ -9,46 +9,55 @@ const Navbar = (): JSX.Element => {
     setOpen(!open);
   };
 
+  const lists = [
+    { id: 1, title: "List", toLink: "/" },
+    { id: 2, title: "Ratings", toLink: "/rating-list" },
+    { id: 3, title: "Spin", toLink: "/spin" },
+  ];
+
+  const [activeTab, setActiveTab] = useState(1);
+
+  const handleClick = (row) => {
+    if (row.id === 1) {
+      setActiveTab(row.id);
+    }
+
+    if (row.id === 2) {
+      setActiveTab(row.id);
+    }
+
+    if (row.id === 3) {
+      setActiveTab(row.id);
+    }
+  };
+
   return (
-    <nav className="m-10 hidden lg:flex justify-between">
-      <div>
+    <nav className="m-10  font-['Staatliches'] text-3xl mt-15 border-b-2 pb-8">
+      {/* <div className="mr-36">
         <Link to="/">List</Link>
       </div>
-      <div>
+      <div className="mr-36">
         <Link to="/rating-list">Ratings</Link>
       </div>
-      <div>
+      <div className="">
         <Link to="/spin">Spin</Link>
-      </div>
+      </div> */}
 
-      {/* When user is signed in */}
-      <div
-        className={
-          open ? "dropdown dropdown-end dropdown-open" : "dropdown dropdown-end"
-        }
-        onClick={openMenu}
-      >
-        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-          <div className="w-10 rounded-full">
-            <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-          </div>
-        </label>
-        <ul
-          tabIndex={0}
-          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-        >
-          {auth.currentUser ? (
-            <li>
-              <Link to="/profile" className="justify-between">
-                Profile
-              </Link>
+      <div className="list-none flex justify-center">
+        {lists.map((list) => (
+          <Link
+            to={list.toLink}
+            key={list.id}
+            className="mt-[20px] mr-[75px] ml-[75px]"
+          >
+            <li
+              className={list.id === activeTab ? "nav-link active" : "nav-link"}
+              onClick={() => handleClick(list)}
+            >
+              {list.title}
             </li>
-          ) : (
-            <li>
-              <Link to="/sign-in">Sign In</Link>
-            </li>
-          )}
-        </ul>
+          </Link>
+        ))}
       </div>
     </nav>
   );

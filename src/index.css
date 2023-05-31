@@ -5,3 +5,57 @@
 @tailwind components;
 @tailwind utilities;
 
+
+body {
+    padding-bottom: 70px;
+}
+
+.nav-link {
+    position: relative;
+    background-color: transparent;
+    line-height: 1.9em;
+    font-size: 26px;
+    width: 120px;
+    text-align: center;
+    color: #fff;
+    z-index: 999;
+    opacity: 1;
+    font-family: "Staatliches", sans-serif;
+    display: inline-block;
+  }
+
+.active {
+    display: inline-block;
+    position: relative;
+    color: #fff;
+  }
+  
+  .active::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(1);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    transform-origin: bottom right;
+  }
+  
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  
+  .nav-link:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
