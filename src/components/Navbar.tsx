@@ -32,7 +32,7 @@ const Navbar = (): JSX.Element => {
   };
 
   return (
-    <nav className="m-10  font-['Staatliches'] text-3xl mt-15 border-b-2 pb-8">
+    <nav className="m-10 hidden lg:block font-['Staatliches'] text-3xl mt-15 border-b-2 pb-8">
       {/* <div className="mr-36">
         <Link to="/">List</Link>
       </div>
@@ -51,7 +51,9 @@ const Navbar = (): JSX.Element => {
             className="mt-[20px] mr-[75px] ml-[75px]"
           >
             <li
-              className={list.id === activeTab ? "nav-link active" : "nav-link"}
+              className={
+                list.id === activeTab ? "nav-link active-nav" : "nav-link"
+              }
               onClick={() => handleClick(list)}
             >
               {list.title}

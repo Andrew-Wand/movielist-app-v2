@@ -24,13 +24,13 @@ body {
     display: inline-block;
   }
 
-.active {
+.active-nav {
     display: inline-block;
     position: relative;
     color: #fff;
   }
   
-  .active::before {
+  .active-nav::before {
     content: "";
     position: absolute;
     width: 100%;
