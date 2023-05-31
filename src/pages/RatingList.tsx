@@ -391,11 +391,11 @@ function RatingList() {
         </form>
       </div> */}
 
-      <div className="absolute left-5 top-[7.4rem]">
+      <div className="absolute left-5 top-[7.4rem] lg:top-[32.7%] lg:left-[29.6%]">
         <BiSearch />
       </div>
-      <div className="flex justify-between">
-        <div>
+      <div className="flex justify-between lg:justify-center">
+        <div className="lg:mr-[21%]">
           <form>
             <input
               type="search"
@@ -419,9 +419,9 @@ function RatingList() {
       {loading ? (
         <Loading />
       ) : ratinglist && ratinglist?.length > 0 ? (
-        <div className="overflow-x-auto p-2 ">
+        <div className="overflow-x-auto p-2 lg:flex lg:flex-col lg:items-center">
           <table
-            className="table table-zebra table-compact w-full font-['Staatliches'] mt-3 drop-shadow-xl text-gray-300 rounded-b-lg"
+            className="table table-zebra table-compact w-full font-['Staatliches'] mt-3 drop-shadow-xl text-gray-300 rounded-b-lg lg:w-5/12"
             data-theme="aqua"
           >
             <caption className="text-5xl p-5 bg-[#2e5394] border-b-2 rounded-tl-lg rounded-tr-lg drop-shadow-xl">

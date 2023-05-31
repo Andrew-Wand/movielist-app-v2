@@ -303,11 +303,11 @@ function MovieList() {
 
   return (
     <main>
-      <div className="absolute left-5 top-[7.4rem]">
+      <div className="absolute left-5 top-[7.4rem] lg:top-[32.7%] lg:left-[29.6%]">
         <BiSearch />
       </div>
-      <div className="flex justify-between">
-        <div>
+      <div className="flex justify-between lg:justify-center">
+        <div className="lg:mr-[21%]">
           <form>
             <input
               type="search"
@@ -333,9 +333,9 @@ function MovieList() {
       {loading ? (
         <Loading />
       ) : movielist && movielist.length > 0 ? (
-        <div className="overflow-x-auto p-2 mt-3 drop-shadow-xl">
+        <div className="overflow-x-auto p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center">
           <table
-            className="table table-zebra w-full font-['Staatliches'] rounded-b-lg"
+            className="table table-zebra w-full font-['Staatliches'] rounded-b-lg lg:w-5/12"
             data-theme="aqua"
           >
             <caption

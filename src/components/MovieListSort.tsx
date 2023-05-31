@@ -135,7 +135,7 @@ function MovieListSort({
         name=""
         id=""
         onChange={onFilterChange}
-        className="select select-bordered select-sm mr-3"
+        className="select select-bordered select-sm mr-3 lg:text-lg"
         data-theme="halloween"
       >
         {/* <option value=""  onClick={handleDateDescend}>
