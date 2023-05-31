@@ -62,6 +62,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
         htmlFor="my-modal-4"
         className="btn text-4xl rounded-full"
         onClick={handleOpen}
+        data-theme="dracula"
       >
         +
       </label>
@@ -75,6 +76,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
       <label
         htmlFor="my-modal-4"
         className="modal modal-middle sm:modal-middle cursor-pointer"
+        data-theme="dracula"
       >
         <label className="modal-box relative">
           <label

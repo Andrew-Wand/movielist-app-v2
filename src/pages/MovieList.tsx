@@ -333,7 +333,7 @@ function MovieList() {
       {loading ? (
         <Loading />
       ) : movielist && movielist.length > 0 ? (
-        <div className="overflow-x-auto p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center">
+        <div className="p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center">
           <table
             className="table table-zebra w-full font-['Staatliches'] rounded-b-lg lg:w-5/12"
             data-theme="aqua"

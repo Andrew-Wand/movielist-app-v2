@@ -81,7 +81,7 @@ function RatingListEditModal({
     setIsChecked(false);
   };
   return (
-    <div>
+    <div className="">
       <label htmlFor="my-modal-4" className="text-xl" onClick={handleOpen}>
         <BiEdit />
       </label>
@@ -95,6 +95,7 @@ function RatingListEditModal({
       <label
         htmlFor="my-modal-4"
         className="modal modal-middle sm:modal-middle cursor-pointer"
+        data-theme="dracula"
       >
         <label className="modal-box relative overflow-x-hidden">
           <label
@@ -110,18 +111,6 @@ function RatingListEditModal({
             </h1>
             <div className="text-xl my-5">
               <label htmlFor="movieName">Movie Name:</label>
-              {/* {ratinglist?.map((movie) => (
-                <input
-                  type="text"
-                  className="p input-ghost outline-none bg-transparent
-           max-w-xs cursor-default ml-5"
-                  value={movie.data.movieName}
-                  id="movieName"
-                  readOnly={true}
-                  // disabled={true}
-                />
-              ))} */}
-
               <input
                 type="text"
                 className="p input-ghost outline-none bg-transparent

@@ -419,17 +419,17 @@ function RatingList() {
       {loading ? (
         <Loading />
       ) : ratinglist && ratinglist?.length > 0 ? (
-        <div className="overflow-x-auto p-2 lg:flex lg:flex-col lg:items-center">
+        <div className="p-2 lg:flex lg:flex-col lg:items-center ">
           <table
-            className="table table-zebra table-compact w-full font-['Staatliches'] mt-3 drop-shadow-xl text-gray-300 rounded-b-lg lg:w-5/12"
+            className="table table-zebra table-compact w-full font-['Staatliches'] mt-3 drop-shadow-xl text-gray-300 rounded-lg lg:w-5/12 "
             data-theme="aqua"
           >
-            <caption className="text-5xl p-5 bg-[#2e5394] border-b-2 rounded-tl-lg rounded-tr-lg drop-shadow-xl">
+            {/* <caption className="text-5xl p-5 bg-[#2e5394] border-b-2 rounded-tl-lg rounded-tr-lg drop-shadow-xl">
               Rating List
-            </caption>
+            </caption> */}
             {/* head */}
-            <thead className="shadow-lg" data-theme="aqua">
-              <tr>
+            <thead className="shadow-lg">
+              <tr className="bg-none">
                 <th></th>
                 <th className="text-xl underline text-black">Title</th>
                 <th className="text-lg underline text-black">Finished</th>

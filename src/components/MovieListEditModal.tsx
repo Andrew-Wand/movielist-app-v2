@@ -63,7 +63,11 @@ function MovieListEditModal({
 
   return (
     <div>
-      <label htmlFor="my-modal-4" className="text-2xl" onClick={handleOpen}>
+      <label
+        htmlFor="my-modal-4"
+        className="text-2xl cursor-pointer"
+        onClick={handleOpen}
+      >
         <BiEdit />
       </label>
 
@@ -76,6 +80,7 @@ function MovieListEditModal({
       <label
         htmlFor="my-modal-4"
         className="modal modal-middle sm:modal-middle cursor-pointer"
+        data-theme="dracula"
       >
         <label className="modal-box relative">
           <label
@@ -86,7 +91,7 @@ function MovieListEditModal({
             ✕
           </label>
           <form onSubmit={addMovieEdit}>
-            <h1>Add a Movie</h1>
+            <h1>Edit Movie</h1>
             <input
               type="text"
               placeholder="Type here"
