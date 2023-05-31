@@ -59,3 +59,37 @@ body {
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+
+  /* Spin wheel */
+
+  .wheel-container {
+    display: flex;
+    justify-content: center;
+    transform: translateX(10%);
+    margin-top: 25px;
+  }
+  
+  .wheel-text {
+    color: #fff;
+    text-align: center;
+    font-size: 40px;
+    margin-top: 20px;
+    font-family: "Staatliches", sans-serif;
+  }
+  
+  @media (max-width: 767px) {
+    .wheel-container canvas {
+      height: 100%;
+      width: 150%;
+      transform: translateX(-3%);
+      color: #fff;
+    }
+  
+    .wheel-text {
+      color: #fff;
+      text-align: center;
+      font-size: 40px;
+      margin-top: 20px;
+      font-family: "Staatliches", sans-serif;
+    }
+  }
