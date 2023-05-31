@@ -15,6 +15,7 @@ import {
   orderBy,
   endBefore,
   limitToLast,
+  DocumentData,
 } from "firebase/firestore";
 import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";
@@ -22,11 +23,17 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import { BiSearch } from "react-icons/bi";
 import { BsTrashFill } from "react-icons/bs";
 
+interface movie {
+  data: DocumentData;
+  id: string;
+}
+
 function MovieList() {
   const [movielist, setmovieList] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState<number>(1);
   const [sort, setSort] = useLocalStorage("sort", []);
+  const [searchMovies, setSearchMovies] = useState<movie[]>([]);
 
   const pageSize = 8;
 
@@ -90,6 +97,24 @@ function MovieList() {
 
       setmovieList(movielistItems);
       setLoading(false);
+
+      //Search entire array without pagination
+      const searchQ = query(
+        movielistRef,
+        orderBy("createdAt", "desc"),
+        where("userRef", "==", auth.currentUser?.uid)
+      );
+
+      const searchQuerySnap = await getDocs(searchQ);
+      const searchArray: movie[] = [];
+
+      searchQuerySnap.forEach((doc) => {
+        return searchArray.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+      setSearchMovies(searchArray);
     } catch (error) {
       console.log(error);
     }
@@ -263,7 +288,7 @@ function MovieList() {
   });
 
   const handleChange = async (e) => {
-    const results = movielist.filter((movie) => {
+    const results = searchMovies.filter((movie) => {
       if (e.currentTarget.value === "") {
         return movielist;
       }
