@@ -12,6 +12,7 @@ import {
   startAfter,
   endBefore,
   limitToLast,
+  DocumentData,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db, auth } from "../../firebase.config";
@@ -22,13 +23,19 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import { BiSearch } from "react-icons/bi";
 import { BsTrashFill } from "react-icons/bs";
 
+interface rate {
+  data: DocumentData;
+  id: string;
+}
+
 function RatingList() {
   const [ratinglist, setRatingList] = useState(null);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState<number>(1);
-  const [rateSort, setRateSort] = useLocalStorage("rateSort", []);
-
+  const [searchRated, setSearchRated] = useState<rate[]>([]);
   const pageSize = 8;
+
+  const [rateSort, setRateSort] = useLocalStorage("rateSort", []);
 
   // Fetch movies from firebase
   const fetchRatingList = async () => {
@@ -111,6 +118,24 @@ function RatingList() {
 
       setRatingList(ratinglistItems);
       setLoading(false);
+
+      // Search entire array without pagination
+      const searchQ = query(
+        ratinglistRef,
+        orderBy("createdAt", "desc"),
+        where("userRef", "==", auth.currentUser?.uid)
+      );
+
+      const searchQuerySnap = await getDocs(searchQ);
+      const searchArray: rate[] = [];
+
+      searchQuerySnap.forEach((doc) => {
+        return searchArray.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+      setSearchRated(searchArray);
     } catch (error) {
       console.log(error);
     }
@@ -127,15 +152,20 @@ function RatingList() {
     list: [null],
   });
 
-  const handleChange = async (e) => {
-    const results = ratinglist.filter((movie) => {
+  const handleChange = (e) => {
+    const results = searchRated?.filter((movie) => {
       if (e.currentTarget.value === "") {
         return ratinglist;
+      } else if (
+        movie.data.movieName
+          .toLowerCase()
+          .includes(e.currentTarget.value.toLowerCase())
+      ) {
+        return movie;
       }
-      return movie.data.movieName
-        .toLowerCase()
-        .includes(e.currentTarget.value.toLowerCase());
+      return false;
     });
+
     setState({
       search: e.currentTarget.value,
       list: results,
