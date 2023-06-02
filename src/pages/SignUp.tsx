@@ -71,43 +71,63 @@ function SignUp() {
   return (
     <div>
       <div>
-        <header>
-          <p> Welcome Back!</p>
+        <header className="text-center text-4xl">
+          <h1>Sign Up</h1>
         </header>
 
         <main>
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={handleOnChange}
-              id="name"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={handleOnChange}
-              id="email"
-            />
+          <form onSubmit={onSubmit} className="text-center mt-10">
+            <div className="join">
+              <button className="btn btn-sm join-item rounded-r-none">
+                Name
+              </button>
+              <input
+                type="text"
+                value={name}
+                onChange={handleOnChange}
+                id="name"
+                className="input input-sm input-bordered rounded-l-none join-item"
+              />
+            </div>
+            <div className="join my-5">
+              <button className="btn btn-sm join-item rounded-r-none">
+                Email
+              </button>
+              <input
+                type="email"
+                value={email}
+                onChange={handleOnChange}
+                id="email"
+                className="input input-sm input-bordered rounded-l-none join-item"
+              />
+            </div>
+
             <div>
-              <input
-                type={showPassword ? "text" : "password"}
-                className="passwordInput"
-                placeholder="Password"
-                id="password"
-                value={password}
-                onChange={handleOnChange}
-              />
-              <input
-                type={showPassword ? "text" : "password"}
-                className="passwordInput"
-                placeholder="Confirm Password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={handleOnChange}
-              />
+              <div className="join my-5">
+                <button className="btn btn-sm join-item rounded-r-none">
+                  Password
+                </button>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="passwordInput input input-sm input-bordered rounded-l-none join-item"
+                  id="password"
+                  value={password}
+                  onChange={handleOnChange}
+                />
+              </div>
+
+              <div className="join">
+                <button className="btn btn-sm join-item rounded-r-none">
+                  Confirm
+                </button>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="passwordInput input input-sm input-bordered rounded-l-none join-item"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={handleOnChange}
+                />
+              </div>
 
               <img
                 src=""
@@ -116,15 +136,25 @@ function SignUp() {
               />
             </div>
 
-            <Link to="/forgot-password">Forgot Password</Link>
+            <div className="my-5">
+              <Link className="link" to="/forgot-password">
+                Forgot Password
+              </Link>
+            </div>
 
             <div>
-              <button type="submit">Sign Up</button>
+              <button type="submit" className="btn btn-info">
+                Sign Up
+              </button>
             </div>
           </form>
           <OAuth />
 
-          <Link to="/sign-up">Sign In</Link>
+          <div className="text-center mt-10">
+            <Link className="btn" to="/sign-in">
+              Sign In
+            </Link>
+          </div>
         </main>
       </div>
     </div>

@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase.config";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import { FcGoogle } from "react-icons/fc";
 
 function OAuth() {
   const navigate = useNavigate();
@@ -30,9 +31,13 @@ function OAuth() {
     }
   };
   return (
-    <div>
-      <p>Sign {location.pathname === "/sign-up" ? "up" : "in"} with</p>
-      <button onClick={onGoogleClick}>**google icon here**</button>
+    <div className="text-center my-10">
+      <p className="text-2xl">
+        Sign {location.pathname === "/sign-up" ? "up" : "in"} with
+      </p>
+      <button onClick={onGoogleClick} className="text-[5rem]">
+        <FcGoogle />
+      </button>
     </div>
   );
 }
