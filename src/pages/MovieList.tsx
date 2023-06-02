@@ -303,17 +303,17 @@ function MovieList() {
 
   return (
     <main>
-      <div className="absolute left-5 top-[7.4rem] lg:top-[32.7%] lg:left-[29.6%]">
-        <BiSearch />
-      </div>
       <div className="flex justify-between lg:justify-center">
-        <div className="lg:mr-[21%]">
+        <div className="h-[32px] w-[30px] bg-blue-400 flex justify-center items-center rounded-l-full ml-5">
+          <BiSearch />
+        </div>
+        <div className="lg:mr-[21%] mr-5">
           <form>
             <input
               type="search"
               value={state.search}
               onChange={handleChange}
-              className="input input-bordered input-sm w-10/12 max-w-xs pl-7 ml-3"
+              className="input input-bordered input-sm w-10/12 max-w-xs  rounded-l-none"
               // placeholder="Search here..."
             />
           </form>
