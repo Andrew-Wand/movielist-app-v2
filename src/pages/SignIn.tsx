@@ -45,28 +45,45 @@ function SignIn() {
   return (
     <div>
       <div>
-        <header>
-          <p> Welcome Back!</p>
+        <header className="text-center text-4xl">
+          <h1> Welcome Back!</h1>
         </header>
 
         <main>
-          <form onSubmit={onSubmit}>
-            <input
+          <form onSubmit={onSubmit} className="text-center mt-10">
+            <div className="join">
+              <button className="btn btn-sm join-item rounded-r-none">
+                Email
+              </button>
+              <input
+                className="input input-sm input-bordered rounded-l-none join-item"
+                type="email"
+                value={email}
+                onChange={handleOnChange}
+                id="email"
+              />
+            </div>
+
+            {/* <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={handleOnChange}
               id="email"
-            />
-            <div>
-              <input
-                type={showPassword ? "text" : "password"}
-                className="passwordInput"
-                placeholder="Password"
-                id="password"
-                value={password}
-                onChange={handleOnChange}
-              />
+            /> */}
+            <div className="mt-5">
+              <div className="join">
+                <button className="btn btn-sm join-item rounded-r-none">
+                  Password
+                </button>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="passwordInput input input-sm rounded-l-none input-bordered"
+                  id="password"
+                  value={password}
+                  onChange={handleOnChange}
+                />
+              </div>
 
               <img
                 src=""
@@ -75,15 +92,25 @@ function SignIn() {
               />
             </div>
 
-            <Link to="/forgot-password">Forgot Password</Link>
+            <div className="my-5">
+              <Link className="link" to="/forgot-password">
+                Forgot Password
+              </Link>
+            </div>
 
             <div>
-              <button type="submit">Sign In</button>
+              <button className="btn btn-info" type="submit">
+                Sign In
+              </button>
             </div>
           </form>
           <OAuth />
 
-          <Link to="/sign-up">Sign Up</Link>
+          <div className="text-center mt-10">
+            <Link className="btn" to="/sign-up">
+              Sign Up
+            </Link>
+          </div>
         </main>
       </div>
     </div>
