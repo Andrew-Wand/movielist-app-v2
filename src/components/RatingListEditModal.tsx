@@ -82,9 +82,15 @@ function RatingListEditModal({
   };
   return (
     <div className="">
-      <label htmlFor="my-modal-4" className="text-xl" onClick={handleOpen}>
-        <BiEdit />
-      </label>
+      <div className="lg:tooltip" data-tip="Edit">
+        <label
+          htmlFor="my-modal-4"
+          className="text-xl cursor-pointer"
+          onClick={handleOpen}
+        >
+          <BiEdit />
+        </label>
+      </div>
 
       <input
         type="checkbox"

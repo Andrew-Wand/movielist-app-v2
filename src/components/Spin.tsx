@@ -25,7 +25,7 @@ function Spin({ movielist }) {
   };
 
   return (
-    <div className="wheel-wrapper">
+    <div className="wheel-wrapper overflow-hidden">
       <div className="wheel-text">
         <h3>Spin the Wheel!</h3>
       </div>

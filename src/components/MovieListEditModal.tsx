@@ -63,13 +63,15 @@ function MovieListEditModal({
 
   return (
     <div>
-      <label
-        htmlFor="my-modal-4"
-        className="text-2xl cursor-pointer"
-        onClick={handleOpen}
-      >
-        <BiEdit />
-      </label>
+      <div className="lg:tooltip" data-tip="Edit">
+        <label
+          htmlFor="my-modal-4"
+          className="text-2xl cursor-pointer"
+          onClick={handleOpen}
+        >
+          <BiEdit />
+        </label>
+      </div>
 
       <input
         type="checkbox"

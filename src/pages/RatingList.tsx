@@ -425,9 +425,9 @@ function RatingList() {
             <thead className="shadow-lg">
               <tr className="bg-none">
                 <th></th>
-                <th className="text-xl underline text-black">Title</th>
-                <th className="text-lg underline text-black">Finished</th>
-                <th className="text-lg underline text-black">Rating</th>
+                <th className="text-xl text-black">Title</th>
+                <th className="text-xl text-black">Finished</th>
+                <th className="text-xl text-black">Rating</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -438,11 +438,15 @@ function RatingList() {
                 ? ratinglist?.map((item) => (
                     <tr>
                       <th></th>
-                      <td className="truncate text-lg">
+                      <td className="truncate text-lg border-r-[1px] border-slate-500">
                         {item.data.movieName}
                       </td>
-                      <td>{item.data.date}</td>
-                      <td>{item.data.rating} / 10</td>
+                      <td className="border-r-[1px] border-slate-500 text-lg">
+                        {item.data.date}
+                      </td>
+                      <td className="border-r-[1px] border-slate-500 text-lg">
+                        {item.data.rating} / 10
+                      </td>
                       <td>
                         <RatingListEditModal
                           movieItemName={item.data.movieName}
@@ -453,12 +457,14 @@ function RatingList() {
                         />
                       </td>
                       <td>
-                        <button
-                          className="text-lg mt-2"
-                          onClick={() => deleteFromRatingList(item.id)}
-                        >
-                          <BsTrashFill />
-                        </button>
+                        <div className="lg:tooltip" data-tip="Delete">
+                          <button
+                            className="text-xl mt-1 "
+                            onClick={() => deleteFromRatingList(item.id)}
+                          >
+                            <BsTrashFill />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
@@ -480,12 +486,14 @@ function RatingList() {
                         />
                       </td>
                       <td>
-                        <button
-                          className="text-lg mt-2"
-                          onClick={() => deleteFromRatingList(item.id)}
-                        >
-                          <BsTrashFill />
-                        </button>
+                        <div className="lg:tooltip" data-tip="Delete">
+                          <button
+                            className="text-xl "
+                            onClick={() => deleteFromRatingList(item.id)}
+                          >
+                            <BsTrashFill />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}

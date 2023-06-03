@@ -12,6 +12,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import Loading from "./Loading";
+import { AiFillStar } from "react-icons/ai";
 
 type RateProps = {
   movieRatingId: string;
@@ -114,13 +115,15 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
 
   return (
     <div>
-      <label
-        htmlFor="my-modal-4"
-        className="cursor-pointer"
-        onClick={handleOpen}
-      >
-        Rate
-      </label>
+      <div className="lg:tooltip" data-tip="Rate">
+        <label
+          htmlFor="my-modal-4"
+          className="cursor-pointer text-2xl"
+          onClick={handleOpen}
+        >
+          <AiFillStar />
+        </label>
+      </div>
 
       <input
         type="checkbox"

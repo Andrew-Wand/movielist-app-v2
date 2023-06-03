@@ -378,12 +378,14 @@ function MovieList() {
                         />
                       </td>
                       <td>
-                        <button
-                          className="text-xl mt-2"
-                          onClick={() => deleteFromMovieList(movieItem.id)}
-                        >
-                          <BsTrashFill />
-                        </button>
+                        <div className="lg:tooltip" data-tip="Delete">
+                          <button
+                            className="text-xl mt-2"
+                            onClick={() => deleteFromMovieList(movieItem.id)}
+                          >
+                            <BsTrashFill />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
@@ -406,12 +408,14 @@ function MovieList() {
                         />
                       </td>
                       <td>
-                        <button
-                          className="text-xl mt-2"
-                          onClick={() => deleteFromMovieList(movieItem.id)}
-                        >
-                          <BsTrashFill />
-                        </button>
+                        <div className="lg:tooltip" data-tip="Delete">
+                          <button
+                            className="text-xl mt-2"
+                            onClick={() => deleteFromMovieList(movieItem.id)}
+                          >
+                            <BsTrashFill />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
