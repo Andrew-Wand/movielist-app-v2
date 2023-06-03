@@ -26,8 +26,10 @@ function Header() {
   };
   return (
     <header>
-      <div className="text-6xl font-['Dancing_Script'] text-center m-5 flex justify-between border-b-2 border-gray-500 lg:justify-center lg:text-8xl lg:border-none lg:underline">
-        <h1 className="text-blue-500 lg:text-center">Movie Night</h1>
+      <div className="text-6xl font-['Dancing_Script'] text-center m-5 flex justify-between border-b-2 border-gray-500 lg:justify-center lg:text-8xl lg:border-none lg:underline decoration-1">
+        <h1 className="text-blue-500 lg:text-center cursor-default ">
+          Movie Night
+        </h1>
         <div
           className="dropdown dropdown-end font-['sans-serif'] lg:absolute lg:right-[20%]"
           onClick={openMenu}

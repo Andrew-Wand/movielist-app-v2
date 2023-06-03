@@ -27,7 +27,7 @@ function Profile() {
   const [loading, setLoading] = useState(true);
 
   const [formData, setFormData] = useState({
-    name: auth.currentUser.displayName,
+    name: auth.currentUser?.displayName,
   });
 
   const { name } = formData;
@@ -36,7 +36,7 @@ function Profile() {
 
   const onLogout = () => {
     auth.signOut();
-    navigate("/");
+    navigate("/sign-in");
   };
 
   const onSubmit = async () => {
@@ -164,7 +164,7 @@ function Profile() {
       </header>
 
       <main>
-        <div className="bg-slate-700 text-center p-10 m-5 rounded-xl shadow-xl">
+        <div className="bg-slate-700 text-center p-10 m-5 rounded-xl shadow-xl lg:w-[40%] lg:ml-[30%]">
           <div>
             <p className="text-xl mb-5">Personal Details</p>
           </div>
@@ -196,7 +196,8 @@ function Profile() {
           </div>
         </div>
 
-        <div>
+        <div className="lg:text-center">
+          <h2 className="text-center text-3xl my-5">Stats</h2>
           <ProfileStats
             fetchMovielist={fetchMovielist}
             fetchRatingList={fetchRatingList}
@@ -208,8 +209,8 @@ function Profile() {
 
         <div className="divider"></div>
 
-        <div className="overflow-x-auto">
-          <h2 className="text-center text-3xl my-5">Your Top 5</h2>
+        <div className="overflow-x-auto lg:flex lg:flex-col lg:items-center">
+          <h3 className="text-center text-3xl my-5">Your Top 5</h3>
           <table className="table table-zebra ml-2 mb-10 shadow-lg">
             {/* head */}
             <thead>
