@@ -1,18 +1,5 @@
 import Spin from "../components/Spin";
-import {
-  collection,
-  getDocs,
-  query,
-  doc,
-  where,
-  deleteDoc,
-  limit,
-  startAfter,
-  orderBy,
-  endBefore,
-  limitToLast,
-  DocumentData,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";

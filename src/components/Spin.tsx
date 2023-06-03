@@ -1,4 +1,3 @@
-import React from "react";
 import WheelComponent from "react-wheel-of-prizes";
 
 function Spin({ movielist }) {

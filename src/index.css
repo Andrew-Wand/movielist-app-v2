@@ -65,7 +65,8 @@ body {
   .wheel-container {
     display: flex;
     justify-content: center;
-    transform: translateX(10%);
+    /* transform: translateX(10%); */
+    
     margin-top: 25px;
   }
   
@@ -76,12 +77,13 @@ body {
     margin-top: 20px;
     font-family: "Staatliches", sans-serif;
   }
+
   
   @media (max-width: 767px) {
     .wheel-container canvas {
       height: 100%;
       width: 150%;
-      transform: translateX(-3%);
+      transform: translateX(3%);
       color: #fff;
     }
   
@@ -91,5 +93,20 @@ body {
       font-size: 40px;
       margin-top: 20px;
       font-family: "Staatliches", sans-serif;
+    }
+  }
+
+  @media (min-width: 120em /* 1920px */ )  {
+    .wheel-container {
+      margin-left: 20%;
+      height: 600px;
+    }
+
+   
+  }
+
+  @media (min-width: 160em /* 2560px */) {
+    .wheel-container {
+      margin-left: 14.5%;
     }
   }
