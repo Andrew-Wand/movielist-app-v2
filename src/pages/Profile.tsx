@@ -22,6 +22,8 @@ function Profile() {
   const [user, setUser] = useState(null);
   const [changeDetails, setChangeDetails] = useState(false);
   const [movielist, setmovieList] = useState<any | null>(null);
+  const [ratingslist, setratingsList] = useState<any | null>(null);
+  const [topRatinglist, setTopRatinglist] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
 
   const [formData, setFormData] = useState({
@@ -89,47 +91,171 @@ function Profile() {
       console.log(error);
     }
   };
+  // Stats for rated list
+  const fetchRatingList = async () => {
+    try {
+      const ratinglistRef = collection(db, "ratingslist");
+      const first = query(
+        ratinglistRef,
+        where("userRef", "==", auth.currentUser?.uid)
+      );
+
+      const querySnap = await getDocs(first);
+
+      const ratedlistItems: any[] = [];
+
+      querySnap.docs.map((doc) => {
+        return ratedlistItems.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setratingsList(ratedlistItems);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Fetch top 10 movies from rating list
+  const fetchTopMovies = async () => {
+    try {
+      const ratinglistRef = collection(db, "ratingslist");
+      const first = query(
+        ratinglistRef,
+        where("userRef", "==", auth.currentUser?.uid),
+        orderBy("rating", "desc"),
+        limit(5)
+      );
+
+      const querySnap = await getDocs(first);
+
+      const topRatedItems: any[] = [];
+
+      querySnap.docs.map((doc) => {
+        return topRatedItems.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setTopRatinglist(topRatedItems);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTopMovies();
+  }, [loading]);
+
+  // Number for top 5 list
+  let listNumber = 1;
 
   return (
     <div>
-      <header>
-        <p>My Profile</p>
-        <button type="button" onClick={onLogout}>
+      <header className="text-center">
+        <h1 className=" text-4xl mb-5">My Profile</h1>
+        <button type="button" className="btn" onClick={onLogout}>
           Log Out
         </button>
       </header>
 
       <main>
-        <div>
-          <p>Personal Details</p>
-          <p
-            onClick={() => {
-              changeDetails && onSubmit();
-              setChangeDetails((prevState) => !prevState);
-            }}
-          >
-            {changeDetails ? "done" : "change"}
-          </p>
+        <div className="bg-slate-700 text-center p-10 m-5 rounded-xl shadow-xl">
+          <div>
+            <p className="text-xl mb-5">Personal Details</p>
+          </div>
+
+          <div>
+            <form>
+              <input
+                type="text"
+                id="name"
+                className={
+                  !changeDetails
+                    ? "profileName input input-sm"
+                    : "profileNameActive input input-sm"
+                }
+                disabled={!changeDetails}
+                value={name}
+                onChange={onChange}
+              />
+              <p
+                onClick={() => {
+                  changeDetails && onSubmit();
+                  setChangeDetails((prevState) => !prevState);
+                }}
+                className="cursor-pointer btn btn-accent mt-5"
+              >
+                {changeDetails ? "Done" : "Change"}
+              </p>
+            </form>
+          </div>
         </div>
 
         <div>
-          <form>
-            <input
-              type="text"
-              id="name"
-              className={!changeDetails ? "profileName" : "profileNameActive"}
-              disabled={!changeDetails}
-              value={name}
-              onChange={onChange}
-            />
-          </form>
-        </div>
-        <div>
           <ProfileStats
             fetchMovielist={fetchMovielist}
+            fetchRatingList={fetchRatingList}
+            ratingslist={ratingslist}
             loading={loading}
             movielist={movielist}
           />
+        </div>
+
+        <div className="divider"></div>
+
+        <div className="overflow-x-auto">
+          <h2 className="text-center text-3xl my-5">Your Top 5</h2>
+          <table className="table table-zebra ml-2 mb-10 shadow-lg">
+            {/* head */}
+            <thead>
+              <tr>
+                <th></th>
+                <th className="text-lg">Title</th>
+                <th className="text-lg">Rating</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              {topRatinglist?.map((item) => (
+                <tr>
+                  <td className="">{listNumber++}</td>
+                  <td>{item.data.movieName}</td>
+                  <td>{item.data.rating} / 10</td>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              ))}
+
+              {/* <tr>
+                <th>1</th>
+                <td>Cy Ganderton</td>
+                <td>Quality Control Specialist</td>
+              </tr> */}
+              {/* row 2 */}
+              {/* <tr>
+                <th>2</th>
+                <td>Hart Hagerty</td>
+                <td>Desktop Support Technician</td>
+              </tr> */}
+              {/* row 3 */}
+              {/* <tr>
+                <th>3</th>
+                <td>Brice Swyre</td>
+                <td>Tax Accountant</td>
+              </tr> */}
+            </tbody>
+          </table>
         </div>
       </main>
     </div>
