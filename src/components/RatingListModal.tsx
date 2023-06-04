@@ -1,22 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { auth, db } from "../../firebase.config";
 import {
   doc,
   addDoc,
   collection,
-  setDoc,
   where,
   getDocs,
   query,
   deleteDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import Loading from "./Loading";
+
 import { AiFillStar } from "react-icons/ai";
 
 type RateProps = {
   movieRatingId: string;
-  fetchMovielist: (params: any) => any;
+  fetchMovielist: () => void;
 };
 
 interface movieInfo {
@@ -37,7 +36,9 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
   const { movieName, date, rating } = formData;
 
   // Handle getting input values
-  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleOnChange = (
+    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+  ) => {
     const id = e.currentTarget.id;
     const value = e.currentTarget.value;
     setFormData((prevState) => ({
@@ -72,7 +73,7 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
   };
 
   // Fetch movie name after clicking rate button
-  const [ratinglist, setratingList] = useState(null);
+  const [ratinglist, setratingList] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const fetchMovieName = async () => {
     try {
@@ -150,7 +151,7 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
             </h1>
             <div className="text-xl my-5">
               <label htmlFor="movieName">Movie Name:</label>
-              {ratinglist?.map((movie) => (
+              {ratinglist?.map((movie: any) => (
                 <input
                   type="text"
                   className="p input-ghost outline-none bg-transparent

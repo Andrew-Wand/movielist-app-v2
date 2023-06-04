@@ -77,13 +77,6 @@ function MovieList() {
               limit(pageSize)
             );
 
-      // query(
-      //   movielistRef,
-      //   where("userRef", "==", auth.currentUser?.uid),
-      //   orderBy("createdAt", "desc"),
-      //   limit(8)
-      // );
-
       const querySnap = await getDocs(q);
 
       const movielistItems: any[] = [];
@@ -121,7 +114,7 @@ function MovieList() {
   };
 
   //Filter
-  const onFilterChange = (e: React.FormEvent<HTMLSelectElement>) => {
+  const onFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSort(e.currentTarget.value);
   };
 
@@ -263,7 +256,6 @@ function MovieList() {
 
   useEffect(() => {
     fetchMovielist();
-    // console.log(movielist[page * 8]);
   }, [sort]);
 
   // Delete from movie list
@@ -286,7 +278,7 @@ function MovieList() {
     list: [null],
   });
 
-  const handleChange = async (e) => {
+  const handleChange = async (e: React.FormEvent<HTMLInputElement>) => {
     const results = searchMovies.filter((movie) => {
       if (e.currentTarget.value === "") {
         return movielist;
@@ -320,13 +312,7 @@ function MovieList() {
         </div>
 
         <div>
-          <MovieListSort
-            movielist={movielist}
-            setmovieList={setmovieList}
-            setLoading={setLoading}
-            sort={sort}
-            onFilterChange={onFilterChange}
-          />
+          <MovieListSort sort={sort} onFilterChange={onFilterChange} />
         </div>
       </div>
 
@@ -349,15 +335,6 @@ function MovieList() {
                 <MovieListModal fetchMovieList={fetchMovielist} />
               </div>
 
-              {/* head */}
-              <thead>
-                {/* <tr>
-                <th className="text-lg">Title</th>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr> */}
-              </thead>
               <tbody>
                 {state.search === ""
                   ? movielist?.map((movieItem: any) => (
@@ -390,7 +367,7 @@ function MovieList() {
                         </td>
                       </tr>
                     ))
-                  : state.list?.map((movieItem) => (
+                  : state.list?.map((movieItem: any) => (
                       <tr>
                         <td className="text-xl max-w-[210px] ">
                           <p className="truncate">{movieItem.data.movieName}</p>

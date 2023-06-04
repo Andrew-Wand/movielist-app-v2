@@ -1,17 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { auth, db } from "../../firebase.config";
-import {
-  doc,
-  addDoc,
-  collection,
-  setDoc,
-  where,
-  getDocs,
-  query,
-  deleteDoc,
-  serverTimestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 import { BiEdit } from "react-icons/bi";
 
@@ -47,7 +36,9 @@ function RatingListEditModal({
   const { movieName, date, rating } = formData;
 
   // Handle getting input values
-  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleOnChange = (
+    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+  ) => {
     const id = e.currentTarget.id;
     const value = e.currentTarget.value;
     setFormData((prevState) => ({
@@ -67,14 +58,12 @@ function RatingListEditModal({
     const movieRef = doc(db, "ratingslist", movieRatingId);
 
     await updateDoc(movieRef, formDataCopy);
-    // await deleteDoc(doc(db, "movieslist", movieRatingId));
     fetchRatingList();
     setIsChecked(false);
   };
 
   const handleOpen = () => {
     setIsChecked(true);
-    // fetchMovieName();
   };
 
   const handleClose = () => {
@@ -124,8 +113,6 @@ function RatingListEditModal({
                 value={movieName}
                 id="movieName"
                 onChange={handleOnChange}
-                // readOnly={true}
-                // disabled={true}
               />
             </div>
 

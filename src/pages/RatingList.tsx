@@ -3,9 +3,7 @@ import {
   getDocs,
   query,
   limit,
-  setDoc,
   doc,
-  addDoc,
   where,
   deleteDoc,
   orderBy,
@@ -29,7 +27,7 @@ interface rate {
 }
 
 function RatingList() {
-  const [ratinglist, setRatingList] = useState(null);
+  const [ratinglist, setRatingList] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState<number>(1);
   const [searchRated, setSearchRated] = useState<rate[]>([]);
@@ -152,7 +150,9 @@ function RatingList() {
     list: [null],
   });
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLSelectElement & HTMLInputElement>
+  ) => {
     const results = searchRated?.filter((movie) => {
       if (e.currentTarget.value === "") {
         return ratinglist;
@@ -402,12 +402,7 @@ function RatingList() {
         </div>
 
         <div>
-          <RatingListSort
-            setRatingList={setRatingList}
-            setLoading={setLoading}
-            rateSort={rateSort}
-            onFilterChange={onFilterChange}
-          />
+          <RatingListSort rateSort={rateSort} onFilterChange={onFilterChange} />
         </div>
       </div>
       {loading ? (
@@ -436,7 +431,7 @@ function RatingList() {
 
               <tbody>
                 {state.search === ""
-                  ? ratinglist?.map((item) => (
+                  ? ratinglist?.map((item: any) => (
                       <tr>
                         <th></th>
                         <td className="truncate text-lg border-r-[1px] border-slate-500">
@@ -469,7 +464,7 @@ function RatingList() {
                         </td>
                       </tr>
                     ))
-                  : state.list?.map((item) => (
+                  : state.list?.map((item: any) => (
                       <tr>
                         <th></th>
                         <td className="truncate text-lg">

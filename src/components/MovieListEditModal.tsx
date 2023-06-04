@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { auth, db } from "../../firebase.config";
-import { addDoc, collection, updateDoc, doc } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 import { BiEdit } from "react-icons/bi";
 
 interface movieInfo {

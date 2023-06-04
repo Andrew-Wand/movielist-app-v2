@@ -1,4 +1,4 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase.config";
 import { updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -9,17 +9,12 @@ import {
   getDocs,
   query,
   where,
-  deleteDoc,
   limit,
-  startAfter,
   orderBy,
-  endBefore,
-  limitToLast,
 } from "firebase/firestore";
 import ProfileStats from "../components/ProfileStats";
 
 function Profile() {
-  const [user, setUser] = useState(null);
   const [changeDetails, setChangeDetails] = useState(false);
   const [movielist, setmovieList] = useState<any | null>(null);
   const [ratingslist, setratingsList] = useState<any | null>(null);
@@ -30,7 +25,7 @@ function Profile() {
     name: auth.currentUser?.displayName,
   });
 
-  const { name } = formData;
+  const { name }: any = formData;
 
   const navigate = useNavigate();
 
@@ -204,7 +199,6 @@ function Profile() {
             ratingslist={ratingslist}
             loading={loading}
             movielist={movielist}
-            topRatinglist={topRatinglist}
           />
         </div>
 
@@ -224,7 +218,7 @@ function Profile() {
               </tr>
             </thead>
             <tbody>
-              {topRatinglist?.map((item) => (
+              {topRatinglist?.map((item: any) => (
                 <tr>
                   <td className="">{listNumber++}</td>
                   <td className="truncate">{item.data.movieName}</td>

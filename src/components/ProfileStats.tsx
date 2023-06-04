@@ -1,18 +1,26 @@
 import { useEffect } from "react";
 
+type ProfileStatsProps = {
+  fetchMovielist: () => void;
+  loading: boolean;
+  movielist: [];
+  fetchRatingList: () => void;
+  ratingslist: [];
+};
+
 function ProfileStats({
   fetchMovielist,
   loading,
   movielist,
   fetchRatingList,
   ratingslist,
-}) {
+}: ProfileStatsProps) {
   useEffect(() => {
     fetchMovielist();
     fetchRatingList();
   }, [loading]);
 
-  const ratingArray = ratingslist?.map((item) => {
+  const ratingArray = ratingslist?.map((item: any) => {
     return parseInt(item.data.rating);
   });
 

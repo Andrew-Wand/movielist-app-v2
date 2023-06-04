@@ -64,13 +64,6 @@ function SignIn() {
               />
             </div>
 
-            {/* <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={handleOnChange}
-              id="email"
-            /> */}
             <div className="mt-5">
               <div className="join">
                 <button className="btn btn-sm join-item rounded-r-none">

@@ -38,9 +38,7 @@ function Header() {
             tabIndex={0}
             className="btn btn-ghost btn-circle avatar text-4xl mt-3 lg:text-5xl lg:ml-36 lg:mt-10"
           >
-            {/* <div className="w-12 rounded-full"> */}
             <BsPersonCircle />
-            {/* </div> */}
           </label>
           <ul
             tabIndex={0}

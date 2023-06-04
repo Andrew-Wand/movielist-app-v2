@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ const MobileNavbar = (): JSX.Element => {
 
   const [activeTab, setActiveTab] = useState(1);
 
-  const handleClick = (row) => {
+  const handleClick = (row: any) => {
     if (row.id === 1) {
       setActiveTab(row.id);
     }

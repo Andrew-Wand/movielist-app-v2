@@ -1,6 +1,10 @@
 import WheelComponent from "react-wheel-of-prizes";
 
-function Spin({ movielist }) {
+type SpinPageProps = {
+  movielist: any[];
+};
+
+function Spin({ movielist }: SpinPageProps) {
   const movieNames = movielist?.map((movie) => movie.data.movieName);
   const segments = movieNames;
   const segColors = [
@@ -19,7 +23,7 @@ function Spin({ movielist }) {
     "#295F4E",
   ];
 
-  const onFinished = (winner) => {
+  const onFinished = (winner: any) => {
     console.log(winner);
   };
 
@@ -32,7 +36,7 @@ function Spin({ movielist }) {
         <WheelComponent
           segments={segments}
           segColors={segColors}
-          onFinished={(winner) => onFinished(winner)}
+          onFinished={(winner: any) => onFinished(winner)}
           primaryColor="#388cb3"
           contrastColor="#0e141b"
           buttonText="Spin"
