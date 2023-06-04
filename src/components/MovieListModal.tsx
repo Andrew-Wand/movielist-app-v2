@@ -62,7 +62,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
         htmlFor="my-modal-4"
         className="btn text-4xl rounded-full"
         onClick={handleOpen}
-        data-theme="dracula"
+        data-theme="dark"
       >
         +
       </label>
@@ -75,7 +75,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
       />
       <label
         htmlFor="my-modal-4"
-        className="modal modal-middle sm:modal-middle cursor-pointer"
+        className="modal modal-middle sm:modal-middle cursor-pointer bg-transparent"
         data-theme="dracula"
       >
         <label className="modal-box relative">
@@ -97,7 +97,10 @@ function MovieListModal({ fetchMovieList }: movieProps) {
               id="movieName"
             />
             <div className="modal-action">
-              <button type="submit" className="btn text-lg">
+              <button
+                type="submit"
+                className="btn bg-[#3b8ac4] text-black text-lg"
+              >
                 Add
               </button>
             </div>

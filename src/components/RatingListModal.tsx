@@ -133,12 +133,13 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
       />
       <label
         htmlFor="my-modal-4"
-        className="modal modal-middle sm:modal-middle cursor-pointer"
+        className="modal modal-middle sm:modal-middle cursor-pointer bg-transparent"
+        data-theme="dracula"
       >
         <label className="modal-box relative overflow-x-hidden">
           <label
             htmlFor="my-modal-4"
-            className="btn btn-sm btn-circle absolute right-2 top-2"
+            className="btn btn-md btn-circle absolute right-2 top-2"
             onClick={handleClose}
           >
             ✕
@@ -169,12 +170,14 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
                 id="date"
                 value={date}
                 onChange={handleOnChange}
-                className="ml-5"
+                className="ml-5 border-2 p-2"
               />
             </div>
 
             <div className="text-xl w-6/12 mt-5">
-              <label htmlFor="rating">Rating:</label>
+              <label className="mr-5" htmlFor="rating">
+                Rating:
+              </label>
               <select
                 className="select select-bordered w-full max-w-xs"
                 value={rating}
@@ -198,7 +201,10 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
             </div>
 
             <div className="modal-action">
-              <button type="submit" className="btn">
+              <button
+                type="submit"
+                className="btn bg-[#3b8ac4] text-black text-lg"
+              >
                 Add
               </button>
             </div>

@@ -176,8 +176,8 @@ function Profile() {
                 id="name"
                 className={
                   !changeDetails
-                    ? "profileName input input-sm"
-                    : "profileNameActive input input-sm"
+                    ? "profileName input input-sm mr-5"
+                    : "profileNameActive input input-sm mr-5"
                 }
                 disabled={!changeDetails}
                 value={name}
@@ -188,7 +188,7 @@ function Profile() {
                   changeDetails && onSubmit();
                   setChangeDetails((prevState) => !prevState);
                 }}
-                className="cursor-pointer btn btn-accent mt-5"
+                className="cursor-pointer btn btn-accent mt-5 btn-sm"
               >
                 {changeDetails ? "Done" : "Change"}
               </p>
