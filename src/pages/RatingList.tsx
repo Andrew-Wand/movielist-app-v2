@@ -413,94 +413,96 @@ function RatingList() {
       {loading ? (
         <Loading />
       ) : ratinglist && ratinglist?.length > 0 ? (
-        <div className="p-2 lg:flex lg:flex-col lg:items-center ">
-          <table
-            className="table table-zebra table-compact w-full font-['Staatliches'] mt-3 drop-shadow-xl text-gray-300 rounded-lg lg:w-5/12 "
-            data-theme="aqua"
-          >
-            {/* <caption className="text-5xl p-5 bg-[#2e5394] border-b-2 rounded-tl-lg rounded-tr-lg drop-shadow-xl">
+        <>
+          <div className="p-2 lg:flex lg:flex-col lg:items-center ">
+            <table
+              className="table table-zebra table-compact w-full font-['Staatliches'] mt-3 drop-shadow-xl text-gray-300 rounded-lg lg:w-5/12 "
+              data-theme="aqua"
+            >
+              {/* <caption className="text-5xl p-5 bg-[#2e5394] border-b-2 rounded-tl-lg rounded-tr-lg drop-shadow-xl">
               Rating List
             </caption> */}
-            {/* head */}
-            <thead className="shadow-lg">
-              <tr className="bg-none">
-                <th></th>
-                <th className="text-xl text-black">Title</th>
-                <th className="text-xl text-black">Finished</th>
-                <th className="text-xl text-black">Rating</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
+              {/* head */}
+              <thead className="shadow-lg">
+                <tr className="bg-none">
+                  <th></th>
+                  <th className="text-xl text-black">Title</th>
+                  <th className="text-xl text-black">Finished</th>
+                  <th className="text-xl text-black">Rating</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {state.search === ""
-                ? ratinglist?.map((item) => (
-                    <tr>
-                      <th></th>
-                      <td className="truncate text-lg border-r-[1px] border-slate-500">
-                        {item.data.movieName}
-                      </td>
-                      <td className="border-r-[1px] border-slate-500 text-lg">
-                        {item.data.date}
-                      </td>
-                      <td className="border-r-[1px] border-slate-500 text-lg">
-                        {item.data.rating} / 10
-                      </td>
-                      <td>
-                        <RatingListEditModal
-                          movieItemName={item.data.movieName}
-                          movieItemDate={item.data.date}
-                          movieItemRating={item.data.rating}
-                          fetchRatingList={fetchRatingList}
-                          movieRatingId={item.id}
-                        />
-                      </td>
-                      <td>
-                        <div className="lg:tooltip" data-tip="Delete">
-                          <button
-                            className="text-xl mt-1 "
-                            onClick={() => deleteFromRatingList(item.id)}
-                          >
-                            <BsTrashFill />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                : state.list?.map((item) => (
-                    <tr>
-                      <th></th>
-                      <td className="truncate text-lg">
-                        {item.data.movieName}
-                      </td>
-                      <td>{item.data.date}</td>
-                      <td>{item.data.rating} / 10</td>
-                      <td>
-                        <RatingListEditModal
-                          movieItemName={item.data.movieName}
-                          movieItemDate={item.data.date}
-                          movieItemRating={item.data.rating}
-                          fetchRatingList={fetchRatingList}
-                          movieRatingId={item.id}
-                        />
-                      </td>
-                      <td>
-                        <div className="lg:tooltip" data-tip="Delete">
-                          <button
-                            className="text-xl "
-                            onClick={() => deleteFromRatingList(item.id)}
-                          >
-                            <BsTrashFill />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-            </tbody>
-          </table>
-          {!state.list.length ? "No results" : ""}
-          <div className=" justify-between flex mt-3">
+              <tbody>
+                {state.search === ""
+                  ? ratinglist?.map((item) => (
+                      <tr>
+                        <th></th>
+                        <td className="truncate text-lg border-r-[1px] border-slate-500">
+                          {item.data.movieName}
+                        </td>
+                        <td className="border-r-[1px] border-slate-500 text-lg">
+                          {item.data.date}
+                        </td>
+                        <td className="border-r-[1px] border-slate-500 text-lg">
+                          {item.data.rating} / 10
+                        </td>
+                        <td>
+                          <RatingListEditModal
+                            movieItemName={item.data.movieName}
+                            movieItemDate={item.data.date}
+                            movieItemRating={item.data.rating}
+                            fetchRatingList={fetchRatingList}
+                            movieRatingId={item.id}
+                          />
+                        </td>
+                        <td>
+                          <div className="lg:tooltip" data-tip="Delete">
+                            <button
+                              className="text-xl mt-1 "
+                              onClick={() => deleteFromRatingList(item.id)}
+                            >
+                              <BsTrashFill />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  : state.list?.map((item) => (
+                      <tr>
+                        <th></th>
+                        <td className="truncate text-lg">
+                          {item.data.movieName}
+                        </td>
+                        <td>{item.data.date}</td>
+                        <td>{item.data.rating} / 10</td>
+                        <td>
+                          <RatingListEditModal
+                            movieItemName={item.data.movieName}
+                            movieItemDate={item.data.date}
+                            movieItemRating={item.data.rating}
+                            fetchRatingList={fetchRatingList}
+                            movieRatingId={item.id}
+                          />
+                        </td>
+                        <td>
+                          <div className="lg:tooltip" data-tip="Delete">
+                            <button
+                              className="text-xl "
+                              onClick={() => deleteFromRatingList(item.id)}
+                            >
+                              <BsTrashFill />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+              </tbody>
+            </table>
+            {!state.list.length ? "No results" : ""}
+          </div>
+          <div className="flex justify-around lg:mx-[15%] mt-4">
             <div>
               {page === 1 ? (
                 ""
@@ -528,7 +530,7 @@ function RatingList() {
               </button>
             )}
           </div>
-        </div>
+        </>
       ) : (
         <div>Nothing here</div>
       )}

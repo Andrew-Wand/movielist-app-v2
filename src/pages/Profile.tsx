@@ -204,6 +204,7 @@ function Profile() {
             ratingslist={ratingslist}
             loading={loading}
             movielist={movielist}
+            topRatinglist={topRatinglist}
           />
         </div>
 
@@ -215,7 +216,7 @@ function Profile() {
             {/* head */}
             <thead>
               <tr>
-                <th></th>
+                <th className="z-0"></th>
                 <th className="text-lg">Title</th>
                 <th className="text-lg">Rating</th>
                 <th></th>

@@ -31,7 +31,7 @@ function Header() {
           Movie Night
         </h1>
         <div
-          className="dropdown dropdown-end font-['sans-serif'] lg:absolute lg:right-[20%]"
+          className="dropdown dropdown-end font-['Staatliches'] lg:absolute lg:right-[20%]"
           onClick={openMenu}
         >
           <label
