@@ -333,96 +333,98 @@ function MovieList() {
       {loading ? (
         <Loading />
       ) : movielist && movielist.length > 0 ? (
-        <div className="p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center">
-          <table
-            className="table table-zebra w-full font-['Staatliches'] rounded-b-lg lg:w-5/12"
-            data-theme="aqua"
-          >
-            <caption
-              className="text-5xl p-5 drop-shadow-xl rounded-t-lg border-b-2"
+        <>
+          <div className="p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center">
+            <table
+              className="table table-zebra w-full font-['Staatliches'] rounded-b-lg lg:w-5/12"
               data-theme="aqua"
             >
-              Movie List
-            </caption>
-            <div className="absolute right-5 top-5">
-              <MovieListModal fetchMovieList={fetchMovielist} />
-            </div>
+              <caption
+                className="text-5xl p-5 drop-shadow-xl rounded-t-lg border-b-2"
+                data-theme="aqua"
+              >
+                Movie List
+              </caption>
+              <div className="absolute right-5 top-5">
+                <MovieListModal fetchMovieList={fetchMovielist} />
+              </div>
 
-            {/* head */}
-            <thead>
-              {/* <tr>
+              {/* head */}
+              <thead>
+                {/* <tr>
                 <th className="text-lg">Title</th>
                 <th></th>
                 <th></th>
                 <th></th>
               </tr> */}
-            </thead>
-            <tbody>
-              {state.search === ""
-                ? movielist?.map((movieItem: any) => (
-                    <tr>
-                      <td className="text-xl max-w-[210px] ">
-                        <p className="truncate">{movieItem.data.movieName}</p>
-                      </td>
-                      <td>
-                        <RatingListModal
-                          movieRatingId={movieItem.id}
-                          fetchMovielist={fetchMovielist}
-                        />
-                      </td>
-                      <td>
-                        <MovieListEditModal
-                          movieItemName={movieItem.data.movieName}
-                          fetchMovielist={fetchMovielist}
-                          movieRatingId={movieItem.id}
-                        />
-                      </td>
-                      <td>
-                        <div className="lg:tooltip" data-tip="Delete">
-                          <button
-                            className="text-xl mt-2"
-                            onClick={() => deleteFromMovieList(movieItem.id)}
-                          >
-                            <BsTrashFill />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                : state.list?.map((movieItem) => (
-                    <tr>
-                      <td className="text-xl max-w-[210px] ">
-                        <p className="truncate">{movieItem.data.movieName}</p>
-                      </td>
-                      <td>
-                        <RatingListModal
-                          movieRatingId={movieItem.id}
-                          fetchMovielist={fetchMovielist}
-                        />
-                      </td>
-                      <td>
-                        <MovieListEditModal
-                          movieItemName={movieItem.data.movieName}
-                          fetchMovielist={fetchMovielist}
-                          movieRatingId={movieItem.id}
-                        />
-                      </td>
-                      <td>
-                        <div className="lg:tooltip" data-tip="Delete">
-                          <button
-                            className="text-xl mt-2"
-                            onClick={() => deleteFromMovieList(movieItem.id)}
-                          >
-                            <BsTrashFill />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-            </tbody>
-          </table>
-          {!state.list.length ? "No results" : ""}
-          <div className="justify-between flex mt-3">
+              </thead>
+              <tbody>
+                {state.search === ""
+                  ? movielist?.map((movieItem: any) => (
+                      <tr>
+                        <td className="text-xl max-w-[210px] ">
+                          <p className="truncate">{movieItem.data.movieName}</p>
+                        </td>
+                        <td>
+                          <RatingListModal
+                            movieRatingId={movieItem.id}
+                            fetchMovielist={fetchMovielist}
+                          />
+                        </td>
+                        <td>
+                          <MovieListEditModal
+                            movieItemName={movieItem.data.movieName}
+                            fetchMovielist={fetchMovielist}
+                            movieRatingId={movieItem.id}
+                          />
+                        </td>
+                        <td>
+                          <div className="lg:tooltip" data-tip="Delete">
+                            <button
+                              className="text-xl mt-2"
+                              onClick={() => deleteFromMovieList(movieItem.id)}
+                            >
+                              <BsTrashFill />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  : state.list?.map((movieItem) => (
+                      <tr>
+                        <td className="text-xl max-w-[210px] ">
+                          <p className="truncate">{movieItem.data.movieName}</p>
+                        </td>
+                        <td>
+                          <RatingListModal
+                            movieRatingId={movieItem.id}
+                            fetchMovielist={fetchMovielist}
+                          />
+                        </td>
+                        <td>
+                          <MovieListEditModal
+                            movieItemName={movieItem.data.movieName}
+                            fetchMovielist={fetchMovielist}
+                            movieRatingId={movieItem.id}
+                          />
+                        </td>
+                        <td>
+                          <div className="lg:tooltip" data-tip="Delete">
+                            <button
+                              className="text-xl mt-2"
+                              onClick={() => deleteFromMovieList(movieItem.id)}
+                            >
+                              <BsTrashFill />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+              </tbody>
+            </table>
+            {!state.list.length ? "No results" : ""}
+          </div>
+          <div className="mt-4 flex justify-around lg:mx-[15%]">
             <div>
               {page === 1 ? (
                 ""
@@ -450,7 +452,7 @@ function MovieList() {
               </button>
             )}
           </div>
-        </div>
+        </>
       ) : (
         <div>Nothing here</div>
       )}
