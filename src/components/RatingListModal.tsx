@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 
 import { AiFillStar } from "react-icons/ai";
+import { DocumentData } from "firebase/firestore/lite";
 
 type RateProps = {
   movieRatingId: string;
@@ -24,16 +25,21 @@ interface movieInfo {
   rating: string;
 }
 
+interface RatingListData {
+  data: DocumentData;
+  id: string;
+}
+
 function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
   const [isChecked, setIsChecked] = useState(false);
-
+  const [ratinglist, setratingList] = useState<RatingListData[]>([]);
   const [formData, setFormData] = useState<movieInfo>({
     movieName: "",
     date: "",
     rating: "1",
   });
 
-  const { movieName, date, rating } = formData;
+  const { date, rating } = formData;
 
   // Handle getting input values
   const handleOnChange = (
@@ -73,8 +79,7 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
   };
 
   // Fetch movie name after clicking rate button
-  const [ratinglist, setratingList] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+
   const fetchMovieName = async () => {
     try {
       const movielistRef = collection(db, "movieslist");
@@ -85,7 +90,7 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
 
       const querySnap = await getDocs(q);
 
-      const movielistItems: any[] = [];
+      const movielistItems: RatingListData[] = [];
 
       querySnap.docs.map((doc) => {
         return movielistItems.push({
@@ -107,8 +112,6 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
         ...prevState,
         movieName: string.toString(),
       }));
-
-      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -151,7 +154,7 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
             </h1>
             <div className="text-xl my-5">
               <label htmlFor="movieName">Movie Name:</label>
-              {ratinglist?.map((movie: any) => (
+              {ratinglist?.map((movie: DocumentData) => (
                 <input
                   type="text"
                   className="p input-ghost outline-none bg-transparent

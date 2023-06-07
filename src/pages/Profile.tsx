@@ -11,21 +11,32 @@ import {
   where,
   limit,
   orderBy,
+  DocumentData,
 } from "firebase/firestore";
 import ProfileStats from "../components/ProfileStats";
 
+interface ProfileStatsData {
+  data: DocumentData;
+  id: string;
+}
+
+// interface RatingData {
+//   data: DocumentData;
+//   id: string;
+// }
+
 function Profile() {
   const [changeDetails, setChangeDetails] = useState(false);
-  const [movielist, setmovieList] = useState<any | null>(null);
-  const [ratingslist, setratingsList] = useState<any | null>(null);
-  const [topRatinglist, setTopRatinglist] = useState<any | null>(null);
+  const [movielist, setmovieList] = useState<ProfileStatsData[]>([]);
+  const [ratingslist, setratingsList] = useState<ProfileStatsData[]>([]);
+  const [topRatinglist, setTopRatinglist] = useState<DocumentData>([]);
   const [loading, setLoading] = useState(true);
 
   const [formData, setFormData] = useState({
     name: auth.currentUser?.displayName,
   });
 
-  const { name }: any = formData;
+  const { name }: DocumentData = formData;
 
   const navigate = useNavigate();
 
@@ -36,16 +47,17 @@ function Profile() {
 
   const onSubmit = async () => {
     try {
-      if (auth.currentUser?.displayName !== name) {
-        await updateProfile(auth.currentUser, {
-          displayName: name,
+      if (auth.currentUser) {
+        if (auth.currentUser?.displayName !== name) {
+          await updateProfile(auth.currentUser, {
+            displayName: name,
+          });
+        }
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        await updateDoc(userRef, {
+          name,
         });
       }
-
-      const userRef = doc(db, "users", auth.currentUser.uid);
-      await updateDoc(userRef, {
-        name,
-      });
     } catch (error) {
       alert("could not update info");
     }
@@ -71,7 +83,7 @@ function Profile() {
 
       const querySnap = await getDocs(first);
 
-      const movielistItems: any[] = [];
+      const movielistItems: ProfileStatsData[] = [];
 
       querySnap.docs.map((doc) => {
         return movielistItems.push({
@@ -97,7 +109,7 @@ function Profile() {
 
       const querySnap = await getDocs(first);
 
-      const ratedlistItems: any[] = [];
+      const ratedlistItems: ProfileStatsData[] = [];
 
       querySnap.docs.map((doc) => {
         return ratedlistItems.push({
@@ -126,7 +138,7 @@ function Profile() {
 
       const querySnap = await getDocs(first);
 
-      const topRatedItems: any[] = [];
+      const topRatedItems: ProfileStatsData[] = [];
 
       querySnap.docs.map((doc) => {
         return topRatedItems.push({
@@ -218,7 +230,7 @@ function Profile() {
               </tr>
             </thead>
             <tbody>
-              {topRatinglist?.map((item: any) => (
+              {topRatinglist?.map((item: DocumentData) => (
                 <tr>
                   <td className="">{listNumber++}</td>
                   <td className="truncate">{item.data.movieName}</td>

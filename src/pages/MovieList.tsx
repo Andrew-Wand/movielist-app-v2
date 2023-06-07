@@ -28,8 +28,12 @@ interface movie {
   id: string;
 }
 
+// interface MovieItem {
+//   data: DocumentData;
+// }
+
 function MovieList() {
-  const [movielist, setmovieList] = useState<any | null>(null);
+  const [movielist, setmovieList] = useState<movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState<number>(1);
   const [sort, setSort] = useLocalStorage("sort", []);
@@ -79,7 +83,7 @@ function MovieList() {
 
       const querySnap = await getDocs(q);
 
-      const movielistItems: any[] = [];
+      const movielistItems: movie[] = [];
 
       querySnap.docs.map((doc) => {
         return movielistItems.push({
@@ -119,7 +123,7 @@ function MovieList() {
   };
 
   // Next button - fetch next movies
-  const fetchNextMovies = async ({ item }) => {
+  const fetchNextMovies = async ({ item }: DocumentData) => {
     try {
       const movielistRef = collection(db, "movieslist");
 
@@ -166,7 +170,7 @@ function MovieList() {
 
       const nextSnap = await getDocs(next);
 
-      const nextListItems: any[] = [];
+      const nextListItems: movie[] = [];
 
       nextSnap.docs.map((doc) => {
         return nextListItems.push({
@@ -184,7 +188,7 @@ function MovieList() {
   };
 
   // Back button
-  const fetchLastMovies = async ({ item }) => {
+  const fetchLastMovies = async ({ item }: DocumentData) => {
     try {
       const movielistRef = collection(db, "movieslist");
 
@@ -236,7 +240,7 @@ function MovieList() {
 
       const previousSnap = await getDocs(previous);
 
-      const lastListItems: any[] = [];
+      const lastListItems: movie[] = [];
 
       previousSnap.docs.map((doc) => {
         return lastListItems.push({
@@ -263,9 +267,7 @@ function MovieList() {
     if (window.confirm("Are you sure you want to delete?")) {
       await deleteDoc(doc(db, "movieslist", movieId));
 
-      const updatedMovieList = movielist.filter(
-        (item: any) => item.id !== movieId
-      );
+      const updatedMovieList = movielist.filter((item) => item.id !== movieId);
       setmovieList(updatedMovieList);
       console.log("Success delete!");
     }
@@ -273,7 +275,7 @@ function MovieList() {
 
   // Searching component
 
-  const [state, setState] = useState({
+  const [state, setState] = useState<DocumentData>({
     search: "",
     list: [null],
   });
@@ -337,7 +339,7 @@ function MovieList() {
 
               <tbody>
                 {state.search === ""
-                  ? movielist?.map((movieItem: any) => (
+                  ? movielist?.map((movieItem: movie) => (
                       <tr>
                         <td className="text-xl max-w-[210px] ">
                           <p className="truncate">{movieItem.data.movieName}</p>
@@ -367,7 +369,7 @@ function MovieList() {
                         </td>
                       </tr>
                     ))
-                  : state.list?.map((movieItem: any) => (
+                  : state.list?.map((movieItem: movie) => (
                       <tr>
                         <td className="text-xl max-w-[210px] ">
                           <p className="truncate">{movieItem.data.movieName}</p>

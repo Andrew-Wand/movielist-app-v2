@@ -1,11 +1,16 @@
+import { DocumentData } from "firebase/firestore";
 import WheelComponent from "react-wheel-of-prizes";
 
 type SpinPageProps = {
-  movielist: any[];
+  movielist: DocumentData;
 };
 
+interface MovieData {
+  data: DocumentData;
+}
+
 function Spin({ movielist }: SpinPageProps) {
-  const movieNames = movielist?.map((movie) => movie.data.movieName);
+  const movieNames = movielist?.map((movie: MovieData) => movie.data.movieName);
   const segments = movieNames;
   const segColors = [
     "#EE4040",
@@ -23,7 +28,7 @@ function Spin({ movielist }: SpinPageProps) {
     "#295F4E",
   ];
 
-  const onFinished = (winner: any) => {
+  const onFinished = (winner: string) => {
     console.log(winner);
   };
 
@@ -36,7 +41,7 @@ function Spin({ movielist }: SpinPageProps) {
         <WheelComponent
           segments={segments}
           segColors={segColors}
-          onFinished={(winner: any) => onFinished(winner)}
+          onFinished={(winner: string) => onFinished(winner)}
           primaryColor="#388cb3"
           contrastColor="#0e141b"
           buttonText="Spin"

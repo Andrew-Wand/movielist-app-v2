@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 
 import { useState } from "react";
 
+interface RowValue {
+  id: number;
+}
+
 const MobileNavbar = (): JSX.Element => {
   const navList = [
     { id: 1, title: "List", toLink: "/" },
@@ -11,7 +15,7 @@ const MobileNavbar = (): JSX.Element => {
 
   const [activeTab, setActiveTab] = useState(1);
 
-  const handleClick = (row: any) => {
+  const handleClick = (row: RowValue) => {
     if (row.id === 1) {
       setActiveTab(row.id);
     }

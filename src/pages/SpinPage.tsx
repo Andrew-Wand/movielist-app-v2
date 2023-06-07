@@ -1,11 +1,22 @@
 import Spin from "../components/Spin";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  DocumentData,
+  collection,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";
 
+interface MovieData {
+  data: DocumentData;
+  id: string;
+}
+
 function SpinPage() {
-  const [movielist, setmovieList] = useState<any | null>(null);
+  const [movielist, setmovieList] = useState<MovieData[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,7 +31,7 @@ function SpinPage() {
 
         const querySnap = await getDocs(q);
 
-        const movielistItems: any[] = [];
+        const movielistItems: MovieData[] = [];
 
         querySnap.docs.map((doc) => {
           return movielistItems.push({

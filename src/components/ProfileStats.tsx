@@ -1,11 +1,12 @@
+import { DocumentData } from "firebase/firestore";
 import { useEffect } from "react";
 
 type ProfileStatsProps = {
   fetchMovielist: () => void;
   loading: boolean;
-  movielist: [];
+  movielist: DocumentData;
   fetchRatingList: () => void;
-  ratingslist: [];
+  ratingslist: DocumentData;
 };
 
 function ProfileStats({
@@ -20,12 +21,12 @@ function ProfileStats({
     fetchRatingList();
   }, [loading]);
 
-  const ratingArray = ratingslist?.map((item: any) => {
+  const ratingArray = ratingslist?.map((item: DocumentData) => {
     return parseInt(item.data.rating);
   });
 
   const calculateAverage = () => {
-    const total = ratingArray?.reduce((acc, c) => acc + c, 0);
+    const total = ratingArray?.reduce((acc: number, c: number) => acc + c, 0);
     return total / ratingArray?.length;
   };
 

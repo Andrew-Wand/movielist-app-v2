@@ -47,9 +47,11 @@ function SignUp() {
 
         const user = userCredential.user;
 
-        updateProfile(auth.currentUser!, {
-          displayName: name,
-        });
+        if (auth.currentUser) {
+          updateProfile(auth.currentUser, {
+            displayName: name,
+          });
+        }
 
         const formDataCopy = { ...formData };
         delete formDataCopy.password;

@@ -27,7 +27,7 @@ interface rate {
 }
 
 function RatingList() {
-  const [ratinglist, setRatingList] = useState<any | null>(null);
+  const [ratinglist, setRatingList] = useState<rate[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState<number>(1);
   const [searchRated, setSearchRated] = useState<rate[]>([]);
@@ -105,7 +105,7 @@ function RatingList() {
 
       const querySnap = await getDocs(q);
 
-      const ratinglistItems: any[] = [];
+      const ratinglistItems: rate[] = [];
 
       querySnap.docs.map((doc) => {
         return ratinglistItems.push({
@@ -145,7 +145,7 @@ function RatingList() {
 
   // Searching component
 
-  const [state, setState] = useState({
+  const [state, setState] = useState<DocumentData>({
     search: "",
     list: [null],
   });
@@ -178,7 +178,7 @@ function RatingList() {
       await deleteDoc(doc(db, "ratingslist", movieId));
 
       const updatedRatingList = ratinglist.filter(
-        (item: any) => item.id !== movieId
+        (item) => item.id !== movieId
       );
       setRatingList(updatedRatingList);
       console.log("Success delete!");
@@ -190,7 +190,7 @@ function RatingList() {
   };
 
   // Next button - fetch next movies
-  const fetchNextMovies = async ({ item }) => {
+  const fetchNextMovies = async ({ item }: DocumentData) => {
     try {
       const ratinglistRef = collection(db, "ratingslist");
 
@@ -269,7 +269,7 @@ function RatingList() {
 
       const nextSnap = await getDocs(next);
 
-      const nextListItems: any[] = [];
+      const nextListItems: rate[] = [];
 
       nextSnap.docs.map((doc) => {
         return nextListItems.push({
@@ -287,7 +287,7 @@ function RatingList() {
   };
 
   // Back button
-  const fetchLastMovies = async ({ item }) => {
+  const fetchLastMovies = async ({ item }: DocumentData) => {
     try {
       const ratinglistRef = collection(db, "ratingslist");
 
@@ -366,7 +366,7 @@ function RatingList() {
 
       const previousSnap = await getDocs(previous);
 
-      const lastListItems: any[] = [];
+      const lastListItems: rate[] = [];
 
       previousSnap.docs.map((doc) => {
         return lastListItems.push({
@@ -431,7 +431,7 @@ function RatingList() {
 
               <tbody>
                 {state.search === ""
-                  ? ratinglist?.map((item: any) => (
+                  ? ratinglist?.map((item: rate) => (
                       <tr>
                         <th></th>
                         <td className="truncate text-lg border-r-[1px] border-slate-500">
@@ -464,7 +464,7 @@ function RatingList() {
                         </td>
                       </tr>
                     ))
-                  : state.list?.map((item: any) => (
+                  : state.list?.map((item: rate) => (
                       <tr>
                         <th></th>
                         <td className="truncate text-lg">
