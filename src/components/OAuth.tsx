@@ -35,7 +35,15 @@ function OAuth() {
       <p className="text-2xl">
         Sign {location.pathname === "/sign-up" ? "up" : "in"} with
       </p>
-      <button onClick={onGoogleClick} className="text-[5rem]">
+      <button
+        onClick={onGoogleClick}
+        className="text-[5rem]"
+        aria-label={
+          location.pathname === "/sign-up"
+            ? "Sign up with your google account."
+            : "Sign in with your google account."
+        }
+      >
         <FcGoogle />
       </button>
     </div>

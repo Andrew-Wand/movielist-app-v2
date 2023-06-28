@@ -46,7 +46,7 @@ function SignIn() {
     <div>
       <div>
         <header className="text-center text-4xl">
-          <h1> Welcome Back!</h1>
+          <h1> Welcome Back</h1>
         </header>
 
         <main>
@@ -61,6 +61,7 @@ function SignIn() {
                 value={email}
                 onChange={handleOnChange}
                 id="email"
+                aria-label="Input for your email address."
               />
             </div>
 
@@ -75,6 +76,7 @@ function SignIn() {
                   id="password"
                   value={password}
                   onChange={handleOnChange}
+                  aria-label="Input for your password."
                 />
               </div>
 
