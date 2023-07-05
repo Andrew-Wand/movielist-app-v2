@@ -45,18 +45,18 @@ function SignIn() {
   return (
     <div>
       <div>
-        <header className="text-center text-4xl">
+        <header className="text-center text-4xl mt-10">
           <h1> Welcome Back</h1>
         </header>
 
         <main>
           <form onSubmit={onSubmit} className="text-center mt-10">
             <div className="join">
-              <button className="btn btn-sm join-item rounded-r-none">
+              <button className="btn btn-md join-item rounded-r-none">
                 Email
               </button>
               <input
-                className="input input-sm input-bordered rounded-l-none join-item"
+                className="input input-md input-bordered rounded-l-none join-item lg:w-[22%]"
                 type="email"
                 value={email}
                 onChange={handleOnChange}
@@ -67,12 +67,12 @@ function SignIn() {
 
             <div className="mt-5">
               <div className="join">
-                <button className="btn btn-sm join-item rounded-r-none">
+                <button className="btn btn-md join-item rounded-r-none">
                   Password
                 </button>
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="passwordInput input input-sm rounded-l-none input-bordered"
+                  className="passwordInput input input-md rounded-l-none input-bordered w-[45%] mb-5 lg:w-[20%]"
                   id="password"
                   value={password}
                   onChange={handleOnChange}
@@ -82,7 +82,7 @@ function SignIn() {
 
               <img
                 src=""
-                alt="show password"
+                alt="Show password"
                 onClick={() => setShowPassword((prevState) => !prevState)}
               />
             </div>

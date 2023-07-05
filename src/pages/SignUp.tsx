@@ -71,14 +71,14 @@ function SignUp() {
   return (
     <div>
       <div>
-        <header className="text-center text-4xl">
+        <header className="text-center text-4xl mt-8">
           <h1>Sign Up</h1>
         </header>
 
         <main>
           <form onSubmit={onSubmit} className="text-center mt-10">
             <div className="join">
-              <button className="btn btn-sm join-item rounded-r-none">
+              <button className="btn btn-md join-item rounded-r-none">
                 Name
               </button>
               <input
@@ -86,11 +86,11 @@ function SignUp() {
                 value={name}
                 onChange={handleOnChange}
                 id="name"
-                className="input input-sm input-bordered rounded-l-none join-item"
+                className="input input-md input-bordered rounded-l-none join-item lg:w-[23%]"
               />
             </div>
             <div className="join my-5">
-              <button className="btn btn-sm join-item rounded-r-none">
+              <button className="btn btn-md join-item rounded-r-none">
                 Email
               </button>
               <input
@@ -98,18 +98,18 @@ function SignUp() {
                 value={email}
                 onChange={handleOnChange}
                 id="email"
-                className="input input-sm input-bordered rounded-l-none join-item"
+                className="input input-md input-bordered rounded-l-none join-item lg:w-[23%]"
               />
             </div>
 
             <div>
               <div className="join my-5">
-                <button className="btn btn-sm join-item rounded-r-none">
+                <button className="btn btn-md join-item rounded-r-none">
                   Password
                 </button>
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="passwordInput input input-sm input-bordered rounded-l-none join-item"
+                  className="passwordInput input input-md input-bordered rounded-l-none join-item w-[45%] lg:w-[21.2%]"
                   id="password"
                   value={password}
                   onChange={handleOnChange}
@@ -117,12 +117,12 @@ function SignUp() {
               </div>
 
               <div className="join">
-                <button className="btn btn-sm join-item rounded-r-none">
+                <button className="btn btn-md join-item rounded-r-none">
                   Confirm
                 </button>
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="passwordInput input input-sm input-bordered rounded-l-none join-item"
+                  className="passwordInput input input-md input-bordered rounded-l-none join-item mb-5 w-[50%] lg:w-[22%]"
                   id="confirmPassword"
                   value={confirmPassword}
                   onChange={handleOnChange}
