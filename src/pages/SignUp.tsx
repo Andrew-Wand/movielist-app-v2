@@ -78,9 +78,9 @@ function SignUp() {
         <main>
           <form onSubmit={onSubmit} className="text-center mt-10">
             <div className="join">
-              <button className="btn btn-md join-item rounded-r-none">
+              <label className="btn btn-md join-item rounded-r-none">
                 Name
-              </button>
+              </label>
               <input
                 type="text"
                 value={name}
@@ -90,9 +90,9 @@ function SignUp() {
               />
             </div>
             <div className="join my-5">
-              <button className="btn btn-md join-item rounded-r-none">
+              <label className="btn btn-md join-item rounded-r-none">
                 Email
-              </button>
+              </label>
               <input
                 type="email"
                 value={email}
@@ -104,9 +104,9 @@ function SignUp() {
 
             <div>
               <div className="join my-5">
-                <button className="btn btn-md join-item rounded-r-none">
+                <label className="btn btn-md join-item rounded-r-none">
                   Password
-                </button>
+                </label>
                 <input
                   type={showPassword ? "text" : "password"}
                   className="passwordInput input input-md input-bordered rounded-l-none join-item w-[45%] lg:w-[21.2%]"
@@ -117,9 +117,9 @@ function SignUp() {
               </div>
 
               <div className="join">
-                <button className="btn btn-md join-item rounded-r-none">
+                <label className="btn btn-md join-item rounded-r-none">
                   Confirm
-                </button>
+                </label>
                 <input
                   type={showPassword ? "text" : "password"}
                   className="passwordInput input input-md input-bordered rounded-l-none join-item mb-5 w-[50%] lg:w-[22%]"

@@ -52,9 +52,9 @@ function SignIn() {
         <main>
           <form onSubmit={onSubmit} className="text-center mt-10">
             <div className="join">
-              <button className="btn btn-md join-item rounded-r-none">
+              <label className="btn btn-md join-item rounded-r-none">
                 Email
-              </button>
+              </label>
               <input
                 className="input input-md input-bordered rounded-l-none join-item lg:w-[22%]"
                 type="email"
@@ -67,9 +67,9 @@ function SignIn() {
 
             <div className="mt-5">
               <div className="join">
-                <button className="btn btn-md join-item rounded-r-none">
+                <label className="btn btn-md join-item rounded-r-none">
                   Password
-                </button>
+                </label>
                 <input
                   type={showPassword ? "text" : "password"}
                   className="passwordInput input input-md rounded-l-none input-bordered w-[45%] mb-5 lg:w-[20%]"
