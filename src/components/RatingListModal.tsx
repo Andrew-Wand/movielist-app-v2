@@ -162,7 +162,6 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
                   value={movie.data.movieName}
                   id="movieName"
                   readOnly={true}
-                  // disabled={true}
                 />
               ))}
             </div>

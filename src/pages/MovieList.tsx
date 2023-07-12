@@ -28,10 +28,6 @@ interface movie {
   id: string;
 }
 
-// interface MovieItem {
-//   data: DocumentData;
-// }
-
 function MovieList() {
   const [movielist, setmovieList] = useState<movie[]>([]);
   const [loading, setLoading] = useState(true);
@@ -308,7 +304,6 @@ function MovieList() {
               value={state.search}
               onChange={handleChange}
               className="input input-bordered input-sm w-10/12 max-w-xs  rounded-l-none"
-              // placeholder="Search here..."
             />
           </form>
         </div>

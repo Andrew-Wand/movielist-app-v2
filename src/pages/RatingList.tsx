@@ -396,7 +396,6 @@ function RatingList() {
               value={state.search}
               onChange={handleChange}
               className="input input-bordered input-sm w-10/12 max-w-xs rounded-l-none"
-              // placeholder="Search here..."
             />
           </form>
         </div>
@@ -414,9 +413,6 @@ function RatingList() {
               className="table table-zebra table-compact w-full font-['Staatliches'] mt-3 drop-shadow-xl text-gray-300 rounded-lg lg:w-5/12 "
               data-theme="aqua"
             >
-              {/* <caption className="text-5xl p-5 bg-[#2e5394] border-b-2 rounded-tl-lg rounded-tr-lg drop-shadow-xl">
-              Rating List
-            </caption> */}
               {/* head */}
               <thead className="shadow-lg">
                 <tr className="bg-none">

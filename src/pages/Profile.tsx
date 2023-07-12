@@ -20,11 +20,6 @@ interface ProfileStatsData {
   id: string;
 }
 
-// interface RatingData {
-//   data: DocumentData;
-//   id: string;
-// }
-
 function Profile() {
   const [changeDetails, setChangeDetails] = useState(false);
   const [movielist, setmovieList] = useState<ProfileStatsData[]>([]);
