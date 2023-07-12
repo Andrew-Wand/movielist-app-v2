@@ -27,7 +27,8 @@ function ProfileStats({
 
   const calculateAverage = () => {
     const total = ratingArray?.reduce((acc: number, c: number) => acc + c, 0);
-    return total / ratingArray?.length;
+    const avg = total / ratingArray?.length;
+    return avg.toFixed(2);
   };
 
   return (
