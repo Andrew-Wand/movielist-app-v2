@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuthStatus } from "../hooks/useAuthStatus";
 
 interface RowValue {
