@@ -45,64 +45,77 @@ function SignIn() {
   return (
     <div>
       <div>
-        <header className="text-center text-4xl mt-10">
-          <h1> Welcome Back</h1>
+        <header className="text-center text-4xl mt-10 font-light">
+          <h1> Sign In </h1>
         </header>
 
         <main>
-          <form onSubmit={onSubmit} className="text-center mt-10">
-            <div className="join">
-              <label className="btn btn-md join-item rounded-r-none">
+          <div className="justify-center flex">
+            <div>
+              <OAuth />
+            </div>
+          </div>
+
+          <div className="divider">OR</div>
+          <form onSubmit={onSubmit} className="text-center mt-5">
+            <div className="px-7 form-control">
+              {/* <label className="btn btn-md join-item rounded-r-none">
                 Email
+              </label> */}
+              <label className="label">
+                <span className="label-text">Email</span>
               </label>
               <input
-                className="input input-md input-bordered rounded-l-none join-item lg:w-[22%]"
+                className="input input-md input-bordered lg:w-[22%] input-info"
                 type="email"
                 value={email}
                 onChange={handleOnChange}
                 id="email"
                 aria-label="Input for your email address."
+                placeholder="Type your email..."
               />
             </div>
 
-            <div className="mt-5">
-              <div className="join">
-                <label className="btn btn-md join-item rounded-r-none">
+            <div className="">
+              <div className="form-control px-7 mt-5">
+                {/* <label className="btn btn-md join-item rounded-r-none">
                   Password
+                </label> */}
+                <label className="label">
+                  <span className="label-text">Password</span>
                 </label>
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="passwordInput input input-md rounded-l-none input-bordered w-[45%] mb-5 lg:w-[20%]"
+                  className="passwordInput input input-md input-info input-bordered lg:w-[20%]"
                   id="password"
                   value={password}
                   onChange={handleOnChange}
                   aria-label="Input for your password."
+                  placeholder="Type your password..."
                 />
               </div>
-
-              <img
-                src=""
-                alt="Show password"
-                onClick={() => setShowPassword((prevState) => !prevState)}
-              />
             </div>
-
+            {/* <img
+              src=""
+              alt="Show password"
+              onClick={() => setShowPassword((prevState) => !prevState)}
+            /> */}
             <div className="my-5">
               <Link className="link" to="/forgot-password">
                 Forgot Password
               </Link>
             </div>
 
-            <div>
-              <button className="btn btn-info" type="submit">
-                Sign In
+            <div className="w-full px-5">
+              <button className="btn btn-info w-full shadow-lg " type="submit">
+                Log In
               </button>
             </div>
           </form>
-          <OAuth />
+          {/* <OAuth /> */}
 
-          <div className="text-center mt-10">
-            <Link className="btn" to="/sign-up">
+          <div className="text-center mt-10 w-full px-5">
+            <Link className="btn w-full text-white shadow-lg " to="/sign-up">
               Sign Up
             </Link>
           </div>
