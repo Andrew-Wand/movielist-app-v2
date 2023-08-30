@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { auth } from "../../firebase.config";
 import { BsPersonCircle } from "react-icons/bs";
+import { useAuthStatus } from "../hooks/useAuthStatus";
+
 function Header() {
   const [open, setOpen] = useState(true);
   const [displayMenuStyle, setdisplayMenuStyle] = useState("");
@@ -22,10 +24,13 @@ function Header() {
     if (auth.currentUser) {
       auth.signOut();
       navigate("/sign-in");
+      location.reload();
     }
   };
+
+  const { loggedIn } = useAuthStatus();
   return (
-    <header>
+    <header className={loggedIn ? "lg:block" : "lg:hidden"}>
       <div className="text-6xl font-['Dancing_Script'] text-center m-5 flex justify-between border-b-2 border-gray-500 lg:justify-center lg:text-8xl lg:border-none lg:underline decoration-1">
         <h1 className="text-blue-500 lg:text-center cursor-default ">
           Movie Night

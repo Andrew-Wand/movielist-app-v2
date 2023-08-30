@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 
 function SignIn() {
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -85,7 +85,7 @@ function SignIn() {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type={showPassword ? "text" : "password"}
+                  // type={showPassword ? "text" : "password"}
                   className="passwordInput input input-md input-info input-bordered lg:w-[20%]"
                   id="password"
                   value={password}

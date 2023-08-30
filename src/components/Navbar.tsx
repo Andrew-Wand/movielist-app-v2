@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuthStatus } from "../hooks/useAuthStatus";
 
 interface RowValue {
   id: number;
@@ -28,8 +29,16 @@ const Navbar = (): JSX.Element => {
     }
   };
 
+  const { loggedIn } = useAuthStatus();
+
   return (
-    <nav className="m-10 hidden lg:block font-['Staatliches'] text-3xl mt-15 border-b-2 pb-8">
+    <nav
+      className={
+        loggedIn
+          ? "m-10 hidden lg:block font-['Staatliches'] text-3xl mt-15 border-b-2 pb-8"
+          : "m-10 hidden lg:hidden font-['Staatliches'] text-3xl mt-15 border-b-2 pb-8"
+      }
+    >
       <div className="list-none flex justify-center">
         {lists.map((list) => (
           <Link

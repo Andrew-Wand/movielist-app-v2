@@ -15,5 +15,5 @@ export const useAuthStatus = () => {
     });
   });
 
-  return { loggedIn, checkingStatus };
+  return { loggedIn, checkingStatus, setLoggedIn };
 };

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useAuthStatus } from "../hooks/useAuthStatus";
 
 import { useState } from "react";
 
@@ -27,8 +28,17 @@ const MobileNavbar = (): JSX.Element => {
     }
   };
 
+  const { loggedIn } = useAuthStatus();
+
   return (
-    <nav className="lg:hidden font-['Staatliches'] list-none" data-theme="aqua">
+    <nav
+      data-theme="aqua"
+      className={
+        loggedIn
+          ? "lg:hidden font-['Staatliches'] list-none"
+          : "lg:hidden hidden font-['Staatliches'] list-none"
+      }
+    >
       <div className="btm-nav ">
         {navList.map((list) => (
           <Link
