@@ -6,9 +6,9 @@
 @tailwind utilities;
 
 
-body {
+/* body {
     padding-bottom: 70px;
-}
+} */
 
 .nav-link {
     position: relative;

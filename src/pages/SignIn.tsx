@@ -43,13 +43,17 @@ function SignIn() {
   };
 
   return (
-    <div>
-      <div>
-        <header className="text-center text-4xl mt-10 font-light">
-          <h1> Sign In </h1>
+    <div className="lg:flex-col lg:justify-center lg:items-center lg:min-h-screen lg:flex lg:bg-[#345da7] ">
+      <main className="lg:rounded-md lg:w-[480px] lg:py-[36px] lg:px-[40px] lg:flex-col lg:items-stretch  lg:outline-cyan-100 lg:bg-[#272935]">
+        <h2 className="hidden lg:block text-blue-500 lg:text-center cursor-default font-['Dancing_Script'] lg:text-5xl ">
+          Movie Night
+        </h2>
+        <div className="divider lg:flex block"></div>
+        <header className="text-center text-2xl mt-10 font-light">
+          <h3> Sign In </h3>
         </header>
 
-        <main>
+        <div>
           <div className="justify-center flex">
             <div>
               <OAuth />
@@ -66,7 +70,7 @@ function SignIn() {
                 <span className="label-text">Email</span>
               </label>
               <input
-                className="input input-md input-bordered lg:w-[22%] input-info"
+                className="input input-md input-bordered  input-info"
                 type="email"
                 value={email}
                 onChange={handleOnChange}
@@ -86,7 +90,7 @@ function SignIn() {
                 </label>
                 <input
                   // type={showPassword ? "text" : "password"}
-                  className="passwordInput input input-md input-info input-bordered lg:w-[20%]"
+                  className="passwordInput input input-md input-info input-bordered"
                   id="password"
                   value={password}
                   onChange={handleOnChange}
@@ -119,8 +123,8 @@ function SignIn() {
               Sign Up
             </Link>
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }

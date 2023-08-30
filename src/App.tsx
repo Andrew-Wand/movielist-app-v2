@@ -14,7 +14,7 @@ import Header from "./components/Header";
 
 function App() {
   return (
-    <div>
+    <>
       <BrowserRouter>
         <Header />
         <Navbar />
@@ -36,7 +36,7 @@ function App() {
         </Routes>
         <MobileNavbar />
       </BrowserRouter>
-    </div>
+    </>
   );
 }
 
