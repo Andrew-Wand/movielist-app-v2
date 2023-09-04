@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { auth, db } from "../../firebase.config";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { AiOutlinePlus } from "react-icons/ai";
 
 interface movieInfo {
   movieName: string;
@@ -60,11 +61,10 @@ function MovieListModal({ fetchMovieList }: movieProps) {
     <div>
       <label
         htmlFor="my-modal-4"
-        className="btn text-4xl rounded-full"
+        className="btn text-3xl btn-circle bg-[#0C2B65] shadow-lg border-0"
         onClick={handleOpen}
-        data-theme="dark"
       >
-        +
+        <AiOutlinePlus />
       </label>
 
       <input

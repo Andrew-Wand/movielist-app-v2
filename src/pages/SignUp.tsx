@@ -1,17 +1,12 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { setDoc, doc } from "firebase/firestore";
-import { auth } from "../../firebase.config";
-import { db } from "../../firebase.config";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import OAuth from "../components/OAuth";
 
-interface formInfo {
-  name: string;
-  email: string;
-  password?: string;
-  confirmPassword?: string;
-}
+// interface formInfo {
+//   name: string;
+//   email: string;
+//   password?: string;
+//   confirmPassword?: string;
+// }
 
 function SignUp() {
   // const [showPassword, setShowPassword] = useState(false);

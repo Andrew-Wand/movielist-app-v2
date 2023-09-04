@@ -22,6 +22,7 @@ import Loading from "../components/Loading";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { BiSearch } from "react-icons/bi";
 import { BsTrashFill } from "react-icons/bs";
+import { GrNext, GrPrevious } from "react-icons/gr";
 
 interface movie {
   data: DocumentData;
@@ -319,13 +320,10 @@ function MovieList() {
         <>
           <div className="p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center">
             <table
-              className="table table-zebra w-full font-['Staatliches'] rounded-b-lg lg:w-5/12"
+              className="table table-zebra w-full font-['Staatliches'] lg:w-5/12"
               data-theme="aqua"
             >
-              <caption
-                className="text-5xl p-5 drop-shadow-xl rounded-t-lg border-b-2"
-                data-theme="aqua"
-              >
+              <caption className="text-5xl p-5 shadow-xl  bg-[#2f5496]">
                 Movie List
               </caption>
               <div className="absolute right-5 top-5">
@@ -336,7 +334,7 @@ function MovieList() {
                 {state.search === ""
                   ? movielist?.map((movieItem: movie) => (
                       <tr>
-                        <td className="text-xl max-w-[210px] ">
+                        <td className="text-xl max-w-[210px] font-['Roboto'] text-white ">
                           <p className="truncate">{movieItem.data.movieName}</p>
                         </td>
                         <td>
@@ -405,10 +403,10 @@ function MovieList() {
               ) : (
                 <button
                   onClick={() => fetchLastMovies({ item: movielist[0] })}
-                  className="btn"
+                  className="btn btn-circle shadow-xl border-2 border-black "
                   data-theme="aqua"
                 >
-                  Back
+                  <GrPrevious className="text-2xl" />
                 </button>
               )}
             </div>
@@ -419,10 +417,10 @@ function MovieList() {
                 onClick={() =>
                   fetchNextMovies({ item: movielist[movielist.length - 1] })
                 }
-                className="btn"
+                className="btn btn-circle  shadow-xl border-2 border-black"
                 data-theme="aqua"
               >
-                Next
+                <GrNext className="text-2xl" />
               </button>
             )}
           </div>

@@ -73,12 +73,16 @@ export default function EmailSignUp() {
         <h2 className="hidden lg:block text-blue-500 lg:text-center cursor-default font-['Dancing_Script'] lg:text-5xl ">
           Movie Night
         </h2>
-        <header className="text-center text-2xl mt-14 font-light mb-5">
-          <h1>Sign Up</h1>
+        <div className="lg:divider"></div>
+        <header className="text-left ml-[7%] mt-14  mb-5">
+          <h1 className="text-2xl font-bold ">Sign Up</h1>
+          <p className="text-[14px] font-light mt-2">
+            Fill in your details and continue signing up{" "}
+          </p>
         </header>
 
         <main>
-          <form onSubmit={onSubmit} className="text-center mt-10">
+          <form onSubmit={onSubmit} className="text-center mt-7">
             <div className="form-control px-7">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -135,17 +139,12 @@ export default function EmailSignUp() {
                 />
               </div>
 
-              <img
-                src=""
-                alt="show password"
+              <p
+                className="cursor-pointer text-left ml-[7%] mt-4 underline text-md"
                 onClick={() => setShowPassword((prevState) => !prevState)}
-              />
-            </div>
-
-            <div className="my-5">
-              <Link className="link" to="/forgot-password">
-                Forgot Password
-              </Link>
+              >
+                {showPassword ? "hide password" : " show password"}
+              </p>
             </div>
 
             <div className="text-center mt-10 w-full px-5">
@@ -155,6 +154,11 @@ export default function EmailSignUp() {
               >
                 Create Account
               </button>
+            </div>
+            <div className="text-center mt-5 w-full px-5">
+              <Link className="btn w-full text-white shadow-lg" to="/sign-in">
+                Back to Sign In
+              </Link>
             </div>
           </form>
         </main>
