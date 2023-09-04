@@ -14,145 +14,89 @@ interface formInfo {
 }
 
 function SignUp() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState<formInfo>({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  // const [showPassword, setShowPassword] = useState(false);
+  // const [formData, setFormData] = useState<formInfo>({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  // });
 
-  const { name, email, password, confirmPassword } = formData;
+  // const { name, email, password, confirmPassword } = formData;
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const id = e.currentTarget.id;
-    const value = e.currentTarget.value;
-    setFormData((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
-  };
+  // const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
+  //   const id = e.currentTarget.id;
+  //   const value = e.currentTarget.value;
+  //   setFormData((prevState) => ({
+  //     ...prevState,
+  //     [id]: value,
+  //   }));
+  // };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (password === confirmPassword) {
-      try {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password!
-        );
+  // const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   if (password === confirmPassword) {
+  //     try {
+  //       const userCredential = await createUserWithEmailAndPassword(
+  //         auth,
+  //         email,
+  //         password!
+  //       );
 
-        const user = userCredential.user;
+  //       const user = userCredential.user;
 
-        if (auth.currentUser) {
-          updateProfile(auth.currentUser, {
-            displayName: name,
-          });
-        }
+  //       if (auth.currentUser) {
+  //         updateProfile(auth.currentUser, {
+  //           displayName: name,
+  //         });
+  //       }
 
-        const formDataCopy = { ...formData };
-        delete formDataCopy.password;
-        delete formDataCopy.confirmPassword;
+  //       const formDataCopy = { ...formData };
+  //       delete formDataCopy.password;
+  //       delete formDataCopy.confirmPassword;
 
-        await setDoc(doc(db, "users", user.uid), formDataCopy);
+  //       await setDoc(doc(db, "users", user.uid), formDataCopy);
 
-        navigate("/");
-      } catch (error) {
-        alert("Something went wrong with registration");
-      }
-    } else {
-      alert("passwords must match");
-    }
-  };
+  //       navigate("/");
+  //     } catch (error) {
+  //       alert("Something went wrong with registration");
+  //     }
+  //   } else {
+  //     alert("passwords must match");
+  //   }
+  // };
 
   return (
     <div>
       <div>
-        <header className="text-center text-4xl mt-8">
+        <header className="text-center text-2xl mt-14 font-light mb-5">
           <h1>Sign Up</h1>
         </header>
 
         <main>
-          <form onSubmit={onSubmit} className="text-center mt-10">
-            <div className="join">
-              <label className="btn btn-md join-item rounded-r-none">
-                Name
-              </label>
-              <input
-                type="text"
-                value={name}
-                onChange={handleOnChange}
-                id="name"
-                className="input input-md input-bordered rounded-l-none join-item lg:w-[23%]"
-              />
-            </div>
-            <div className="join my-5">
-              <label className="btn btn-md join-item rounded-r-none">
-                Email
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={handleOnChange}
-                id="email"
-                className="input input-md input-bordered rounded-l-none join-item lg:w-[23%]"
-              />
-            </div>
+          <div className="flex flex-col items-center">
+            <OAuth />
+            <div className="divider">OR</div>
+            <Link
+              className="btn btn-outline text-lg font-light mt-10"
+              to="/sign-up/email"
+            >
+              Sign up with email address
+            </Link>
+          </div>
 
-            <div>
-              <div className="join my-5">
-                <label className="btn btn-md join-item rounded-r-none">
-                  Password
-                </label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className="passwordInput input input-md input-bordered rounded-l-none join-item w-[45%] lg:w-[21.2%]"
-                  id="password"
-                  value={password}
-                  onChange={handleOnChange}
-                />
-              </div>
+          {/* <div className="text-center btn btn-outline ">
+            <p className="text-lg font-light">Sign up with email address</p>
+          </div> */}
 
-              <div className="join">
-                <label className="btn btn-md join-item rounded-r-none">
-                  Confirm
-                </label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className="passwordInput input input-md input-bordered rounded-l-none join-item mb-5 w-[50%] lg:w-[22%]"
-                  id="confirmPassword"
-                  value={confirmPassword}
-                  onChange={handleOnChange}
-                />
-              </div>
-
-              <img
-                src=""
-                alt="show password"
-                onClick={() => setShowPassword((prevState) => !prevState)}
-              />
-            </div>
-
-            <div className="my-5">
-              <Link className="link" to="/forgot-password">
-                Forgot Password
-              </Link>
-            </div>
-
-            <div>
-              <button type="submit" className="btn btn-info">
-                Sign Up
-              </button>
-            </div>
-          </form>
-          <OAuth />
-
-          <div className="text-center mt-10">
-            <Link className="btn" to="/sign-in">
-              Sign In
+          <div className="text-center mt-20 w-full px-5">
+            <Link
+              className="btn w-full text-white shadow-lg bg-[#3b82f6]"
+              to="/sign-in"
+            >
+              Back to Sign In
             </Link>
           </div>
         </main>

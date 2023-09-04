@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import MobileNavbar from "./components/MobileNavbar";
 import PrivateRoute from "./components/PrivateRoute";
 import Header from "./components/Header";
+import EmailSignUp from "./pages/EmailSignUp";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/spin" element={<SpinPage />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-up/email" element={<EmailSignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />

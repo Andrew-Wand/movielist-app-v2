@@ -70,7 +70,7 @@ function SignIn() {
                 <span className="label-text">Email</span>
               </label>
               <input
-                className="input input-md input-bordered  input-info"
+                className="input input-md input-bordered input-info"
                 type="email"
                 value={email}
                 onChange={handleOnChange}
@@ -111,7 +111,10 @@ function SignIn() {
             </div>
 
             <div className="w-full px-5">
-              <button className="btn btn-info w-full shadow-lg " type="submit">
+              <button
+                className="btn text-white bg-[#3b82f6] w-full shadow-lg "
+                type="submit"
+              >
                 Log In
               </button>
             </div>
