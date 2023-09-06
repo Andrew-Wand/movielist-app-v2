@@ -61,7 +61,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
     <div>
       <label
         htmlFor="my-modal-4"
-        className="btn text-3xl btn-circle bg-[#0C2B65] shadow-lg border-0"
+        className="btn text-3xl bg-[#0C2B65] shadow-lg border-0"
         onClick={handleOpen}
       >
         <AiOutlinePlus />

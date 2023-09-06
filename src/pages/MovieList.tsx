@@ -304,7 +304,8 @@ function MovieList() {
               type="search"
               value={state.search}
               onChange={handleChange}
-              className="input input-bordered input-sm w-10/12 max-w-xs  rounded-l-none"
+              className="input input-bordered input-sm w-10/12 max-w-xs rounded-l-none bg-white border-none text-black"
+              placeholder="Search movie title..."
             />
           </form>
         </div>
@@ -364,7 +365,7 @@ function MovieList() {
                     ))
                   : state.list?.map((movieItem: movie) => (
                       <tr>
-                        <td className="text-xl max-w-[210px] ">
+                        <td className="text-xl max-w-[210px] font-['Roboto'] text-white ">
                           <p className="truncate">{movieItem.data.movieName}</p>
                         </td>
                         <td>
@@ -396,31 +397,50 @@ function MovieList() {
             </table>
             {!state.list.length ? "No results" : ""}
           </div>
-          <div className="mt-4 flex justify-around lg:mx-[15%]">
-            <div>
-              {page === 1 ? (
-                ""
-              ) : (
-                <button
-                  onClick={() => fetchLastMovies({ item: movielist[0] })}
-                  className="btn btn-circle shadow-xl border-2 border-black "
-                  data-theme="aqua"
-                >
-                  <GrPrevious className="text-2xl" />
-                </button>
-              )}
-            </div>
+
+          <div className="mt-4 mb-[11.5rem] join flex justify-center lg:mx-[15%]">
+            {page === 1 ? (
+              <button
+                disabled
+                className="btn btn-lg btn-info join-item rounded-tr-none rounded-br-none "
+                data-theme="aqua"
+              >
+                «
+              </button>
+            ) : (
+              <button
+                onClick={() => fetchLastMovies({ item: movielist[0] })}
+                className="btn btn-lg  join-item rounded-tr-none rounded-br-none "
+                data-theme="aqua"
+              >
+                «
+              </button>
+            )}
+
+            <button className="join-item btn rounded-none btn-lg">
+              Page {page}
+            </button>
+
             {movielist?.length < 6 ? (
-              ""
+              <button
+                onClick={() =>
+                  fetchNextMovies({ item: movielist[movielist.length - 1] })
+                }
+                disabled
+                className=" btn join-item rounded-tl-none rounded-bl-none btn-lg"
+                data-theme="aqua"
+              >
+                »
+              </button>
             ) : (
               <button
                 onClick={() =>
                   fetchNextMovies({ item: movielist[movielist.length - 1] })
                 }
-                className="btn btn-circle  shadow-xl border-2 border-black"
+                className=" btn join-item rounded-tl-none rounded-bl-none btn-lg"
                 data-theme="aqua"
               >
-                <GrNext className="text-2xl" />
+                »
               </button>
             )}
           </div>
