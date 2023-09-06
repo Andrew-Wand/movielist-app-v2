@@ -121,7 +121,7 @@ function SignIn() {
           </form>
           {/* <OAuth /> */}
 
-          <div className="text-center mt-10 w-full px-5">
+          <div className="text-center mt-4 w-full px-5">
             <Link className="btn w-full text-white shadow-lg " to="/sign-up">
               Sign Up
             </Link>
