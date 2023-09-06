@@ -166,9 +166,9 @@ function Profile() {
       </header>
 
       <main>
-        <div className="bg-slate-700 text-center p-10 m-5 rounded-xl shadow-xl lg:w-[40%] lg:ml-[30%]">
+        <div className="bg-slate-700 text-center p-10 m-5 rounded-xl shadow-xl lg:w-[40%] lg:ml-[30%] bg-[#345da7]">
           <div>
-            <p className="text-xl mb-5">Personal Details</p>
+            <p className="text-xl mb-5 ">Personal Details</p>
           </div>
 
           <div>
@@ -213,11 +213,11 @@ function Profile() {
 
         <div className="overflow-x-auto lg:flex lg:flex-col lg:items-center">
           <h3 className="text-center text-3xl my-5">Top 5 Movies</h3>
-          <table className="table table-zebra ml-[10%] mb-10 lg:ml-[1%] shadow-lg">
+          <table className="table table-zebra ml-[10%] mb-36 lg:ml-[1%] shadow-lg">
             {/* head */}
             <thead>
               <tr>
-                <th className="z-0"></th>
+                <th className="text-lg">#</th>
                 <th className="text-lg">Title</th>
                 <th className="text-lg">Rating</th>
                 <th></th>

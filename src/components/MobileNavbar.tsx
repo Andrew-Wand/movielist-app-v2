@@ -35,7 +35,7 @@ const MobileNavbar = (): JSX.Element => {
       data-theme="aqua"
       className={
         loggedIn
-          ? "lg:hidden font-['Staatliches'] list-none"
+          ? "lg:hidden font-['Staatliches'] list-none z-[999] relative "
           : "lg:hidden hidden font-['Staatliches'] list-none"
       }
     >
