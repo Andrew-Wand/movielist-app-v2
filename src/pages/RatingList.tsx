@@ -395,7 +395,8 @@ function RatingList() {
               type="search"
               value={state.search}
               onChange={handleChange}
-              className="input input-bordered input-sm w-10/12 max-w-xs rounded-l-none"
+              className="input input-bordered input-sm w-10/12 max-w-xs rounded-l-none bg-white text-black"
+              placeholder="Search movie title..."
             />
           </form>
         </div>
@@ -493,31 +494,49 @@ function RatingList() {
             </table>
             {!state.list.length ? "No results" : ""}
           </div>
-          <div className="flex justify-around lg:mx-[15%] mt-4">
-            <div>
-              {page === 1 ? (
-                ""
-              ) : (
-                <button
-                  onClick={() => fetchLastMovies({ item: ratinglist[0] })}
-                  className="btn"
-                  data-theme="aqua"
-                >
-                  Back
-                </button>
-              )}
-            </div>
+          <div className="mt-4 mb-[11.5rem] join flex justify-center lg:mx-[15%]">
+            {page === 1 ? (
+              <button
+                disabled
+                className="btn btn-lg btn-info join-item rounded-tr-none rounded-br-none "
+                data-theme="aqua"
+              >
+                «
+              </button>
+            ) : (
+              <button
+                onClick={() => fetchLastMovies({ item: ratinglist[0] })}
+                className="btn btn-lg  join-item rounded-tr-none rounded-br-none "
+                data-theme="aqua"
+              >
+                «
+              </button>
+            )}
+
+            <button className="join-item btn rounded-none btn-lg">
+              Page {page}
+            </button>
+
             {ratinglist?.length < 8 ? (
-              ""
+              <button
+                onClick={() =>
+                  fetchNextMovies({ item: ratinglist[ratinglist.length - 1] })
+                }
+                disabled
+                className=" btn join-item rounded-tl-none rounded-bl-none btn-lg"
+                data-theme="aqua"
+              >
+                »
+              </button>
             ) : (
               <button
                 onClick={() =>
                   fetchNextMovies({ item: ratinglist[ratinglist.length - 1] })
                 }
-                className="btn"
+                className=" btn join-item rounded-tl-none rounded-bl-none btn-lg"
                 data-theme="aqua"
               >
-                Next
+                »
               </button>
             )}
           </div>
