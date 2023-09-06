@@ -3,9 +3,12 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SignIn() {
   // const [showPassword, setShowPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -38,7 +41,21 @@ function SignIn() {
         navigate("/");
       }
     } catch (error) {
-      alert("Bad user credentials");
+      const passwordInput = document.getElementById("password");
+      passwordInput?.classList.add("input-error");
+      const emailInput = document.getElementById("email");
+      emailInput?.classList.add("input-error");
+
+      toast.error("Email address or password is incorrect. Please try again.", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -90,6 +107,7 @@ function SignIn() {
                 </label>
                 <input
                   // type={showPassword ? "text" : "password"}
+                  type="password"
                   className="passwordInput input input-md input-info input-bordered"
                   id="password"
                   value={password}
@@ -127,6 +145,7 @@ function SignIn() {
             </Link>
           </div>
         </div>
+        <ToastContainer />
       </main>
     </div>
   );

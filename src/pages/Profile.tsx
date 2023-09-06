@@ -38,6 +38,7 @@ function Profile() {
   const onLogout = () => {
     auth.signOut();
     navigate("/sign-in");
+    location.reload();
   };
 
   const onSubmit = async () => {
