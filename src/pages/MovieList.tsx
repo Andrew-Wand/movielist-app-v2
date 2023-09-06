@@ -319,12 +319,12 @@ function MovieList() {
         <Loading />
       ) : movielist && movielist.length > 0 ? (
         <>
-          <div className="p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center">
+          <div className="p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center ">
             <table
-              className="table table-zebra w-full font-['Staatliches'] lg:w-5/12"
+              className="table table-zebra w-full font-['Staatliches'] lg:w-5/12 rounded-lg "
               data-theme="aqua"
             >
-              <caption className="text-5xl p-5 shadow-xl  bg-[#2f5496]">
+              <caption className="text-5xl p-5 shadow-xl  bg-[#2f5496] rounded-tr-lg rounded-tl-lg ">
                 Movie List
               </caption>
               <div className="absolute right-5 top-5">
@@ -402,7 +402,7 @@ function MovieList() {
             {page === 1 ? (
               <button
                 disabled
-                className="btn btn-lg btn-info join-item rounded-tr-none rounded-br-none "
+                className="btn  btn-info join-item rounded-tr-none rounded-br-none "
                 data-theme="aqua"
               >
                 «
@@ -410,16 +410,14 @@ function MovieList() {
             ) : (
               <button
                 onClick={() => fetchLastMovies({ item: movielist[0] })}
-                className="btn btn-lg  join-item rounded-tr-none rounded-br-none "
+                className="btn   join-item rounded-tr-none rounded-br-none "
                 data-theme="aqua"
               >
                 «
               </button>
             )}
 
-            <button className="join-item btn rounded-none btn-lg">
-              Page {page}
-            </button>
+            <button className="join-item btn rounded-none ">Page {page}</button>
 
             {movielist?.length < 6 ? (
               <button
@@ -427,7 +425,7 @@ function MovieList() {
                   fetchNextMovies({ item: movielist[movielist.length - 1] })
                 }
                 disabled
-                className=" btn join-item rounded-tl-none rounded-bl-none btn-lg"
+                className=" btn join-item rounded-tl-none rounded-bl-none "
                 data-theme="aqua"
               >
                 »
@@ -437,7 +435,7 @@ function MovieList() {
                 onClick={() =>
                   fetchNextMovies({ item: movielist[movielist.length - 1] })
                 }
-                className=" btn join-item rounded-tl-none rounded-bl-none btn-lg"
+                className=" btn join-item rounded-tl-none rounded-bl-none "
                 data-theme="aqua"
               >
                 »

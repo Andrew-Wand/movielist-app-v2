@@ -408,19 +408,19 @@ function RatingList() {
       {loading ? (
         <Loading />
       ) : ratinglist && ratinglist?.length > 0 ? (
-        <>
-          <div className="p-2 lg:flex lg:flex-col lg:items-center ">
+        <div>
+          <div className=" lg:flex lg:flex-col lg:items-center ">
             <table
-              className="table table-zebra table-compact w-full font-['Staatliches'] mt-3 drop-shadow-xl text-gray-300 rounded-lg lg:w-5/12 "
+              className="table table-zebra table-compact w-full font-['Roboto'] mt-3 drop-shadow-xl text-white rounded-lg lg:w-5/12 "
               data-theme="aqua"
             >
               {/* head */}
               <thead className="shadow-lg">
                 <tr className="bg-none">
                   <th></th>
-                  <th className="text-xl text-black">Title</th>
-                  <th className="text-xl text-black">Finished</th>
-                  <th className="text-xl text-black">Rating</th>
+                  <th className="text-lg text-black">Title</th>
+                  <th className="text-lg text-black">Finished</th>
+                  <th className="text-lg text-black">Rating</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -431,7 +431,7 @@ function RatingList() {
                   ? ratinglist?.map((item: rate) => (
                       <tr>
                         <th></th>
-                        <td className="truncate text-lg border-r-[1px] border-slate-500">
+                        <td className="truncate text-[1rem] border-r-[1px] border-slate-500">
                           {item.data.movieName}
                         </td>
                         <td className="border-r-[1px] border-slate-500 text-lg">
@@ -498,7 +498,7 @@ function RatingList() {
             {page === 1 ? (
               <button
                 disabled
-                className="btn btn-lg btn-info join-item rounded-tr-none rounded-br-none "
+                className="btn  btn-info join-item rounded-tr-none rounded-br-none "
                 data-theme="aqua"
               >
                 «
@@ -506,16 +506,14 @@ function RatingList() {
             ) : (
               <button
                 onClick={() => fetchLastMovies({ item: ratinglist[0] })}
-                className="btn btn-lg  join-item rounded-tr-none rounded-br-none "
+                className="btn   join-item rounded-tr-none rounded-br-none "
                 data-theme="aqua"
               >
                 «
               </button>
             )}
 
-            <button className="join-item btn rounded-none btn-lg">
-              Page {page}
-            </button>
+            <button className="join-item btn rounded-none ">Page {page}</button>
 
             {ratinglist?.length < 8 ? (
               <button
@@ -523,7 +521,7 @@ function RatingList() {
                   fetchNextMovies({ item: ratinglist[ratinglist.length - 1] })
                 }
                 disabled
-                className=" btn join-item rounded-tl-none rounded-bl-none btn-lg"
+                className=" btn join-item rounded-tl-none rounded-bl-none "
                 data-theme="aqua"
               >
                 »
@@ -533,14 +531,14 @@ function RatingList() {
                 onClick={() =>
                   fetchNextMovies({ item: ratinglist[ratinglist.length - 1] })
                 }
-                className=" btn join-item rounded-tl-none rounded-bl-none btn-lg"
+                className=" btn join-item rounded-tl-none rounded-bl-none "
                 data-theme="aqua"
               >
                 »
               </button>
             )}
           </div>
-        </>
+        </div>
       ) : (
         <div>Nothing here</div>
       )}
