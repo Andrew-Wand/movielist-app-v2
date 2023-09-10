@@ -8,9 +8,11 @@
 @tailwind utilities;
 
 
-/* body {
-    padding-bottom: 70px;
-} */
+
+body {
+  background-color: #0e141b;
+  min-height: 100vh;
+}
 
 .nav-link {
     position: relative;

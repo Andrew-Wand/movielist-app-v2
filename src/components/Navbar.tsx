@@ -35,7 +35,7 @@ const Navbar = (): JSX.Element => {
     <nav
       className={
         loggedIn
-          ? "m-10 hidden lg:block font-['Staatliches'] text-3xl mt-15 border-b-2 pb-8"
+          ? "m-10 hidden lg:block font-['Staatliches'] text-3xl mt-15 pb-8"
           : "m-10 hidden lg:hidden font-['Staatliches'] text-3xl mt-15 border-b-2 pb-8"
       }
     >

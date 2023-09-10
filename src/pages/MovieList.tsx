@@ -22,7 +22,6 @@ import Loading from "../components/Loading";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { BiSearch } from "react-icons/bi";
 import { BsTrashFill } from "react-icons/bs";
-import { GrNext, GrPrevious } from "react-icons/gr";
 
 interface movie {
   data: DocumentData;
@@ -320,10 +319,7 @@ function MovieList() {
       ) : movielist && movielist.length > 0 ? (
         <>
           <div className="p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center ">
-            <table
-              className="table table-zebra w-full font-['Staatliches'] lg:w-5/12 rounded-lg "
-              data-theme="aqua"
-            >
+            <table className="table table-zebra w-full font-['Staatliches'] lg:w-5/12 rounded-lg ">
               <caption className="text-5xl p-5 shadow-xl  bg-[#2f5496] rounded-tr-lg rounded-tl-lg ">
                 Movie List
               </caption>

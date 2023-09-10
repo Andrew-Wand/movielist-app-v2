@@ -17,8 +17,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
-        <Navbar />
+        <div className="bg-[#182635] shadow-lg ">
+          <Header />
+          <Navbar />
+        </div>
 
         <Routes>
           <Route path="/rating-list" element={<PrivateRoute />}>

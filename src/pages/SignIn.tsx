@@ -60,9 +60,9 @@ function SignIn() {
   };
 
   return (
-    <div className="lg:flex-col lg:justify-center lg:items-center lg:min-h-screen lg:flex lg:bg-[#345da7] ">
+    <div className="lg:flex-col lg:justify-center lg:items-center lg:min-h-screen lg:flex">
       <main className="lg:rounded-md lg:w-[480px] lg:py-[36px] lg:px-[40px] lg:flex-col lg:items-stretch  lg:outline-cyan-100 lg:bg-[#272935]">
-        <h2 className="hidden lg:block text-blue-500 lg:text-center cursor-default font-['Dancing_Script'] lg:text-5xl ">
+        <h2 className="hidden lg:block text-white lg:text-center cursor-default font-['Dancing_Script'] lg:text-5xl ">
           Movie Night
         </h2>
         <div className="divider lg:flex block"></div>

@@ -4,6 +4,8 @@ import { auth } from "../../firebase.config";
 import { db } from "../../firebase.config";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface formInfo {
   name: string;
@@ -60,10 +62,33 @@ export default function EmailSignUp() {
 
         navigate("/");
       } catch (error) {
-        alert("Something went wrong with registration");
+        toast.error("Something went wrong.", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       }
     } else {
-      alert("passwords must match");
+      const passwordInput = document.getElementById("password");
+      passwordInput?.classList.add("input-error");
+      const passwordConfirmInput = document.getElementById("confirmPassword");
+      passwordConfirmInput?.classList.add("input-error");
+
+      toast.error("Passwords must match.", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -163,6 +188,7 @@ export default function EmailSignUp() {
           </form>
         </main>
       </div>
+      <ToastContainer />
     </div>
   );
 }
