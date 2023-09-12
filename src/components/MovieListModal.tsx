@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { auth, db } from "../../firebase.config";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { AiOutlinePlus } from "react-icons/ai";
 import { HiPlusCircle } from "react-icons/hi2";
 
 interface movieInfo {
