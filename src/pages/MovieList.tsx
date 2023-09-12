@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import MovieListModal from "../components/MovieListModal";
-import MovieListEditModal from "../components/MovieListEditModal";
+
 import MovieListSort from "../components/MovieListSort";
-import RatingListModal from "../components/RatingListModal";
+
 import MovieListCard from "../components/MovieListCard";
 import {
   collection,
@@ -21,8 +21,6 @@ import {
 import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { BiSearch } from "react-icons/bi";
-import { BsTrashFill } from "react-icons/bs";
 import { HiFilm } from "react-icons/hi";
 
 interface movie {
@@ -337,11 +335,10 @@ function MovieList() {
       ) : movielist && movielist.length > 0 ? (
         <>
           <MovieListCard
-            state={state}
             movielist={movielist}
             list={state.list}
             search={state.search}
-            delete={deleteFromMovieList}
+            deleteFromMovieList={deleteFromMovieList}
             fetchMovielist={fetchMovielist}
           />
           {/* <div className="p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center ">
