@@ -336,11 +336,19 @@ function MovieList() {
         <Loading />
       ) : movielist && movielist.length > 0 ? (
         <>
-          <div className="p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center ">
+          <MovieListCard
+            state={state}
+            movielist={movielist}
+            list={state.list}
+            search={state.search}
+            delete={deleteFromMovieList}
+            fetchMovielist={fetchMovielist}
+          />
+          {/* <div className="p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center ">
             <table className="table table-zebra w-full font-['Staatliches'] lg:w-5/12 rounded-lg  ">
-              {/* <caption className="text-5xl p-5 shadow-xl  bg-[#2f5496] rounded-tr-lg rounded-tl-lg ">
+              <caption className="text-5xl p-5 shadow-xl  bg-[#2f5496] rounded-tr-lg rounded-tl-lg ">
                 Movie List
-              </caption> */}
+              </caption>
 
               <tbody>
                 {state.search === ""
@@ -407,7 +415,7 @@ function MovieList() {
               </tbody>
             </table>
             {!state.list.length ? "No results" : ""}
-          </div>
+          </div> */}
 
           <div className="mt-4 mb-[11.5rem] join flex justify-center lg:mx-[15%]">
             {page === 1 ? (

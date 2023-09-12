@@ -66,7 +66,7 @@ function MovieListEditModal({
       <div className="lg:tooltip" data-tip="Edit">
         <label
           htmlFor="my-modal-4"
-          className="text-2xl cursor-pointer"
+          className="text-3xl cursor-pointer"
           onClick={handleOpen}
         >
           <BiEdit />
