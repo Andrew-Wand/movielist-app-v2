@@ -32,7 +32,7 @@ function Header() {
   return (
     <header className={loggedIn ? "lg:block" : "lg:hidden"}>
       <div className="text-6xl font-['Dancing_Script'] text-center flex justify-between border-b-2 border-gray-500 lg:justify-center lg:text-8xl lg:border-none  decoration-1">
-        <h1 className="text-white lg:text-center cursor-default ">
+        <h1 className="text-white lg:text-center cursor-default mb-2 p-5 ">
           Movie Night
         </h1>
         <div
@@ -41,7 +41,7 @@ function Header() {
         >
           <label
             tabIndex={0}
-            className="btn btn-ghost btn-circle avatar text-4xl mt-3 lg:text-5xl lg:ml-36 lg:mt-10"
+            className="btn btn-ghost btn-circle avatar mr-7 mt-8 text-4xl mt-3 lg:text-5xl lg:ml-36 lg:mt-10"
           >
             <BsPersonCircle />
           </label>

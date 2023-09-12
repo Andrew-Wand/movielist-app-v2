@@ -2,6 +2,7 @@ import { useState } from "react";
 import { auth, db } from "../../firebase.config";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { AiOutlinePlus } from "react-icons/ai";
+import { HiPlusCircle } from "react-icons/hi2";
 
 interface movieInfo {
   movieName: string;
@@ -61,10 +62,11 @@ function MovieListModal({ fetchMovieList }: movieProps) {
     <div>
       <label
         htmlFor="my-modal-4"
-        className="btn text-3xl bg-[#0C2B65] shadow-lg border-0"
+        className="btn text-4xl bg-[#182635] shadow-lg border-0 font-['Roboto'] rounded-full"
         onClick={handleOpen}
       >
-        <AiOutlinePlus />
+        <HiPlusCircle />
+        <p className="normal-case ml-2 text-[20px] ">New</p>
       </label>
 
       <input

@@ -3,6 +3,7 @@ import MovieListModal from "../components/MovieListModal";
 import MovieListEditModal from "../components/MovieListEditModal";
 import MovieListSort from "../components/MovieListSort";
 import RatingListModal from "../components/RatingListModal";
+import MovieListCard from "../components/MovieListCard";
 import {
   collection,
   getDocs,
@@ -22,6 +23,7 @@ import Loading from "../components/Loading";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { BiSearch } from "react-icons/bi";
 import { BsTrashFill } from "react-icons/bs";
+import { HiFilm } from "react-icons/hi";
 
 interface movie {
   data: DocumentData;
@@ -293,23 +295,39 @@ function MovieList() {
 
   return (
     <main>
-      <div className="flex justify-between lg:justify-center">
-        <div className="h-[32px] w-[30px] bg-blue-400 flex justify-center items-center rounded-l-full ml-5">
-          <BiSearch />
+      <div className="flex justify-around mt-8 mb-5">
+        <div className="font-['Roboto']">
+          <h2 className=" text-2xl mr-20  font-bold">Movie List</h2>
+          <p className="text-sm font-light text-slate-400">
+            {searchMovies.length} Total To Watch
+          </p>
         </div>
-        <div className="lg:mr-[21%] mr-5">
+        <div className="">
+          <MovieListModal fetchMovieList={fetchMovielist} />
+        </div>
+      </div>
+
+      <div className="divider text-5xl">
+        <HiFilm />
+      </div>
+
+      <div className="flex justify-evenly mb-5">
+        <div className="flex">
+          {/* <div className="">
+            <BiSearch />
+          </div> */}
+
           <form>
             <input
               type="search"
               value={state.search}
               onChange={handleChange}
-              className="input input-bordered input-sm w-10/12 max-w-xs rounded-l-none bg-white border-none text-black"
+              className="input input-bordered input-sm w-9/12 max-w-xs bg-white border-none text-black"
               placeholder="Search movie title..."
             />
           </form>
         </div>
-
-        <div>
+        <div className="">
           <MovieListSort sort={sort} onFilterChange={onFilterChange} />
         </div>
       </div>
@@ -319,13 +337,10 @@ function MovieList() {
       ) : movielist && movielist.length > 0 ? (
         <>
           <div className="p-2 mt-3 drop-shadow-xl lg:flex lg:flex-col lg:items-center ">
-            <table className="table table-zebra w-full font-['Staatliches'] lg:w-5/12 rounded-lg ">
-              <caption className="text-5xl p-5 shadow-xl  bg-[#2f5496] rounded-tr-lg rounded-tl-lg ">
+            <table className="table table-zebra w-full font-['Staatliches'] lg:w-5/12 rounded-lg  ">
+              {/* <caption className="text-5xl p-5 shadow-xl  bg-[#2f5496] rounded-tr-lg rounded-tl-lg ">
                 Movie List
-              </caption>
-              <div className="absolute right-5 top-5">
-                <MovieListModal fetchMovieList={fetchMovielist} />
-              </div>
+              </caption> */}
 
               <tbody>
                 {state.search === ""
