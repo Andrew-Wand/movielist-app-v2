@@ -292,11 +292,11 @@ function MovieList() {
   };
 
   return (
-    <main>
-      <div className="flex justify-around mt-8 mb-5">
+    <main className="xl:mx-[35rem]">
+      <div className="flex justify-around mt-8 mb-5 lg:justify-between lg:mx-6">
         <div className="font-['Roboto']">
-          <h2 className=" text-2xl mr-20  font-bold">Movie List</h2>
-          <p className="text-sm font-light text-slate-400">
+          <h2 className="text-2xl mr-20 font-bold lg:text-4xl">Movie List</h2>
+          <p className="text-sm font-light text-slate-400 lg:text-lg">
             {searchMovies.length} Total To Watch
           </p>
         </div>
@@ -309,7 +309,7 @@ function MovieList() {
         <HiFilm />
       </div>
 
-      <div className="flex justify-evenly mb-5">
+      <div className="flex justify-evenly mb-5 lg:mt-14 lg:justify-between lg:mx-6">
         <div className="flex">
           {/* <div className="">
             <BiSearch />
@@ -320,7 +320,7 @@ function MovieList() {
               type="search"
               value={state.search}
               onChange={handleChange}
-              className="input input-bordered input-sm w-9/12 max-w-xs bg-white border-none text-black"
+              className="input input-bordered input-sm w-9/12 max-w-xs bg-white border-none text-black lg:input-md lg:w-full "
               placeholder="Search movie title..."
             />
           </form>
@@ -414,7 +414,7 @@ function MovieList() {
             {!state.list.length ? "No results" : ""}
           </div> */}
 
-          <div className="mt-4 mb-[11.5rem] join flex justify-center lg:mx-[15%]">
+          <div className="mt-4 pb-28 join flex justify-center lg:mx-[15%]">
             {page === 1 ? (
               <button
                 disabled

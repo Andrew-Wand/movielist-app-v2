@@ -29,12 +29,12 @@ function MovieListCard({
         ? movielist?.map((movieItem: movie) => (
             <div className="flex justify-between bg-[#182635] mb-7 rounded-xl shadow-lg p-5">
               <div>
-                <p className="text-2xl font-bold truncate mt-8 ">
+                <p className="text-2xl font-bold truncate mt-8  ">
                   {movieItem.data.movieName}
                 </p>
               </div>
 
-              <div className="rounded-lg flex flex-col items-end">
+              <div className="rounded-lg flex flex-col items-end lg:mr-5">
                 <div className="flex">
                   <div className="">
                     <MovieListEditModal
