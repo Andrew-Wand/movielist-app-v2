@@ -119,7 +119,7 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
 
   return (
     <div>
-      <div className="lg:tooltip" data-tip="Rate">
+      <div className="lg:tooltip lg:mt-1" data-tip="Rate">
         <label
           htmlFor="my-modal-4"
           className="cursor-pointer text-3xl"
