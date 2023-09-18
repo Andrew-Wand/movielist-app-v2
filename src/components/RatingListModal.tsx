@@ -120,13 +120,13 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
   return (
     <div>
       <div className="lg:tooltip lg:mt-1" data-tip="Rate">
-        <label
+        {/* <label
           htmlFor="my-modal-4"
-          className="cursor-pointer text-3xl"
+          className="cursor-pointer text-3xl text-[#f2f4f8]"
           onClick={handleOpen}
         >
           <AiFillStar />
-        </label>
+        </label> */}
       </div>
 
       <input

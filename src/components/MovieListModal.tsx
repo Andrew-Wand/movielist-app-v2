@@ -61,7 +61,7 @@ function MovieListModal({ fetchMovieList }: movieProps) {
     <div>
       <label
         htmlFor="my-modal-4"
-        className="btn text-4xl bg-[#182635] shadow-lg border-0 font-['Roboto'] rounded-full lg:mt-3"
+        className="btn text-4xl bg-[#172131] shadow-lg border-0 font-['Roboto'] rounded-full lg:mt-3 text-[#f2f4f8]"
         onClick={handleOpen}
       >
         <HiPlusCircle />

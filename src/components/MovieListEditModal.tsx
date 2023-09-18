@@ -64,7 +64,7 @@ function MovieListEditModal({
   return (
     <>
       <div
-        className="btn lg:btn-lg lg:mr-5 mr-2 lg:tooltip"
+        className="btn lg:btn-lg lg:mr-5 mr-2 lg:tooltip bg-[#5371a2] drop-shadow-lg"
         data-tip="Edit"
         onClick={() => {
           if (document) {
@@ -74,14 +74,14 @@ function MovieListEditModal({
           }
         }}
       >
-        <button className="lg:text-4xl text-3xl lg:mt-3 ">
+        <button className="lg:text-4xl text-3xl lg:mt-3 text-[#f2f4f8] ">
           <BiEdit />
         </button>
         <dialog
           id="my_modal_5"
           className="modal-bottom sm:modal-middle bg-transparent"
         >
-          <div className="w-200px h-400px lg:p-20 bg-[#3F4C5C] p-10 rounded-lg shadow-xl">
+          <div className="w-200px h-400px lg:p-14 bg-[#182437] p-10 rounded-lg shadow-xl">
             {/* <h3 className="font-bold text-lg">Hello!</h3>
           <p className="py-4">
             Press ESC key or click the button below to close
@@ -104,11 +104,13 @@ function MovieListEditModal({
                 <form method="dialog">
                   {/* if there is a button in form, it will close the modal */}
 
-                  <button className="btn text-lg">Close</button>
+                  <button className="btn text-lg bg-[#172131] text-[#f2f4f8]">
+                    Close
+                  </button>
                 </form>
                 <button
                   type="submit"
-                  className="btn bg-[#3b8ac4] text-black text-lg"
+                  className="btn bg-[#86a6da] text-black text-lg"
                 >
                   Add
                 </button>

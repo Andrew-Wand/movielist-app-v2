@@ -32,20 +32,21 @@ const MobileNavbar = (): JSX.Element => {
 
   return (
     <nav
-      data-theme="aqua"
       className={
         loggedIn
-          ? "lg:hidden font-['Staatliches'] list-none z-[999] relative "
+          ? "lg:hidden font-['Staatliches'] list-none z-[999] relative"
           : "lg:hidden hidden font-['Staatliches'] list-none"
       }
     >
-      <div className="btm-nav ">
+      <div className="btm-nav bg-[#86a6da]">
         {navList.map((list) => (
           <Link
             to={list.toLink}
             key={list.id}
             className={
-              list.id === activeTab ? "active btm-nav-label" : "btm-nav-label"
+              list.id === activeTab
+                ? "active btm-nav-label bg-[#86a6da]"
+                : "btm-nav-label"
             }
             onClick={() => handleClick(list)}
           >

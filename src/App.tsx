@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <div className="bg-[#182635] shadow-lg ">
+        <div className="bg-[#050d1a] shadow-lg ">
           <Header />
           <Navbar />
         </div>

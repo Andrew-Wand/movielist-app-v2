@@ -31,7 +31,7 @@ function Header() {
   const { loggedIn } = useAuthStatus();
   return (
     <header className={loggedIn ? "lg:block" : "lg:hidden"}>
-      <div className="text-6xl font-['Dancing_Script'] text-center flex justify-between border-b-2 border-gray-500 lg:justify-center lg:text-8xl lg:border-none  decoration-1">
+      <div className="text-6xl font-['Dancing_Script'] text-center flex justify-between lg:justify-center lg:text-8xl lg:border-none  decoration-1">
         <h1 className="text-white lg:text-center cursor-default mb-2 p-5 ">
           Movie Night
         </h1>

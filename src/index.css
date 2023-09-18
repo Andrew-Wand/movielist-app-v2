@@ -10,8 +10,9 @@
 
 
 body {
-  background-color: #0e141b;
+  background-color: #050d1a;
   min-height: 100vh;
+  color: #f2f4f8;
 }
 
 .nav-link {
