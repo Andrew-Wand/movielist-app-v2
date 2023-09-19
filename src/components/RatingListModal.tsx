@@ -120,13 +120,13 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
   return (
     <div>
       <div className="lg:tooltip lg:mt-1" data-tip="Rate">
-        {/* <label
+        <label
           htmlFor="my-modal-4"
-          className="cursor-pointer text-3xl text-[#f2f4f8]"
+          className="cursor-pointertext-[#f2f4f8] btn mt-3 bg-[#86a6da] text-2xl lg:btn-lg text-black p-2 shadow-lg lg:mr-3 lg:w-[190px] w-[130px] "
           onClick={handleOpen}
         >
-          <AiFillStar />
-        </label> */}
+          Rate
+        </label>
       </div>
 
       <input
@@ -140,25 +140,28 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
         className="modal modal-middle sm:modal-middle cursor-pointer bg-transparent"
         data-theme="dracula"
       >
-        <label className="modal-box relative overflow-x-hidden">
+        <label className="modal-box relative overflow-x-hidden bg-[#182437]">
           <label
             htmlFor="my-modal-4"
-            className="btn btn-md btn-circle absolute right-2 top-2"
+            className="btn btn-md btn-circle absolute right-2 top-2 bg-[#172131]"
             onClick={handleClose}
           >
             ✕
           </label>
           <form onSubmit={addRating} className="">
-            <h1 className="text-center text-3xl underline m-5">
+            <h1 className="text-left text-3xl lg:text-4xl uppercase mt-10 font-bold">
               Rate This Movie
             </h1>
-            <div className="text-xl my-5">
-              <label htmlFor="movieName">Movie Name:</label>
+            <div className="divider"></div>
+            <div className="text-xl my-5 flex">
+              <label className="text-slate-300" htmlFor="movieName">
+                Title:
+              </label>
               {ratinglist?.map((movie: DocumentData) => (
                 <input
                   type="text"
-                  className="p input-ghost outline-none bg-transparent
-               max-w-xs cursor-default ml-5"
+                  className="
+               max-w-xs cursor-default ml-5 bg-transparent outline-none input-ghost truncate"
                   value={movie.data.movieName}
                   id="movieName"
                   readOnly={true}
@@ -167,22 +170,24 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
             </div>
 
             <div className="text-xl">
-              <label htmlFor="date">Date:</label>
+              <label className="text-slate-300" htmlFor="date">
+                Date:
+              </label>
               <input
                 type="date"
                 id="date"
                 value={date}
                 onChange={handleOnChange}
-                className="ml-5 border-2 p-2"
+                className="ml-5 border-2 p-2 rounded-lg text-lg"
               />
             </div>
 
-            <div className="text-xl w-6/12 mt-5">
+            <div className="text-xl w-6/12 mt-5 flex">
               <label className="mr-5" htmlFor="rating">
                 Rating:
               </label>
               <select
-                className="select select-bordered w-full max-w-xs"
+                className="select select-bordered w-full max-w-xs select-sm"
                 value={rating}
                 id="rating"
                 onChange={handleOnChange}
@@ -206,7 +211,7 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
             <div className="modal-action">
               <button
                 type="submit"
-                className="btn bg-[#3b8ac4] text-black text-lg"
+                className="btn bg-[#86a6da] text-black text-lg"
               >
                 Add
               </button>

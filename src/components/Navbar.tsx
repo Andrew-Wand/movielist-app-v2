@@ -39,7 +39,7 @@ const Navbar = (): JSX.Element => {
           : "m-10 hidden lg:hidden font-['Staatliches'] text-3xl mt-15 border-b-2 pb-8"
       }
     >
-      <div className="list-none flex justify-center">
+      <div className="list-none flex justify-center ">
         {lists.map((list) => (
           <Link
             to={list.toLink}

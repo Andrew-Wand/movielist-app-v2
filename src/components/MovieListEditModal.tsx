@@ -81,7 +81,7 @@ function MovieListEditModal({
           id="my_modal_5"
           className="modal-bottom sm:modal-middle bg-transparent"
         >
-          <div className="w-200px h-400px lg:p-14 bg-[#182437] p-10 rounded-lg shadow-xl">
+          <div className="w-200px h-400px lg:p-14 bg-[#182437] px-14 py-10 rounded-lg shadow-xl">
             {/* <h3 className="font-bold text-lg">Hello!</h3>
           <p className="py-4">
             Press ESC key or click the button below to close

@@ -51,10 +51,10 @@ function MovieListCard({
                     </button>
                   </div>
                 </div>
-                <div className="mt-3 bg-[#86a6da] text-2xl btn lg:btn-lg text-black p-2 shadow-lg lg:mr-3 lg:w-[190px] w-[130px]">
-                  <span className="lg:mr-2 mr-3 normal-case text-[#f2f4f8]">
+                <div className="">
+                  {/* <span className="lg:mr-2 mr-3 normal-case text-[#f2f4f8]">
                     Rate
-                  </span>
+                  </span> */}
                   <RatingListModal
                     movieRatingId={movieItem.id}
                     fetchMovielist={fetchMovielist}
@@ -64,7 +64,7 @@ function MovieListCard({
             </div>
           ))
         : list?.map((movieItem: movie) => (
-            <div className="flex justify-between bg-[#182635] mb-7 rounded-xl shadow-lg p-5">
+            <div className="flex justify-between bg-[#172131] mb-7 rounded-xl shadow-lg p-5">
               <div>
                 <p className="lg:text-2xl text-xl font-bold truncate lg:mt-14 mt-10 lg:ml-5">
                   {movieItem.data.movieName}
@@ -83,15 +83,14 @@ function MovieListCard({
 
                   <div className="lg:tooltip " data-tip="Delete">
                     <button
-                      className="lg:text-3xl btn lg:btn-lg text-2xl"
+                      className="lg:text-3xl btn lg:btn-lg text-2xl bg-[#172131] text-[#f2f4f8]"
                       onClick={() => deleteFromMovieList(movieItem.id)}
                     >
                       <BsTrashFill />
                     </button>
                   </div>
                 </div>
-                <div className="mt-3 bg-[#c2cbf5] text-2xl btn lg:btn-lg text-black p-2 shadow-lg lg:mr-3 lg:w-[190px] w-[130px]">
-                  <span className="lg:mr-2 mr-3">Rate</span>
+                <div>
                   <RatingListModal
                     movieRatingId={movieItem.id}
                     fetchMovielist={fetchMovielist}

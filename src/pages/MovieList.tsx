@@ -418,22 +418,22 @@ function MovieList() {
             {page === 1 ? (
               <button
                 disabled
-                className="btn  btn-info join-item rounded-tr-none rounded-br-none "
-                data-theme="aqua"
+                className="btn  btn-info join-item rounded-tr-none rounded-br-none  bg-[#86a6da] text-black  "
               >
                 «
               </button>
             ) : (
               <button
                 onClick={() => fetchLastMovies({ item: movielist[0] })}
-                className="btn   join-item rounded-tr-none rounded-br-none "
-                data-theme="aqua"
+                className="btn   join-item rounded-tr-none rounded-br-none  bg-[#86a6da] text-black  "
               >
                 «
               </button>
             )}
 
-            <button className="join-item btn rounded-none ">Page {page}</button>
+            <button className="join-item btn rounded-none bg-[#050d1a] text-[#f2f4f8] ">
+              Page {page}
+            </button>
 
             {movielist?.length < 6 ? (
               <button
@@ -441,8 +441,7 @@ function MovieList() {
                   fetchNextMovies({ item: movielist[movielist.length - 1] })
                 }
                 disabled
-                className=" btn join-item rounded-tl-none rounded-bl-none "
-                data-theme="aqua"
+                className=" btn join-item rounded-tl-none rounded-bl-none bg-[#86a6da] text-black "
               >
                 »
               </button>
@@ -451,8 +450,7 @@ function MovieList() {
                 onClick={() =>
                   fetchNextMovies({ item: movielist[movielist.length - 1] })
                 }
-                className=" btn join-item rounded-tl-none rounded-bl-none "
-                data-theme="aqua"
+                className=" btn join-item rounded-tl-none rounded-bl-none bg-[#86a6da] text-black "
               >
                 »
               </button>

@@ -19,6 +19,7 @@ function App() {
       <BrowserRouter>
         <div className="bg-[#050d1a] shadow-lg ">
           <Header />
+
           <Navbar />
         </div>
 
