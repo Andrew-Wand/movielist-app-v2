@@ -16,11 +16,8 @@ import { useEffect, useState } from "react";
 import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";
 import RatingListSort from "../components/RatingListSort";
-import RatingListEditModal from "../components/RatingListEditModal";
 import RatingListCard from "../components/RatingListCard";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { BiSearch } from "react-icons/bi";
-import { BsTrashFill } from "react-icons/bs";
 import { HiFilm } from "react-icons/hi";
 
 interface rate {
@@ -422,89 +419,7 @@ function RatingList() {
             fetchRatingList={fetchRatingList}
             deleteFromRatingList={deleteFromRatingList}
           />
-          {/* <div className=" lg:flex lg:flex-col lg:items-center ">
-            <table
-              className="table table-zebra table-compact w-full font-['Roboto'] mt-3 drop-shadow-xl text-white  lg:w-5/12 "
-              data-theme="aqua"
-            >
-              <thead className="shadow-lg">
-                <tr className="bg-none">
-                  <th></th>
-                  <th className="text-lg text-black">Title</th>
-                  <th className="text-lg text-black">Finished</th>
-                  <th className="text-lg text-black">Rating</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
 
-              <tbody>
-                {state.search === ""
-                  ? ratinglist?.map((item: rate) => (
-                      <tr>
-                        <th></th>
-                        <td className="truncate text-[1rem] border-r-[1px] border-slate-500">
-                          {item.data.movieName}
-                        </td>
-                        <td className="border-r-[1px] border-slate-500 text-lg">
-                          {item.data.date}
-                        </td>
-                        <td className="border-r-[1px] border-slate-500 text-lg">
-                          {item.data.rating} / 10
-                        </td>
-                        <td>
-                          <RatingListEditModal
-                            movieItemName={item.data.movieName}
-                            movieItemDate={item.data.date}
-                            movieItemRating={item.data.rating}
-                            fetchRatingList={fetchRatingList}
-                            movieRatingId={item.id}
-                          />
-                        </td>
-                        <td>
-                          <div className="lg:tooltip" data-tip="Delete">
-                            <button
-                              className="text-xl mt-1 "
-                              onClick={() => deleteFromRatingList(item.id)}
-                            >
-                              <BsTrashFill />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  : state.list?.map((item: rate) => (
-                      <tr>
-                        <th></th>
-                        <td className="truncate text-lg">
-                          {item.data.movieName}
-                        </td>
-                        <td>{item.data.date}</td>
-                        <td>{item.data.rating} / 10</td>
-                        <td>
-                          <RatingListEditModal
-                            movieItemName={item.data.movieName}
-                            movieItemDate={item.data.date}
-                            movieItemRating={item.data.rating}
-                            fetchRatingList={fetchRatingList}
-                            movieRatingId={item.id}
-                          />
-                        </td>
-                        <td>
-                          <div className="lg:tooltip" data-tip="Delete">
-                            <button
-                              className="text-xl "
-                              onClick={() => deleteFromRatingList(item.id)}
-                            >
-                              <BsTrashFill />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-              </tbody>
-            </table>
-          </div> */}
           {!state.list.length ? "No results" : ""}
 
           {/* Pagination */}

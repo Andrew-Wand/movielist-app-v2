@@ -11,7 +11,6 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-import { AiFillStar } from "react-icons/ai";
 import { DocumentData } from "firebase/firestore/lite";
 
 type RateProps = {
