@@ -91,7 +91,7 @@ function SignUp() {
 
           <div className="text-center mt-20 w-full px-5">
             <Link
-              className="btn w-full text-white shadow-lg bg-[#3b82f6]"
+              className="btn w-full text-white shadow-lg bg-[#5371a2]"
               to="/sign-in"
             >
               Back to Sign In

@@ -175,7 +175,7 @@ export default function EmailSignUp() {
             <div className="text-center mt-10 w-full px-5">
               <button
                 type="submit"
-                className="btn bg-[#3b82f6]  w-full text-white shadow-lg"
+                className="btn bg-[#5371a2]  w-full text-white shadow-lg"
               >
                 Create Account
               </button>

@@ -66,9 +66,9 @@ function SignIn() {
           Movie Night
         </h2>
         <div className="divider lg:flex block"></div>
-        <header className="text-center text-2xl mt-10 font-light">
+        <div className="text-center text-2xl mt-10 font-light">
           <h3> Sign In </h3>
-        </header>
+        </div>
 
         <div>
           <div className="justify-center flex">
@@ -130,7 +130,7 @@ function SignIn() {
 
             <div className="w-full px-5">
               <button
-                className="btn text-white bg-[#3b82f6] w-full shadow-lg "
+                className="btn text-white bg-[#5371a2] w-full shadow-lg "
                 type="submit"
               >
                 Log In
