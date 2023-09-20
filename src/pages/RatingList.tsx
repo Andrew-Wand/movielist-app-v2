@@ -427,16 +427,14 @@ function RatingList() {
             {page === 1 ? (
               <button
                 disabled
-                className="btn  btn-info join-item rounded-tr-none rounded-br-none "
-                data-theme="aqua"
+                className="btn  btn-info join-item rounded-tr-none rounded-br-none bg-[#86a6da] "
               >
                 «
               </button>
             ) : (
               <button
                 onClick={() => fetchLastMovies({ item: ratinglist[0] })}
-                className="btn   join-item rounded-tr-none rounded-br-none "
-                data-theme="aqua"
+                className="btn   join-item rounded-tr-none rounded-br-none bg-[#86a6da] "
               >
                 «
               </button>
@@ -450,8 +448,7 @@ function RatingList() {
                   fetchNextMovies({ item: ratinglist[ratinglist.length - 1] })
                 }
                 disabled
-                className=" btn join-item rounded-tl-none rounded-bl-none "
-                data-theme="aqua"
+                className=" btn join-item rounded-tl-none rounded-bl-none bg-[#86a6da] "
               >
                 »
               </button>
@@ -460,8 +457,7 @@ function RatingList() {
                 onClick={() =>
                   fetchNextMovies({ item: ratinglist[ratinglist.length - 1] })
                 }
-                className=" btn join-item rounded-tl-none rounded-bl-none "
-                data-theme="aqua"
+                className=" btn join-item rounded-tl-none rounded-bl-none bg-[#86a6da] "
               >
                 »
               </button>

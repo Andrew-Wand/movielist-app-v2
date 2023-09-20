@@ -26,8 +26,8 @@ const RatingListCard = ({
     <div className="flex flex-col justify-center mx-6 font-['Roboto'] mt-6">
       {search === ""
         ? ratinglist?.map((item: rate) => (
-            <div className="flex justify-between bg-[#172131] mb-7 rounded-xl shadow-lg p-5">
-              <div className="">
+            <div className="flex justify-between bg-[#172131] mb-7 rounded-xl shadow-lg py-5 px-2 ">
+              <div className="truncate">
                 <p className="lg:text-2xl font-bold truncate text-2xl lg:ml-1 ml-1 lg:mb-2">
                   {item.data.movieName}
                 </p>
@@ -61,7 +61,7 @@ const RatingListCard = ({
                   </div>
                 </div>
                 <p className="text-sm font-thin mt-4 text-slate-300">
-                  Completed - {item.data.date}
+                  Finished - {item.data.date}
                 </p>
               </div>
             </div>
