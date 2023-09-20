@@ -10,7 +10,7 @@ function RatingListSort({ rateSort, onFilterChange }: RatingListSortProps) {
         name=""
         id=""
         onChange={onFilterChange}
-        className="select select-bordered select-sm mr-3"
+        className="select select-bordered select-sm mr-3 lg:text-lg lg:select-md lg:mr-0"
         data-theme="halloween"
       >
         <option selected={rateSort == "NEW" ? true : false}>NEW</option>

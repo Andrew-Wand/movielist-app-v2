@@ -17,9 +17,11 @@ import { db, auth } from "../../firebase.config";
 import Loading from "../components/Loading";
 import RatingListSort from "../components/RatingListSort";
 import RatingListEditModal from "../components/RatingListEditModal";
+import RatingListCard from "../components/RatingListCard";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { BiSearch } from "react-icons/bi";
 import { BsTrashFill } from "react-icons/bs";
+import { HiFilm } from "react-icons/hi";
 
 interface rate {
   data: DocumentData;
@@ -384,37 +386,47 @@ function RatingList() {
   };
 
   return (
-    <main>
-      <div className="flex justify-between lg:justify-center">
-        <div className="h-[32px] w-[30px] bg-blue-400 flex justify-center items-center rounded-l-full ml-5">
-          <BiSearch />
+    <main className="xl:mx-[35rem]">
+      <div className="flex flex-col p-5">
+        <div className="font-['Roboto']">
+          <h2 className="text-2xl mr-20 font-bold lg:text-4xl">Rating List</h2>
+          <p className="text-sm font-light text-slate-400 lg:text-lg">
+            {searchRated.length} Movies Watched
+          </p>
         </div>
-        <div className="lg:mr-[21%] mr-5">
+        <div className="divider text-5xl">
+          <HiFilm />
+        </div>
+
+        <div className="flex lg:mt-10 justify-evenly lg:justify-between">
           <form>
             <input
               type="search"
               value={state.search}
               onChange={handleChange}
-              className="input input-bordered input-sm w-10/12 max-w-xs rounded-l-none bg-white text-black"
+              className="input input-bordered input-sm w-9/12 max-w-xs bg-white border-none text-black lg:input-md lg:w-full"
               placeholder="Search movie title..."
             />
           </form>
-        </div>
-
-        <div>
           <RatingListSort rateSort={rateSort} onFilterChange={onFilterChange} />
         </div>
       </div>
       {loading ? (
         <Loading />
       ) : ratinglist && ratinglist?.length > 0 ? (
-        <div>
-          <div className=" lg:flex lg:flex-col lg:items-center ">
+        <>
+          <RatingListCard
+            ratinglist={ratinglist}
+            list={state.list}
+            search={state.search}
+            fetchRatingList={fetchRatingList}
+            deleteFromRatingList={deleteFromRatingList}
+          />
+          {/* <div className=" lg:flex lg:flex-col lg:items-center ">
             <table
-              className="table table-zebra table-compact w-full font-['Roboto'] mt-3 drop-shadow-xl text-white rounded-lg lg:w-5/12 "
+              className="table table-zebra table-compact w-full font-['Roboto'] mt-3 drop-shadow-xl text-white  lg:w-5/12 "
               data-theme="aqua"
             >
-              {/* head */}
               <thead className="shadow-lg">
                 <tr className="bg-none">
                   <th></th>
@@ -492,9 +504,11 @@ function RatingList() {
                     ))}
               </tbody>
             </table>
-            {!state.list.length ? "No results" : ""}
-          </div>
-          <div className="mt-4 mb-[11.5rem] join flex justify-center lg:mx-[15%]">
+          </div> */}
+          {!state.list.length ? "No results" : ""}
+
+          {/* Pagination */}
+          <div className="mt-4 pb-28 join flex justify-center lg:mx-[15%]">
             {page === 1 ? (
               <button
                 disabled
@@ -538,7 +552,7 @@ function RatingList() {
               </button>
             )}
           </div>
-        </div>
+        </>
       ) : (
         <div>Nothing here</div>
       )}

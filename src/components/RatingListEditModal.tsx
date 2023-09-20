@@ -74,7 +74,7 @@ function RatingListEditModal({
       <div className="lg:tooltip" data-tip="Edit">
         <label
           htmlFor="my-modal-4"
-          className="text-xl cursor-pointer"
+          className="lg:text-4xl btn lg:btn-lg text-3xl bg-[#172131] text-[#f2f4f8] bg-[#5371a2]"
           onClick={handleOpen}
         >
           <BiEdit />
@@ -101,38 +101,36 @@ function RatingListEditModal({
             ✕
           </label>
           <form onSubmit={addRatingEdit} className="">
-            <h1 className="text-center text-3xl underline m-5">
-              Rate This Movie
-            </h1>
-            <div className="text-xl my-5">
-              <label htmlFor="movieName">Movie Name:</label>
+            <h1 className="text-left text-3xl mt-10">Edit Movie</h1>
+            <div className="divider"></div>
+            <div className="text-xl my-6">
+              <label htmlFor="movieName">Title</label>
               <input
                 type="text"
-                className="p input-ghost outline-none bg-transparent
-           max-w-xs cursor-default ml-5"
+                className="max-w-xs cursor-default ml-5 input input-bordered text-xl"
                 value={movieName}
                 id="movieName"
                 onChange={handleOnChange}
               />
             </div>
 
-            <div className="text-xl">
-              <label htmlFor="date">Date:</label>
+            <div className="text-xl my-6">
+              <label htmlFor="date">Date</label>
               <input
                 type="date"
                 id="date"
                 value={date}
                 onChange={handleOnChange}
-                className="ml-5 border-2 p-2"
+                className="ml-5 border-2 p-2 rounded-lg text-lg"
               />
             </div>
 
-            <div className="text-xl w-6/12 mt-5">
+            <div className="text-xl w-6/12 mt-5 flex">
               <label className="mr-5" htmlFor="rating">
-                Rating:
+                Rate
               </label>
               <select
-                className="select select-bordered w-full max-w-xs"
+                className="select select-bordered w-full max-w-xs select-sm"
                 value={rating}
                 id="rating"
                 onChange={handleOnChange}
@@ -156,7 +154,7 @@ function RatingListEditModal({
             <div className="modal-action">
               <button
                 type="submit"
-                className="btn bg-[#3b8ac4] text-black text-lg"
+                className="btn bg-[#86a6da] text-black text-lg"
               >
                 Add
               </button>

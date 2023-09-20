@@ -35,7 +35,7 @@ function MovieListCard({
               </div>
 
               <div className="rounded-lg flex flex-col items-end lg:mr-5">
-                <div className="flex lg:mr-4 ">
+                <div className="flex lg:mr-4">
                   <MovieListEditModal
                     movieItemName={movieItem.data.movieName}
                     fetchMovielist={fetchMovielist}

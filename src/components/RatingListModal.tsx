@@ -122,7 +122,7 @@ function RatingListModal({ movieRatingId, fetchMovielist }: RateProps) {
       <div className="lg:tooltip lg:mt-1" data-tip="Rate">
         <label
           htmlFor="my-modal-4"
-          className="cursor-pointertext-[#f2f4f8] btn mt-3 bg-[#86a6da] text-2xl lg:btn-lg text-black p-2 shadow-lg lg:mr-3 lg:w-[190px] w-[130px] "
+          className="cursor-pointer text-[#f2f4f8] btn mt-3 bg-[#86a6da] text-xl lg:text-2xl lg:btn-lg text-black p-2 shadow-lg lg:mr-3 lg:w-[190px] w-[130px] "
           onClick={handleOpen}
         >
           Rate
