@@ -55,7 +55,7 @@ function SpinPage() {
       {loading ? (
         <Loading />
       ) : (
-        <div>
+        <div className="">
           <Spin movielist={movielist} />
         </div>
       )}

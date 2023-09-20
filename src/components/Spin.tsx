@@ -33,7 +33,7 @@ function Spin({ movielist }: SpinPageProps) {
   };
 
   return (
-    <div className="wheel-wrapper overflow-hidden">
+    <div className="wheel-wrapper overflow-hidden lg:pb-20">
       <div className="wheel-text">
         <h3>Spin the Wheel!</h3>
       </div>
