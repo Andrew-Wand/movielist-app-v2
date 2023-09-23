@@ -1,0 +1,1 @@
+A movie rating app, created because I love watching movies, and I wanted a way to save and rate the movies I had watched. Just create an account and add your movies to the list. When you finish watching a movie, you can rate it and add the date watched.
